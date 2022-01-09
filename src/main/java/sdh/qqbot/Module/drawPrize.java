@@ -56,7 +56,7 @@ public class drawPrize {
         String[] msgArray = message.getMessage().split(" ");
         StringBuilder stringBuilder = new StringBuilder("抽奖命令帮助");
         stringBuilder.append("%0d------------%0d");
-        stringBuilder.append("抽奖 添加奖品 奖品名称 奖品数量(不写默认为1) 抽取时间(不写默认为手动抽取,格式:2022-01-12T12:00)");
+        stringBuilder.append("抽奖 添加奖品 奖品名称 奖品数量(不写默认为1) 抽取时间(不写默认手动抽取,格式:2022-01-12T12:00)");
         stringBuilder.append("%0d------------%0d");
         stringBuilder.append("抽奖 奖品列表");
         stringBuilder.append("%0d------------%0d");
@@ -79,11 +79,11 @@ public class drawPrize {
                 //只带一个参数,仅支持查看奖品列表
                 if ("奖品列表".equals(msgArray[1])) {
                     QBotSendMessageController.sendMsg(message, "奖品列表:%0d"
-                            + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList()).toString());
+                            + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList()));
                 } else if ("中奖列表".equals(msgArray[1])) {
                     List<Prize> prizeListByUserQQ = WinnersController.getPrizeListByUserQQ(message.getUserId().toString());
                     QBotSendMessageController.sendMsg(message, message.getSender().getNickname() + "的中奖列表:%0d"
-                            + QBotSendMessageController.generatorMessageByList(prizeListByUserQQ).toString());
+                            + QBotSendMessageController.generatorMessageByList(prizeListByUserQQ));
                 } else {
                     QBotSendMessageController.sendMsg(message, "参数错误");
                 }
@@ -110,24 +110,29 @@ public class drawPrize {
                         }
                         break;
                     case "参与抽奖":
-                           try {
-                               //获取奖品信息
-                               Prize prize2 = PrizeController.getPrizeById(Integer.parseInt(msgArray[2]));
-                               //判断奖品是否存在
-                               if(prize2!=null){
-                                   //参与抽奖
-                                   DrawprizeController.joinDrawPrize(Integer.parseInt(msgArray[2]),message);
-                               }else {
-                                   //奖品不存在
-                                   QBotSendMessageController.sendMsg(message, "无该抽奖项");
-                               }
-                           }catch (Exception e){
-                               QBotSendMessageController.sendMsg(message, "参数错误");
-                           }
-
+                        try {
+                            //获取奖品信息
+                            Prize prize2 = PrizeController.getPrizeById(Integer.parseInt(msgArray[2]));
+                            //判断奖品是否存在
+                            if (prize2 != null) {
+                                //参与抽奖
+                                DrawprizeController.joinDrawPrize(Integer.parseInt(msgArray[2]), message);
+                            } else {
+                                //奖品不存在
+                                QBotSendMessageController.sendMsg(message, "无该抽奖项");
+                            }
+                        } catch (Exception e) {
+                            QBotSendMessageController.sendMsg(message, "参数错误");
+                        }
                         break;
                     case "开奖":
-
+                        //手动开奖 参数 奖项id
+                        //涉及类型转换，使用try
+                        try {
+                            DrawprizeController.manualDrawPrize(Integer.parseInt(msgArray[2]), message);
+                        } catch (Exception e) {
+                            QBotSendMessageController.sendMsg(message, "参数错误");
+                        }
                         break;
                     case "参与列表":
                         try {
@@ -142,8 +147,8 @@ public class drawPrize {
                             if (userListByPrizeId.size() == 0) {
                                 QBotSendMessageController.sendMsg(message, "未开奖或者无此奖品");
                             } else {
-                                QBotSendMessageController.sendMsg(message, "奖品ID为" + Integer.parseInt(msgArray[2] + "的中奖者列表:%0d"
-                                        + QBotSendMessageController.generatorMessageByList(userListByPrizeId).toString()));
+                                QBotSendMessageController.sendMsg(message, "奖品ID为" + Integer.parseInt(msgArray[2]) + "的中奖者列表:%0d"
+                                        + QBotSendMessageController.generatorMessageByList(userListByPrizeId));
                             }
                         } catch (Exception e) {
                             QBotSendMessageController.sendMsg(message, "参数错误");

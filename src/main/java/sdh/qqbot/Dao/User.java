@@ -46,6 +46,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "QQ:" + this.userId + "昵称:" + this.userName;
+        return "QQ:" + this.userId + "，昵称:" + this.userName;
     }
 }

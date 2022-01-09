@@ -66,7 +66,7 @@ public class ReceiveMessageController {
         String[] msgArray = message.getMessage().split(" ");
         switch (msgArray[0]) {
             case "色图":
-                sexPicture.sendSexPicture(message, "group");
+                //sexPicture.sendSexPicture(message, "group");
                 break;
             case "抽奖":
                 drawPrize.DrawPrizeManager(message, "group");

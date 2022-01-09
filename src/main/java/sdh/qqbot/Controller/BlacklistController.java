@@ -38,7 +38,7 @@ public class BlacklistController {
     判断用户是否在黑名单中
      */
     public static boolean isBlack(String userId) {
-        Blacklist blacker = blacklistService.getOne(new QueryWrapper<Blacklist>().eq("blackuser_id", userId));
+        Blacklist blacker = blacklistService.getOne(new QueryWrapper<Blacklist>().eq("blackuser_id", userId).ge("black_time",LocalDateTime.ofInstant(new Date().toInstant(),ZoneId.systemDefault())));
         return blacker != null;
     }
 

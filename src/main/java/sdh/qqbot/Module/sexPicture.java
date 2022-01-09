@@ -1,7 +1,6 @@
 package sdh.qqbot.Module;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sdh.qqbot.Controller.QBotSendMessageController;
@@ -14,6 +13,8 @@ import sdh.qqbot.Utils.OkHttpUtil;
 import sdh.qqbot.service.ISexpictureService;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 发送色图模块
@@ -42,14 +43,17 @@ public class sexPicture {
             if (img.getData().size() != 0) {
                 imgUrl = img.getData().get((int) Math.floor(Math.random() * img.getData().size())).getUrls().getSmall();
                 Log.i("色图图片链接：" + imgUrl);
-                String cqMsg = "[CQ:image,file=" + imgUrl + "]";
+                String cqMsg = "[CQ:image,file=picture,c=3,url=" + imgUrl + "]";
                 setTypeAndSend(message, cqMsg, type);
+                List<Sexpicture> sexpictures = new ArrayList<>();
                 for (int i = 0; i < img.getData().size(); i++) {
                     sdh.qqbot.Dao.Sexpicture sexpicture = new Sexpicture();
                     sexpicture.setPictureId(img.getData().get(i).getPid().toString());
                     sexpicture.setPictureUrl(img.getData().get(i).getUrls().getSmall());
-                    sexpictureService.saveOrUpdate(sexpicture, new UpdateWrapper<Sexpicture>().eq("picture_id", sexpicture.getPictureId()));
+                    sexpictures.add(sexpicture);
+//                    sexpictureService.saveOrUpdate(sexpicture, new UpdateWrapper<Sexpicture>().eq("picture_id", sexpicture.getPictureId()));
                 }
+                sexpictureService.saveOrUpdateBatch(sexpictures);
             } else {
                 String errorMessage = "找不到关键词";
                 setTypeAndSend(message, errorMessage, type);

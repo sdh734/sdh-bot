@@ -43,7 +43,7 @@ public class WinnersController {
         List<Winners> winnersList = winnersService.list(new QueryWrapper<Winners>().eq("prize_id", prizeId));
         List<User> users = new ArrayList<>();
         for (Winners i : winnersList) {
-            users.add(UserController.getUserByQQ(i.getUserId().toString()));
+            users.add(UserController.getUserById(i.getUserId()));
         }
         return users;
     }

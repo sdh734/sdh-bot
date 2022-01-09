@@ -67,7 +67,7 @@ public class DrawprizeController {
         drawprize.setPrizeId(prizeId);
         drawprize.setPlayerId(user.getId().toString());
         //判断参与用户是否在黑名单中
-        if (!BlacklistController.isBlack(user.getUserId())) {
+        if (!BlacklistController.isBlack(user.getId().toString())) {
             if (drawprizeService.getOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
                 QBotSendMessageController.sendMsg(messageEntity, "请勿重复参与!");
             } else {
@@ -75,7 +75,7 @@ public class DrawprizeController {
                 QBotSendMessageController.sendMsg(messageEntity, "成功参与抽奖!");
             }
         } else {
-            QBotSendMessageController.sendMsg(messageEntity, "您在黑名单中,无法参与!");
+            QBotSendMessageController.sendMsg(messageEntity, user.getUserName()+",您在黑名单中,无法参与!");
         }
     }
 
@@ -84,15 +84,28 @@ public class DrawprizeController {
      */
     public static void manualDrawPrize(int prizeId, MessageEntity messageEntity) {
         Prize prize = prizeService.getById(prizeId);
-        if (prize.getPrizeIsdraw() == 0) {
-            List<User> userList = startDrawPrize(prize);
-            prize.setPrizeIsdraw(1);
-            prizeService.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
-            QBotSendMessageController.sendMsg(messageEntity, "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
-        } else {
-            QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖");
-        }
+        int userLevel = UserController.getPermissionByUserId(messageEntity.getUserId().toString());
+        if (userLevel > 1) {
+            if (prize != null) {
+                if (prize.getPrizeIsdraw() == 0) {
+                    List<User> userList = startDrawPrize(prize);
+                    if (userList.size() > 0) {
+                        prize.setPrizeIsdraw(1);
+                        prizeService.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
+                        QBotSendMessageController.sendMsg(messageEntity, "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
+                    } else {
+                        QBotSendMessageController.sendMsg(messageEntity, "该抽奖项无人参与，请查询参与列表");
+                    }
+                } else {
+                    QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖，请查询中奖列表");
+                }
+            } else {
+                QBotSendMessageController.sendMsg(messageEntity, "无该抽奖项或无人参与，请查询奖项列表或者参与列表");
+            }
 
+        } else {
+            QBotSendMessageController.sendMsg(messageEntity, "无开奖权限");
+        }
     }
 
     /**
@@ -100,8 +113,14 @@ public class DrawprizeController {
      */
     public static void getDrawPrizeListByPrizeId(int prizeId, MessageEntity messageEntity) {
         List<Drawprize> list = drawprizeService.list(new QueryWrapper<Drawprize>().eq("prize_id", prizeId));
+        Prize prize = prizeService.getById(prizeId);
         if (list.size() == 0) {
-            QBotSendMessageController.sendMsg(messageEntity, "无该抽奖项或无人参与");
+            if (prize.getPrizeIsdraw() == 0) {
+                QBotSendMessageController.sendMsg(messageEntity, "无该抽奖项或无人参与，请查询奖项列表或者参与列表");
+            } else {
+                QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖，请查询中奖列表");
+            }
+
         } else {
             QBotSendMessageController.sendMsg(messageEntity, "参与抽奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(list));
         }
@@ -115,22 +134,22 @@ public class DrawprizeController {
         List<User> userList = new ArrayList<>();
         //根据奖品id获取参与名单
         List<Drawprize> drawprizeList = drawprizeService.list(new QueryWrapper<Drawprize>().eq("prize_id", prize.getId()));
-
-        for (int i = 0; i < prize.getPrizeQuantity(); i++) {
-            Drawprize drawprize = randomPerson(drawprizeList);
-            userList.add(UserController.getUserByQQ(drawprize.getPlayerId()));
-            drawprizeList.remove(drawprize);
-            //从参与名单中移除
-            drawprizeService.removeById(drawprize.getId());
-            //加入黑名单一天
-            BlacklistController.joinBlackList(drawprize.getPlayerId());
-            //加入到中奖者表中
-            Winners winners = new Winners();
-            winners.setPrizeId(prize.getId());
-            winners.setUserId(Integer.valueOf(drawprize.getPlayerId()));
-            winnersService.save(winners);
+        if (drawprizeList.size() > 0) {
+            for (int i = 0; i < prize.getPrizeQuantity(); i++) {
+                Drawprize drawprize = randomPerson(drawprizeList);
+                userList.add(UserController.getUserById(Integer.parseInt(drawprize.getPlayerId())));
+                drawprizeList.remove(drawprize);
+                //从参与名单中移除
+                drawprizeService.removeById(drawprize.getId());
+                //加入黑名单一天
+                BlacklistController.joinBlackList(drawprize.getPlayerId());
+                //加入到中奖者表中
+                Winners winners = new Winners();
+                winners.setPrizeId(prize.getId());
+                winners.setUserId(Integer.valueOf(drawprize.getPlayerId()));
+                winnersService.save(winners);
+            }
         }
-
         return userList;
     }
 
