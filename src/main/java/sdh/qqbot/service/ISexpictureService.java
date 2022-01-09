@@ -1,6 +1,6 @@
 package sdh.qqbot.service;
 
-import sdh.qqbot.Dao.Sexpicture;
+import sdh.qqbot.dao.Sexpicture;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

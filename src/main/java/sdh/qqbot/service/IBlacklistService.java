@@ -1,6 +1,6 @@
 package sdh.qqbot.service;
 
-import sdh.qqbot.Dao.Blacklist;
+import sdh.qqbot.dao.Blacklist;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

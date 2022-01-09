@@ -1,7 +1,7 @@
 package sdh.qqbot.service.impl;
 
-import sdh.qqbot.Dao.User;
-import sdh.qqbot.Mapper.UserMapper;
+import sdh.qqbot.dao.User;
+import sdh.qqbot.mapper.UserMapper;
 import sdh.qqbot.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package sdh.qqbot.service;
 
-import sdh.qqbot.Dao.Drawprize;
+import sdh.qqbot.dao.Drawprize;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

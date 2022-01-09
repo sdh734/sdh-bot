@@ -1,7 +1,7 @@
 package sdh.qqbot.service.impl;
 
-import sdh.qqbot.Dao.Drawprize;
-import sdh.qqbot.Mapper.DrawprizeMapper;
+import sdh.qqbot.dao.Drawprize;
+import sdh.qqbot.mapper.DrawprizeMapper;
 import sdh.qqbot.service.IDrawprizeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
