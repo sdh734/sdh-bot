@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sdh.qqbot.Mapper.PrizeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="sdh.qqbot.Dao.Prize">
+        <id column="id" property="id" />
+        <result column="prize_name" property="prizeName" />
+        <result column="prize_quantity" property="prizeQuantity" />
+        <result column="prize_drawtime" property="prizeDrawtime" />
+        <result column="prize_addtime" property="prizeAddtime" />
+        <result column="prize_isdraw" property="prizeIsdraw" />
+        <result column="prize_from" property="prizeFrom" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, prize_name, prize_quantity, prize_drawtime, prize_addtime, prize_isdraw, prize_from
+    </sql>
+
+</mapper>
