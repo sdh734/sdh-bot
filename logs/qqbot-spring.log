@@ -2672,3 +2672,12 @@ java.sql.SQLException: url not set
 2022-01-09 20:20:55 INFO  sdh.qqbot.Utils.Log.i[11] - 收到私聊消息，消息内容：抽奖 参与抽奖 9
 2022-01-09 20:20:58 INFO  sdh.qqbot.Utils.Log.i[11] - 收到私聊消息，消息内容：抽奖 参与抽奖 7
 2022-01-09 20:21:05 INFO  sdh.qqbot.Utils.Log.i[11] - 收到私聊消息，消息内容：抽奖 参与抽奖
+2022-01-09 20:46:21 INFO  org.springframework.boot.StartupInfoLogger.logStarting[55] - Starting AppApplicationTests using Java 11.0.13 on SDH-PC with PID 8532 (started by 12477 in F:\Java_Workspace\app)
+2022-01-09 20:46:21 INFO  org.springframework.boot.SpringApplication.logStartupProfileInfo[635] - No active profile set, falling back to default profiles: default
+2022-01-09 20:46:22 INFO  sdh.qqbot.Utils.Log.i[11] - ���ӳɹ�
+2022-01-09 20:46:22 INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure.dataSource[56] - Init DruidDataSource
+2022-01-09 20:46:23 INFO  com.alibaba.druid.pool.DruidDataSource.init[998] - {dataSource-1} inited
+2022-01-09 20:46:25 INFO  org.springframework.boot.StartupInfoLogger.logStarted[61] - Started AppApplicationTests in 4.807 seconds (JVM running for 5.518)
+2022-01-09 20:46:25 INFO  sdh.qqbot.Utils.Log.i[11] - 2021-11-22T12:00
+2022-01-09 20:46:25 INFO  com.alibaba.druid.pool.DruidDataSource.close[2071] - {dataSource-1} closing ...
+2022-01-09 20:46:25 INFO  com.alibaba.druid.pool.DruidDataSource.close[2144] - {dataSource-1} closed
