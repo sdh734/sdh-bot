@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import sdh.qqbot.utils.WSUtil;
 
 @SpringBootApplication
-@MapperScan("sdh.qqbot.mapper")
 public class AppApplication {
     WebSocket webSocket = WSUtil.getInstance();
 

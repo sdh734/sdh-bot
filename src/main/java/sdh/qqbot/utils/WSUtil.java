@@ -26,7 +26,7 @@ public class WSUtil {
                 super.onMessage(webSocket, text);
                 //收到消息...（一般是这里处理json）
                 ReceiveMessageController.MessageClassification(text);
-//                LOG.i(text);
+                Log.i(text);
             }
 
             @Override
