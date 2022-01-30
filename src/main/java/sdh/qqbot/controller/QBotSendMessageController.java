@@ -1,7 +1,6 @@
 package sdh.qqbot.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.utils.OkHttpUtil;
@@ -16,11 +15,6 @@ public class QBotSendMessageController {
     public void Test() {
         //URL %0d 回车符
         OkHttpUtil.get("http://127.0.0.1:5700/send_private_msg?user_id=1247769958&message=1111111111111111111111111111111" + "%0d" + "2222222222222222222222222222222222222222222222222%0d333");
-    }
-
-    @PostMapping("/cqhttp")
-    public void cqhttp(String messqge) {
-        System.out.println(messqge);
     }
 
     public static void sendPrivateMsg(String userId, String message) {
@@ -39,9 +33,9 @@ public class QBotSendMessageController {
 
     public static void sendMsg(MessageEntity messageEntity, String message) {
         if ("private".equals(messageEntity.getMessageType())) {
-            sendPrivateMsg(messageEntity.getUserId().toString(), message);
+            sendPrivateMsg(messageEntity.getUserId(), message);
         } else {
-            sendGroupMsg(messageEntity.getGroupId().toString(), message);
+            sendGroupMsg(messageEntity.getGroupId(), message);
         }
     }
 

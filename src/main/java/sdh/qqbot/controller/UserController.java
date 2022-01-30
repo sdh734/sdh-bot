@@ -4,7 +4,6 @@ package sdh.qqbot.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.User;
 import sdh.qqbot.entity.MessageEntity;
@@ -21,7 +20,6 @@ import javax.annotation.PostConstruct;
  * @since 2022-01-08
  */
 @RestController
-@RequestMapping("/user")
 public class UserController {
     @Autowired
     private IUserService iUserService;
@@ -56,7 +54,7 @@ public class UserController {
 
     public static void addUser(MessageEntity message) {
         User user = new User();
-        user.setUserId(message.getUserId().toString());
+        user.setUserId(message.getUserId());
         user.setUserName(message.getSender().getNickname());
         userService.saveOrUpdate(user, new UpdateWrapper<User>().eq("user_id", user.getUserId()));
     }

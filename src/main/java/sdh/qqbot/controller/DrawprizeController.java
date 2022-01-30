@@ -4,7 +4,6 @@ package sdh.qqbot.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Drawprize;
 import sdh.qqbot.dao.Prize;
@@ -29,7 +28,6 @@ import java.util.List;
  * @since 2022-01-08
  */
 @RestController
-@RequestMapping("/drawprize")
 public class DrawprizeController {
     @Autowired
     private IDrawprizeService iDrawprizeService;
@@ -58,10 +56,10 @@ public class DrawprizeController {
      */
     public static void joinDrawPrize(int prizeId, MessageEntity messageEntity) {
         //判断用户是否存在,如不存在则加入用户表中
-        User user = UserController.getUserByQQ(messageEntity.getUserId().toString());
+        User user = UserController.getUserByQQ(messageEntity.getUserId());
         if (user == null) {
             UserController.addUser(messageEntity);
-            user = UserController.getUserByQQ(messageEntity.getUserId().toString());
+            user = UserController.getUserByQQ(messageEntity.getUserId());
         }
         Drawprize drawprize = new Drawprize();
         drawprize.setPrizeId(prizeId);
@@ -75,7 +73,7 @@ public class DrawprizeController {
                 QBotSendMessageController.sendMsg(messageEntity, "成功参与抽奖!");
             }
         } else {
-            QBotSendMessageController.sendMsg(messageEntity, user.getUserName()+",您在黑名单中,无法参与!");
+            QBotSendMessageController.sendMsg(messageEntity, user.getUserName() + ",您在黑名单中,无法参与!");
         }
     }
 
@@ -84,7 +82,7 @@ public class DrawprizeController {
      */
     public static void manualDrawPrize(int prizeId, MessageEntity messageEntity) {
         Prize prize = prizeService.getById(prizeId);
-        int userLevel = UserController.getPermissionByUserId(messageEntity.getUserId().toString());
+        int userLevel = UserController.getPermissionByUserId(messageEntity.getUserId());
         if (userLevel > 1) {
             if (prize != null) {
                 if (prize.getPrizeIsdraw() == 0) {
@@ -106,6 +104,30 @@ public class DrawprizeController {
         } else {
             QBotSendMessageController.sendMsg(messageEntity, "无开奖权限");
         }
+    }
+
+    /**
+     * 自动抽奖
+     */
+    public static void manualDrawPrize(Prize prize) {
+        //判断是否已开奖
+        if (prize.getPrizeIsdraw() == 0) {
+            List<User> userList = startDrawPrize(prize);
+            if (userList.size() > 0) {
+                prize.setPrizeIsdraw(1);
+                prizeService.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
+                //QBotSendMessageController.sendGroupMsg("814012332", "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
+                QBotSendMessageController.sendPrivateMsg(prize.getPrizeFrom(), "您提供的" + prize.getPrizeName() + "的中奖人员列表为:%0d" + QBotSendMessageController.generatorMessageByList(userList));
+                for (User u : userList) {
+                    QBotSendMessageController.sendPrivateMsg(u.getUserId(), "恭喜你，获得 " + prize.getPrizeName() + " 一份，请找QQ号为：" + prize.getPrizeFrom() + "的群友兑奖。");
+                }
+            } else {
+                QBotSendMessageController.sendGroupMsg("814012332", "奖品为" + prize.getPrizeName() + "的抽奖项无人参与，请查询参与列表");
+            }
+        } else {
+            QBotSendMessageController.sendGroupMsg("814012332", "奖品为" + prize.getPrizeName() + "的奖品已完成抽奖，请查询中奖列表");
+        }
+
     }
 
     /**

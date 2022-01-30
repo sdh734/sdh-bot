@@ -4,7 +4,6 @@ package sdh.qqbot.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Blacklist;
 import sdh.qqbot.service.IBlacklistService;
@@ -23,10 +22,10 @@ import java.util.Date;
  * @since 2022-01-08
  */
 @RestController
-@RequestMapping("/blacklist")
 public class BlacklistController {
     @Autowired
     private IBlacklistService iBlacklistService;
+
     static IBlacklistService blacklistService;
 
     @PostConstruct

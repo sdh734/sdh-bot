@@ -3,7 +3,6 @@ package sdh.qqbot.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.service.IPrizeService;
@@ -20,7 +19,6 @@ import java.util.List;
  * @since 2022-01-09
  */
 @RestController
-@RequestMapping("/prize")
 public class PrizeController {
     @Autowired
     private IPrizeService iPrizeService;
@@ -48,8 +46,16 @@ public class PrizeController {
         return prizeService.list();
     }
 
+    /**
+     * 通过奖品ID获取奖品详情
+     *
+     * @param prizeId 奖品ID
+     * @return 奖品对象
+     */
     public static Prize getPrizeById(int prizeId) {
         return prizeService.getById(prizeId);
     }
+
+
 }
 

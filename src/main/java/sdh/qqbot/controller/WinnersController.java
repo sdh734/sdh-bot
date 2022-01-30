@@ -3,8 +3,6 @@ package sdh.qqbot.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.dao.User;
@@ -24,7 +22,6 @@ import java.util.List;
  * @since 2022-01-09
  */
 @RestController
-@RequestMapping("/winners")
 public class WinnersController {
     @Autowired
     private IWinnersService iWinnersService;

@@ -3,8 +3,10 @@ package sdh.qqbot.utils;
 import okhttp3.*;
 import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
-import sdh.qqbot.controller.ReceiveMessageController;
 
+/**
+ * 弃用WS连接
+ */
 public class WSUtil {
     final String url = "ws://127.0.0.1:6700/";
     final Request request = new Request.Builder().get().url(url).build();
@@ -25,8 +27,8 @@ public class WSUtil {
             public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
                 super.onMessage(webSocket, text);
                 //收到消息...（一般是这里处理json）
-                ReceiveMessageController.MessageClassification(text);
-                Log.i(text);
+                // ReceiveMessageController.MessageClassification(text);
+
             }
 
             @Override

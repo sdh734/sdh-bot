@@ -75,7 +75,7 @@ public class drawPrize {
                     QBotSendMessageController.sendMsg(message, "奖品列表:%0d"
                             + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList()));
                 } else if ("中奖列表".equals(msgArray[1])) {
-                    List<Prize> prizeListByUserQQ = WinnersController.getPrizeListByUserQQ(message.getUserId().toString());
+                    List<Prize> prizeListByUserQQ = WinnersController.getPrizeListByUserQQ(message.getUserId());
                     QBotSendMessageController.sendMsg(message, message.getSender().getNickname() + "的中奖列表:%0d"
                             + QBotSendMessageController.generatorMessageByList(prizeListByUserQQ));
                 } else {
@@ -87,7 +87,7 @@ public class drawPrize {
                     case "添加奖品":
                         Prize prize = new Prize();
                         prize.setPrizeName(msgArray[2]);
-                        prize.setPrizeFrom(message.getUserId().toString());
+                        prize.setPrizeFrom(message.getUserId());
                         PrizeController.addPrize(prize);
                         QBotSendMessageController.sendMsg(message, "奖品添加成功");
                         break;
@@ -154,7 +154,7 @@ public class drawPrize {
                 if ("添加奖品".equals(msgArray[1])) {
                     Prize prize = new Prize();
                     prize.setPrizeName(msgArray[2]);
-                    prize.setPrizeFrom(message.getUserId().toString());
+                    prize.setPrizeFrom(message.getUserId());
                     try {
                         prize.setPrizeQuantity(Integer.parseInt(msgArray[3]));
                     } catch (Exception e) {
@@ -162,6 +162,7 @@ public class drawPrize {
                         Log.i(datestr);
                         prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
                     }
+
                     PrizeController.addPrize(prize);
                     QBotSendMessageController.sendMsg(message, "奖品添加成功");
                 } else {
@@ -173,7 +174,7 @@ public class drawPrize {
                     Prize prize = new Prize();
                     prize.setPrizeName(msgArray[2]);
                     prize.setPrizeQuantity(Integer.parseInt(msgArray[3]));
-                    prize.setPrizeFrom(message.getUserId().toString());
+                    prize.setPrizeFrom(message.getUserId());
                     String datestr = msgArray[4];
                     Log.i(datestr);
                     prize.setPrizeDrawtime(LocalDateTime.parse(datestr));

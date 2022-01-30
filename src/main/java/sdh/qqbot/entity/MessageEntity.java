@@ -16,7 +16,7 @@ public class MessageEntity {
     private Integer font;
     //群聊ID
     @JsonProperty("group_id")
-    private Integer groupId;
+    private String groupId;
     //消息内容
     @JsonProperty("message")
     private String message;
@@ -61,7 +61,7 @@ public class MessageEntity {
      * 消息发送人ID
      */
     @JsonProperty("user_id")
-    private Integer userId;
+    private String userId;
 
     @NoArgsConstructor
     @Data
@@ -83,6 +83,6 @@ public class MessageEntity {
         @JsonProperty("title")
         private String title;
         @JsonProperty("user_id")
-        private Integer userId;
+        private String userId;
     }
 }
