@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("sdh.qqbot.Mapper")
+@MapperScan("sdh.qqbot.mapper")
 public class MyBatisPlusConfig {
 
     /**
@@ -20,6 +20,4 @@ public class MyBatisPlusConfig {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
-
-
 }

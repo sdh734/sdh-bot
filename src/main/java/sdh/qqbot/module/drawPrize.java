@@ -1,6 +1,5 @@
 package sdh.qqbot.module;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sdh.qqbot.controller.DrawprizeController;
 import sdh.qqbot.controller.PrizeController;
@@ -9,12 +8,8 @@ import sdh.qqbot.controller.WinnersController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.dao.User;
 import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.service.IDrawprizeService;
-import sdh.qqbot.service.IPrizeService;
-import sdh.qqbot.service.IUserService;
 import sdh.qqbot.utils.Log;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,28 +18,10 @@ import java.util.List;
  */
 @Component
 public class drawPrize {
-    @Autowired
-    private IDrawprizeService iDrawprizeService;
-    @Autowired
-    private IUserService iUserService;
-    @Autowired
-    private IPrizeService iPrizeService;
-
-    static IDrawprizeService drawprizeService;
-    static IUserService userService;
-    static IPrizeService prizeService;
-
-    @PostConstruct
-    public void init() {
-        drawprizeService = this.iDrawprizeService;
-        userService = this.iUserService;
-        prizeService = iPrizeService;
-    }
-
     /**
      * 抽奖功能管理模块,提供消息内容解析处理功能.
-     *  @param message 消息对象
      *
+     * @param message 消息对象
      */
     public static void DrawPrizeManager(MessageEntity message) {
         String[] msgArray = message.getMessage().split(" ");
@@ -88,8 +65,13 @@ public class drawPrize {
                         Prize prize = new Prize();
                         prize.setPrizeName(msgArray[2]);
                         prize.setPrizeFrom(message.getUserId());
-                        PrizeController.addPrize(prize);
-                        QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                        int addflag1 = PrizeController.addPrize(prize);
+                        if (addflag1 == 0) {
+                            QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                        } else {
+                            QBotSendMessageController.sendMsg(message, "奖品添加失败，请查询奖品列表是否有同名奖品");
+                        }
+
                         break;
                     case "奖品详情":
                         try {
@@ -163,8 +145,12 @@ public class drawPrize {
                         prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
                     }
 
-                    PrizeController.addPrize(prize);
-                    QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                    int addflag2 = PrizeController.addPrize(prize);
+                    if (addflag2 == 0) {
+                        QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                    } else {
+                        QBotSendMessageController.sendMsg(message, "奖品添加失败，请查询奖品列表是否有同名奖品");
+                    }
                 } else {
                     QBotSendMessageController.sendMsg(message, "参数错误");
                 }
@@ -179,7 +165,12 @@ public class drawPrize {
                     Log.i(datestr);
                     prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
                     PrizeController.addPrize(prize);
-                    QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                    int addflag3 = PrizeController.addPrize(prize);
+                    if (addflag3 == 0) {
+                        QBotSendMessageController.sendMsg(message, "奖品添加成功");
+                    } else {
+                        QBotSendMessageController.sendMsg(message, "奖品添加失败，请查询奖品列表是否有同名奖品");
+                    }
                 } else {
                     QBotSendMessageController.sendMsg(message, "参数错误");
                 }

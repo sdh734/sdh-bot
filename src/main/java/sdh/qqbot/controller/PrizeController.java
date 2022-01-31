@@ -1,11 +1,11 @@
 package sdh.qqbot.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Prize;
-import sdh.qqbot.service.IPrizeService;
+import sdh.qqbot.mapper.PrizeMapper;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -20,21 +20,21 @@ import java.util.List;
  */
 @RestController
 public class PrizeController {
+    static PrizeMapper prizeMapper;
     @Autowired
-    private IPrizeService iPrizeService;
-    static IPrizeService prizeService;
-
-
-    @PostConstruct
-    public void init() {
-        prizeService = iPrizeService;
-    }
+    private PrizeMapper iPrizeMapper;
 
     /**
      * 添加奖品
      */
-    public static void addPrize(Prize prize) {
-        prizeService.saveOrUpdate(prize, new UpdateWrapper<Prize>().eq("prize_name", prize.getPrizeName()));
+    public static int addPrize(Prize prize) {
+        List<Prize> prizes = prizeMapper.selectList(new QueryWrapper<Prize>().eq("prize_name", prize.getPrizeName()));
+        if (prizes.size() > 0) {
+            return -1;
+        } else {
+            prizeMapper.insert(prize);
+            return 0;
+        }
     }
 
     /**
@@ -43,7 +43,7 @@ public class PrizeController {
      * @return 返回奖品列表
      */
     public static List<Prize> getPrizeList() {
-        return prizeService.list();
+        return prizeMapper.selectList(new QueryWrapper<>());
     }
 
     /**
@@ -53,7 +53,12 @@ public class PrizeController {
      * @return 奖品对象
      */
     public static Prize getPrizeById(int prizeId) {
-        return prizeService.getById(prizeId);
+        return prizeMapper.selectById(prizeId);
+    }
+
+    @PostConstruct
+    public void init() {
+        prizeMapper = iPrizeMapper;
     }
 
 

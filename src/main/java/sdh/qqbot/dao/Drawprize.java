@@ -47,6 +47,6 @@ public class Drawprize implements Serializable {
 
     @Override
     public String toString() {
-        return "奖品ID:"+this.prizeId+",参与人员ID:"+this.playerId;
+        return "奖品ID：" + this.prizeId + "，参与人员ID：" + this.playerId;
     }
 }

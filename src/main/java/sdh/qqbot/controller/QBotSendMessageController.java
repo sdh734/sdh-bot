@@ -14,7 +14,7 @@ public class QBotSendMessageController {
     @GetMapping("/test")
     public void Test() {
         //URL %0d 回车符
-        OkHttpUtil.get("http://127.0.0.1:5700/send_private_msg?user_id=1247769958&message=1111111111111111111111111111111" + "%0d" + "2222222222222222222222222222222222222222222222222%0d333");
+        //OkHttpUtil.get("http://127.0.0.1:5700/send_private_msg?user_id=1247769958&message=1111111111111111111111111111111" + "%0d" + "2222222222222222222222222222222222222222222222222%0d333");
     }
 
     public static void sendPrivateMsg(String userId, String message) {
