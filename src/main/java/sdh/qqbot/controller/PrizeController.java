@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.mapper.PrizeMapper;
-import sdh.qqbot.service.IPrizeService;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -26,9 +25,10 @@ public class PrizeController {
     @Autowired
     private PrizeMapper iPrizeMapper;
 
-    static IPrizeService prizeService;
-    @Autowired
-    private IPrizeService iPrizeService;
+    @PostConstruct
+    public void init() {
+        prizeMapper = iPrizeMapper;
+    }
 
     /**
      * 添加奖品
@@ -42,11 +42,6 @@ public class PrizeController {
         }
     }
 
-    @PostConstruct
-    public void init() {
-        prizeMapper = iPrizeMapper;
-        prizeService = iPrizeService;
-    }
 
     /**
      * 获取奖品列表
