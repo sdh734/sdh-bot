@@ -42,6 +42,14 @@ public class DrawprizeController {
     @Autowired
     private WinnersMapper iWinnersMapper;
 
+    @PostConstruct
+    public void init() {
+        drawprizeMapper = iDrawprizeMapper;
+        prizeMapper = iPrizeMapper;
+        blacklistMapper = iBlacklistMapper;
+        winnersMapper = iWinnersMapper;
+    }
+
     /**
      * 参与抽奖方法
      */
@@ -58,12 +66,6 @@ public class DrawprizeController {
         drawprize.setPlayerId(user.getId().toString());
         //判断参与用户是否在黑名单中
         if (!BlacklistController.isBlack(user.getId().toString())) {
-//            if (drawprizeService.getOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
-//                QBotSendMessageController.sendMsg(messageEntity, "请勿重复参与!");
-//            } else {
-//                drawprizeService.saveOrUpdate(drawprize, new UpdateWrapper<Drawprize>().eq("prize_id", prizeId));
-//                QBotSendMessageController.sendMsg(messageEntity, "成功参与抽奖!");
-//            }
             if (drawprizeMapper.selectOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
                 QBotSendMessageController.sendMsg(messageEntity, "请勿重复参与!");
             } else {
@@ -91,7 +93,6 @@ public class DrawprizeController {
                     if (userList.size() > 0) {
                         prize.setPrizeIsdraw(1);
                         prizeMapper.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
-                        //prizeService.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
                         QBotSendMessageController.sendMsg(messageEntity, "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
                     } else {
                         QBotSendMessageController.sendMsg(messageEntity, "该抽奖项无人参与，请查询参与列表");
@@ -117,7 +118,6 @@ public class DrawprizeController {
             List<User> userList = startDrawPrize(prize);
             if (userList.size() > 0) {
                 prize.setPrizeIsdraw(1);
-                //prizeService.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
                 prizeMapper.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
                 QBotSendMessageController.sendGroupMsg("814012332", "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
                 QBotSendMessageController.sendPrivateMsg(prize.getPrizeFrom(), "您提供的" + prize.getPrizeName() + "的中奖人员列表为:%0d" + QBotSendMessageController.generatorMessageByList(userList));
@@ -137,9 +137,6 @@ public class DrawprizeController {
      * 获取参与抽奖人员名单 By 奖品id
      */
     public static void getDrawPrizeListByPrizeId(int prizeId, MessageEntity messageEntity) {
-
-//        List<Drawprize> list = drawprizeService.list(new QueryWrapper<Drawprize>().eq("prize_id", prizeId));
-//        Prize prize = prizeService.getById(prizeId);
         List<Drawprize> list = drawprizeMapper.selectList(new QueryWrapper<Drawprize>().eq("prize_id", prizeId));
         Prize prize = prizeMapper.selectById(prizeId);
 
@@ -170,7 +167,6 @@ public class DrawprizeController {
                 drawprizeList.remove(drawprize);
                 //从参与名单中移除
                 drawprizeMapper.deleteById(drawprize.getId());
-//                drawprizeService.removeById(drawprize.getId());
                 //加入黑名单一天
                 BlacklistController.joinBlackList(drawprize.getPlayerId());
                 //加入到中奖者表中
@@ -178,19 +174,11 @@ public class DrawprizeController {
                 winners.setPrizeId(prize.getId());
                 winners.setUserId(Integer.valueOf(drawprize.getPlayerId()));
                 winnersMapper.insert(winners);
-//                winnersService.save(winners);
             }
         }
         return userList;
     }
 
-    @PostConstruct
-    public void init() {
-        drawprizeMapper = iDrawprizeMapper;
-        prizeMapper = iPrizeMapper;
-        blacklistMapper = iBlacklistMapper;
-        winnersMapper = iWinnersMapper;
-    }
 
     /**
      * 抽取奖品

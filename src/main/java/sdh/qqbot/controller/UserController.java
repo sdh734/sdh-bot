@@ -29,7 +29,6 @@ public class UserController {
      */
     public static User getUserByQQ(String userQQ) {
         return userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userQQ));
-//        return userService.getOne(new QueryWrapper<User>().eq("user_id", userQQ));
     }
 
     /**
@@ -37,7 +36,6 @@ public class UserController {
      */
     public static User getUserById(int userId) {
         return userMapper.selectById(userId);
-//        return userService.getOne(new QueryWrapper<User>().eq("id", userId));
     }
 
     /**

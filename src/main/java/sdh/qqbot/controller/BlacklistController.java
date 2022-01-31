@@ -22,10 +22,6 @@ import java.util.Date;
  */
 @RestController
 public class BlacklistController {
-    //@Autowired
-    //private IBlacklistService iBlacklistService;
-
-    //static IBlacklistService blacklistService;
     static BlacklistMapper blacklistMapper;
     @Autowired
     private BlacklistMapper iBlacklistMapper;
@@ -56,7 +52,6 @@ public class BlacklistController {
             blacklistMapper.insert(blacklist);
         }
 
-        //blacklistService.saveOrUpdate(blacklist, new UpdateWrapper<Blacklist>().eq("blackuser_id", userId));
     }
 
     /**
@@ -64,12 +59,10 @@ public class BlacklistController {
      */
     public static void removeBlackList(String userId) {
         blacklistMapper.delete(new QueryWrapper<Blacklist>().eq("blackuser_id", userId));
-//        blacklistService.remove(new QueryWrapper<Blacklist>().eq("blackuser_id", userId));
     }
 
     @PostConstruct
     public void init() {
-        //blacklistService = iBlacklistService;
         blacklistMapper = iBlacklistMapper;
     }
 }
