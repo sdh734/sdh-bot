@@ -7,16 +7,9 @@
 使用go-cqhttp+SpringBoot创建。数据库使用MySQL。
 
 #### 安装教程
-1. 下载最新版[go-cqhttp](https://docs.go-cqhttp.org/)，编辑配置文件，确保HTTP和正向WS配置和下方一致。
+1. 下载最新版[go-cqhttp](https://docs.go-cqhttp.org/)，编辑配置文件，确保HTTP配置和下方一致。
 
 ```
-- ws:
-      # 正向WS服务器监听地址
-      host: 127.0.0.1
-      # 正向WS服务器监听端口
-      port: 6700
-      middlewares:
-        <<: *default # 引用默认中间件
 - http:
       # 服务端监听地址
       host: 127.0.0.1
@@ -33,6 +26,8 @@
         max-queue-size: 2000
       middlewares:
         <<: *default # 引用默认中间件
+      post:
+      - url: http://127.0.0.1:8090/push # POST上报地址
 ```
 2. 导入数据库文件。
 3. Clone项目，使用IDEA启动即可，也可打包运行。
