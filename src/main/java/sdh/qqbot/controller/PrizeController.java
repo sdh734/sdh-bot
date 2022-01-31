@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.mapper.PrizeMapper;
+import sdh.qqbot.service.IPrizeService;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -21,20 +22,30 @@ import java.util.List;
 @RestController
 public class PrizeController {
     static PrizeMapper prizeMapper;
+
     @Autowired
     private PrizeMapper iPrizeMapper;
+
+    static IPrizeService prizeService;
+    @Autowired
+    private IPrizeService iPrizeService;
 
     /**
      * 添加奖品
      */
     public static int addPrize(Prize prize) {
-        List<Prize> prizes = prizeMapper.selectList(new QueryWrapper<Prize>().eq("prize_name", prize.getPrizeName()));
-        if (prizes.size() > 0) {
+        if (prizeMapper.exists(new QueryWrapper<Prize>().eq("prize_name", prize.getPrizeName()))) {
             return -1;
         } else {
             prizeMapper.insert(prize);
             return 0;
         }
+    }
+
+    @PostConstruct
+    public void init() {
+        prizeMapper = iPrizeMapper;
+        prizeService = iPrizeService;
     }
 
     /**
@@ -54,11 +65,6 @@ public class PrizeController {
      */
     public static Prize getPrizeById(int prizeId) {
         return prizeMapper.selectById(prizeId);
-    }
-
-    @PostConstruct
-    public void init() {
-        prizeMapper = iPrizeMapper;
     }
 
 

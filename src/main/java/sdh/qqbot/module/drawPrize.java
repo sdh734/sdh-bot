@@ -8,7 +8,6 @@ import sdh.qqbot.controller.WinnersController;
 import sdh.qqbot.dao.Prize;
 import sdh.qqbot.dao.User;
 import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.utils.Log;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -141,7 +140,7 @@ public class drawPrize {
                         prize.setPrizeQuantity(Integer.parseInt(msgArray[3]));
                     } catch (Exception e) {
                         String datestr = msgArray[3];
-                        Log.i(datestr);
+//                        Log.i(datestr);
                         prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
                     }
 
@@ -162,9 +161,8 @@ public class drawPrize {
                     prize.setPrizeQuantity(Integer.parseInt(msgArray[3]));
                     prize.setPrizeFrom(message.getUserId());
                     String datestr = msgArray[4];
-                    Log.i(datestr);
+//                    Log.i(datestr);
                     prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
-                    PrizeController.addPrize(prize);
                     int addflag3 = PrizeController.addPrize(prize);
                     if (addflag3 == 0) {
                         QBotSendMessageController.sendMsg(message, "奖品添加成功");
