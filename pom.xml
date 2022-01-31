@@ -8,11 +8,11 @@
         <version>2.6.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>sdh.qqbot</groupId>
-    <artifactId>app</artifactId>
-    <version>1</version>
-    <name>qqbot</name>
-    <description>qqbot</description>
+    <groupId>sdh</groupId>
+    <artifactId>qqbot</artifactId>
+    <version>1.0</version>
+    <name>qq-bot</name>
+    <description>QQ-Bot By SDH</description>
     <properties>
         <java.version>11</java.version>
     </properties>
