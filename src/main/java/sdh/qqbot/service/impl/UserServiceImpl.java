@@ -7,10 +7,12 @@ import sdh.qqbot.mapper.UserMapper;
 import sdh.qqbot.service.IUserService;
 
 /**
- *  服务实现类
+ * <p>
+ * 服务实现类
+ * </p>
  *
  * @author SDH
- * @since 2022-01-08
+ * @since 2022-02-01
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {

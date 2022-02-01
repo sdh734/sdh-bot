@@ -59,29 +59,39 @@ public class DrawprizeController {
         Drawprize drawprize = new Drawprize();
         drawprize.setPrizeId(prizeId);
         drawprize.setPlayerId(user.getId().toString());
-        //判断参与用户是否在黑名单中
-        if (!BlacklistController.isBlack(user.getId().toString())) {
-            if (drawprizeMapper.selectOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
-                QBotSendMessageController.sendMsg(messageEntity, "请勿重复参与!");
-            } else {
-                drawprizeMapper.insert(drawprize);
-                QBotSendMessageController.sendMsg(messageEntity, "成功参与抽奖!");
-            }
+        //判断群成员等级
+        int level = Integer.parseInt(user.getLevel());
+        if (level >= 2) {
+            //判断参与用户是否在黑名单中
+            if (!BlacklistController.isBlack(user.getId().toString())) {
+                if (drawprizeMapper.selectOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
+                    QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",请勿重复参与!");
+                } else {
+                    drawprizeMapper.insert(drawprize);
+                    QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",恭喜您成功参与抽奖!");
+                }
 
+            } else {
+                QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",您在黑名单中,无法参与!");
+            }
         } else {
-            QBotSendMessageController.sendMsg(messageEntity, user.getUserName() + ",您在黑名单中,无法参与!");
+            QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",您的群成员等级未达标!");
         }
+
+
     }
 
     /**
-     * 手动抽奖
+     * 手动抽奖，用户权限等级大于1或者是群内管理员即可手动开奖
      */
     public static void manualDrawPrize(int prizeId, MessageEntity messageEntity) {
 
 //        Prize prize = prizeService.getById(prizeId);
         Prize prize = prizeMapper.selectById(prizeId);
         int userLevel = UserController.getPermissionByUserId(messageEntity.getUserId());
-        if (userLevel > 1) {
+        String role = UserController.getRoleByUserId(messageEntity.getUserId());
+        //判断用户权限大于1或者是群内管理员
+        if (userLevel > 1 || "owner".equals(role) || "admin".equals(role)) {
             if (prize != null) {
                 if (prize.getPrizeIsdraw() == 0) {
                     List<User> userList = startDrawPrize(prize);
@@ -146,7 +156,7 @@ public class DrawprizeController {
 
             for (Drawprize d : list) {
                 User user = UserController.getUserById(Integer.parseInt(d.getPlayerId()));
-                builder.append("奖品名称：").append(prize.getPrizeName()).append("，参与人：").append(user.getUserName()).append("%0d");
+                builder.append("奖品名称：").append(prize.getPrizeName()).append("，参与人：").append(user.getNickname()).append("%0d");
             }
             QBotSendMessageController.sendMsg(messageEntity, builder.toString());
         }

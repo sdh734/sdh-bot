@@ -1,15 +1,15 @@
 package sdh.qqbot.service;
 
-import sdh.qqbot.dao.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import sdh.qqbot.dao.User;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author SDH
- * @since 2022-01-08
+ * @since 2022-02-01
  */
 public interface IUserService extends IService<User> {
 

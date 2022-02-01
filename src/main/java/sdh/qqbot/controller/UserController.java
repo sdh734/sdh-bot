@@ -1,12 +1,17 @@
+
+
 package sdh.qqbot.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.dao.User;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.mapper.UserMapper;
+import sdh.qqbot.utils.OkHttpUtil;
 
 import javax.annotation.PostConstruct;
 
@@ -52,11 +57,34 @@ public class UserController {
 
     }
 
+    /**
+     * 根据收到消息自动添加用户
+     *
+     * @param message 消息实体
+     */
     public static void addUser(MessageEntity message) {
         User user = new User();
-        user.setUserId(message.getUserId());
-        user.setUserName(message.getSender().getNickname());
+        //群聊消息和私聊消息差异化处理
+        if ("private".equals(message.getMessageType())) {
+            user.setUserId(message.getUserId());
+            user.setNickname(message.getSender().getNickname());
+        } else {
+            user = getUserInfo(message.getGroupId(), message.getUserId());
+        }
         addUser(user);
+    }
+
+    /**
+     * 根据群号和qq号，获取群成员信息
+     *
+     * @param groupId 群号
+     * @param userId  qq号
+     * @return 群成员信息
+     */
+    private static User getUserInfo(String groupId, String userId) {
+        String s = OkHttpUtil.get("http://127.0.0.1:5700/get_group_member_info?no_cache=true&group_id=" + groupId + "&user_id=" + userId);
+        JSONObject parse = (JSONObject) JSONObject.parse(s);
+        return JSON.parseObject(parse.getJSONObject("data").toString(), User.class);
     }
 
     /**
@@ -68,15 +96,19 @@ public class UserController {
     public static int getPermissionByUserId(String userId) {
 
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userId));
-        /*
-          如果数据库不存在该用户则新增
-         */
-        if (user == null) {
-            User user1 = new User();
-            user1.setUserId(userId);
-            addUser(user1);
-        }
         return user != null ? user.getUserLevel() : 0;
+    }
+
+    /**
+     * 用户组判断
+     *
+     * @param userId 用户qq号
+     * @return 用户组名称
+     */
+    public static String getRoleByUserId(String userId) {
+
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userId));
+        return user != null ? user.getLevel() : null;
     }
 
     @PostConstruct
@@ -85,4 +117,3 @@ public class UserController {
     }
 
 }
-

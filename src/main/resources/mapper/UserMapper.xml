@@ -4,15 +4,29 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="sdh.qqbot.dao.User">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="user_name" property="userName" />
-        <result column="user_level" property="userLevel" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="nickname" property="nickname"/>
+        <result column="user_level" property="userLevel"/>
+        <result column="age" property="age"/>
+        <result column="area" property="area"/>
+        <result column="card" property="card"/>
+        <result column="card_changeable" property="cardChangeable"/>
+        <result column="group_id" property="groupId"/>
+        <result column="sex" property="sex"/>
+        <result column="join_time" property="joinTime"/>
+        <result column="last_sent_time" property="lastSentTime"/>
+        <result column="level" property="level"/>
+        <result column="role" property="role"/>
+        <result column="unfriendly" property="unfriendly"/>
+        <result column="title" property="title"/>
+        <result column="title_expire_time" property="titleExpireTime"/>
+        <result column="shut_up_timestamp" property="shutUpTimestamp"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, user_name, user_level
+        id, user_id, nickname, user_level, age, area, card, card_changeable, group_id, sex, join_time, last_sent_time, level, role, unfriendly, title, title_expire_time, shut_up_timestamp
     </sql>
 
 </mapper>

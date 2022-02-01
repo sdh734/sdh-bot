@@ -1,6 +1,9 @@
 package sdh.qqbot.utils;
 
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -10,7 +13,6 @@ public class OkHttpUtil {
             = MediaType.get("application/json; charset=utf-8");
 
     public static String get(String url)  {
-
         final Request request = new Request.Builder()
                 .url(url)
                 .addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
