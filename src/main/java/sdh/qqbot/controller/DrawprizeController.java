@@ -54,13 +54,8 @@ public class DrawprizeController {
      * 参与抽奖方法
      */
     public static void joinDrawPrize(int prizeId, MessageEntity messageEntity) {
-        //判断用户是否存在,如不存在则加入用户表中
-
+        //判断用户是否存在
         User user = UserController.getUserByQQ(messageEntity.getUserId());
-        if (user == null) {
-            UserController.addUser(messageEntity);
-            user = UserController.getUserByQQ(messageEntity.getUserId());
-        }
         Drawprize drawprize = new Drawprize();
         drawprize.setPrizeId(prizeId);
         drawprize.setPlayerId(user.getId().toString());

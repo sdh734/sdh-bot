@@ -50,7 +50,7 @@ public class MessageEntity {
      * 消息发送人信息对象
      */
     @JsonProperty("sender")
-    private GroupMessageEntity.SenderDTO sender;
+    private SenderDTO sender;
     @JsonProperty("sub_type")
     private String subType;
     @JsonProperty("target_id")
