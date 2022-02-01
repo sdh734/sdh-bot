@@ -62,18 +62,24 @@ public class DrawprizeController {
         //判断群成员等级
         int level = Integer.parseInt(user.getLevel());
         if (level >= 2) {
-            //判断参与用户是否在黑名单中
-            if (!BlacklistController.isBlack(user.getId().toString())) {
-                if (drawprizeMapper.selectOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
-                    QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",请勿重复参与!");
+            Prize prize = prizeMapper.selectById(prizeId);
+            //判断是否已抽取
+            if (prize.getPrizeIsdraw() == 0) {
+                //判断参与用户是否在黑名单中
+                if (!BlacklistController.isBlack(user.getId().toString())) {
+                    if (drawprizeMapper.selectOne(new QueryWrapper<Drawprize>().eq("prize_id", prizeId).eq("player_id", drawprize.getPlayerId())) != null) {
+                        QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",请勿重复参与!");
+                    } else {
+                        drawprizeMapper.insert(drawprize);
+                        QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",恭喜您成功参与抽奖!");
+                    }
                 } else {
-                    drawprizeMapper.insert(drawprize);
-                    QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",恭喜您成功参与抽奖!");
+                    QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",您在黑名单中,无法参与!");
                 }
-
             } else {
-                QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",您在黑名单中,无法参与!");
+                QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",该奖品已完成抽奖，请查询中奖列表。");
             }
+
         } else {
             QBotSendMessageController.sendMsg(messageEntity, user.getNickname() + ",您的群成员等级未达标!");
         }
@@ -144,23 +150,21 @@ public class DrawprizeController {
     public static void getDrawPrizeListByPrizeId(int prizeId, MessageEntity messageEntity) {
         List<Drawprize> list = drawprizeMapper.selectList(new QueryWrapper<Drawprize>().eq("prize_id", prizeId));
         Prize prize = prizeMapper.selectById(prizeId);
-
-        if (list.size() == 0) {
-            if (prize.getPrizeIsdraw() == 0) {
+        if (prize.getPrizeIsdraw() == 0) {
+            if (list.size() == 0) {
                 QBotSendMessageController.sendMsg(messageEntity, "无该抽奖项或无人参与，请查询奖项列表或者参与列表");
             } else {
-                QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖，请查询中奖列表");
+                StringBuilder builder = new StringBuilder("参与抽奖人员列表:%0d");
+
+                for (Drawprize d : list) {
+                    User user = UserController.getUserById(Integer.parseInt(d.getPlayerId()));
+                    builder.append("奖品名称：").append(prize.getPrizeName()).append("，参与人：").append(user.getNickname()).append("%0d");
+                }
+                QBotSendMessageController.sendMsg(messageEntity, builder.toString());
             }
         } else {
-            StringBuilder builder = new StringBuilder("参与抽奖人员列表:%0d");
-
-            for (Drawprize d : list) {
-                User user = UserController.getUserById(Integer.parseInt(d.getPlayerId()));
-                builder.append("奖品名称：").append(prize.getPrizeName()).append("，参与人：").append(user.getNickname()).append("%0d");
-            }
-            QBotSendMessageController.sendMsg(messageEntity, builder.toString());
+            QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖，请查询中奖列表");
         }
-
     }
 
     /**
@@ -175,8 +179,6 @@ public class DrawprizeController {
                 Drawprize drawprize = randomPerson(drawprizeList);
                 userList.add(UserController.getUserById(Integer.parseInt(drawprize.getPlayerId())));
                 drawprizeList.remove(drawprize);
-                //从参与名单中移除
-                drawprizeMapper.deleteById(drawprize.getId());
                 //加入黑名单一天
                 BlacklistController.joinBlackList(drawprize.getPlayerId());
                 //加入到中奖者表中
@@ -185,6 +187,8 @@ public class DrawprizeController {
                 winners.setUserId(Integer.valueOf(drawprize.getPlayerId()));
                 winnersMapper.insert(winners);
             }
+            //抽奖完成删除参与名单
+            drawprizeMapper.delete(new QueryWrapper<Drawprize>().eq("prize_id", prize.getId()));
         }
         return userList;
     }

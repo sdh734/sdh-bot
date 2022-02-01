@@ -44,12 +44,17 @@ public class PrizeController {
 
 
     /**
-     * 获取奖品列表
+     * 获取未抽取奖品列表
      *
      * @return 返回奖品列表
      */
-    public static List<Prize> getPrizeList() {
-        return prizeMapper.selectList(new QueryWrapper<>());
+    public static List<Prize> getPrizeList(boolean flag) {
+        if (flag) {
+            return prizeMapper.selectList(new QueryWrapper<Prize>().eq("prize_isdraw", 1));
+        } else {
+            return prizeMapper.selectList(new QueryWrapper<Prize>().eq("prize_isdraw", 0));
+        }
+
     }
 
     /**

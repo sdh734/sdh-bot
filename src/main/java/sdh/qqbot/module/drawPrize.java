@@ -28,7 +28,7 @@ public class drawPrize {
         stringBuilder.append("%0d------------%0d");
         stringBuilder.append("抽奖 添加奖品 奖品名称 奖品数量(不写默认为1) 抽取时间(不写默认手动抽取,格式:2022-01-12T12:00)");
         stringBuilder.append("%0d------------%0d");
-        stringBuilder.append("抽奖 奖品列表");
+        stringBuilder.append("抽奖 奖品列表/已抽取列表");
         stringBuilder.append("%0d------------%0d");
         stringBuilder.append("抽奖 奖品详情 奖品id(通过奖品详情获取)");
         stringBuilder.append("%0d------------%0d");
@@ -49,11 +49,14 @@ public class drawPrize {
                 //只带一个参数,仅支持查看奖品列表
                 if ("奖品列表".equals(msgArray[1])) {
                     QBotSendMessageController.sendMsg(message, "奖品列表:%0d"
-                            + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList()));
+                            + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList(false)));
                 } else if ("中奖列表".equals(msgArray[1])) {
                     List<Prize> prizeListByUserQQ = WinnersController.getPrizeListByUserQQ(message.getUserId());
                     QBotSendMessageController.sendMsg(message, message.getSender().getNickname() + "的中奖列表:%0d"
                             + QBotSendMessageController.generatorMessageByList(prizeListByUserQQ));
+                } else if ("已抽取列表".equals(msgArray[1])) {
+                    QBotSendMessageController.sendMsg(message, "已抽取的奖项列表:%0d"
+                            + QBotSendMessageController.generatorMessageByList(PrizeController.getPrizeList(true)));
                 } else {
                     QBotSendMessageController.sendMsg(message, "参数错误");
                 }
@@ -140,7 +143,6 @@ public class drawPrize {
                         prize.setPrizeQuantity(Integer.parseInt(msgArray[3]));
                     } catch (Exception e) {
                         String datestr = msgArray[3];
-//                        Log.i(datestr);
                         prize.setPrizeDrawtime(LocalDateTime.parse(datestr));
                     }
 
