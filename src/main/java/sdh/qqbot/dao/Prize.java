@@ -62,6 +62,6 @@ public class Prize implements Serializable {
 
     @Override
     public String toString() {
-        return "奖品ID：" + this.id + "，奖品名称：" + this.prizeName + "，奖品数量：" + this.prizeQuantity + "，是否抽取：" + (this.prizeIsdraw == 1 ? '是' : '否') + "，提供者QQ号：" + this.prizeFrom;
+        return "奖品ID：" + this.id + "，奖品名称：" + this.prizeName + "，奖品数量：" + this.prizeQuantity + "，是否抽取：" + (this.prizeIsdraw == 1 ? '是' : '否') + "，提供者QQ号：" + this.prizeFrom + "，抽取时间：" + this.prizeDrawtime;
     }
 }

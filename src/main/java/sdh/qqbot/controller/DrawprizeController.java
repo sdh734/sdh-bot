@@ -146,9 +146,14 @@ public class DrawprizeController {
             } else {
                 QBotSendMessageController.sendMsg(messageEntity, "该奖品已完成抽奖，请查询中奖列表");
             }
-
         } else {
-            QBotSendMessageController.sendMsg(messageEntity, "参与抽奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(list));
+            StringBuilder builder = new StringBuilder("参与抽奖人员列表:%0d");
+
+            for (Drawprize d : list) {
+                User user = UserController.getUserById(Integer.parseInt(d.getPlayerId()));
+                builder.append("奖品名称：").append(prize.getPrizeName()).append("，参与人：").append(user.getUserName()).append("%0d");
+            }
+            QBotSendMessageController.sendMsg(messageEntity, builder.toString());
         }
 
     }
