@@ -98,7 +98,7 @@ public class DrawprizeController {
                     if (userList.size() > 0) {
                         prize.setPrizeIsdraw(1);
                         prizeMapper.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
-                        QBotSendMessageController.sendMsg(messageEntity, "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
+                        QBotSendMessageController.sendMsg(messageEntity, "奖品为：" + prize.getPrizeName() + "的中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
                     } else {
                         QBotSendMessageController.sendMsg(messageEntity, "该抽奖项无人参与，请查询参与列表");
                     }
@@ -124,7 +124,7 @@ public class DrawprizeController {
             if (userList.size() > 0) {
                 prize.setPrizeIsdraw(1);
                 prizeMapper.update(prize, new UpdateWrapper<Prize>().eq("id", prize.getId()));
-                QBotSendMessageController.sendGroupMsg("814012332", "中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
+                QBotSendMessageController.sendGroupMsg("814012332", "奖品为：" + prize.getPrizeName() + "的中奖人员列表:%0d" + QBotSendMessageController.generatorMessageByList(userList));
                 QBotSendMessageController.sendPrivateMsg(prize.getPrizeFrom(), "您提供的" + prize.getPrizeName() + "的中奖人员列表为:%0d" + QBotSendMessageController.generatorMessageByList(userList));
                 for (User u : userList) {
                     QBotSendMessageController.sendPrivateMsg(u.getUserId(), "恭喜你，获得 " + prize.getPrizeName() + " 一份，请找QQ号为：" + prize.getPrizeFrom() + "的群友兑奖。");
