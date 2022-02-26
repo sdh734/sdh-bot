@@ -9,8 +9,11 @@ import sdh.qqbot.utils.OkHttpUtil;
  * 查询天气接口
  */
 public class WeatherController {
-    final static String AMAP_TOKEN = "db2e7c0e24ccc73bd5b3ce0a9681b298";
-    final static String CY_TOKEN = "jeh6AUT3D1rClHmN";
+    //替换为自己的token
+    //高德开发者token
+    final static String AMAP_TOKEN = "";
+    //彩云天气开发者token
+    final static String CY_TOKEN = "";
 
     /**
      * 通过城市字符串查询所在经纬度
