@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.module.drawPrize;
+import sdh.qqbot.module.queryWeather;
 import sdh.qqbot.module.sexPicture;
 import sdh.qqbot.utils.Log;
 
@@ -49,10 +50,16 @@ public class ReceiveMessageController {
         UserController.addUser(message);
         Log.i("收到私聊消息，消息内容：" + message.getMessage());
         String[] msgArray = message.getMessage().split(" ");
-        if ("色图".equals(msgArray[0])) {
-            sexPicture.sendSexPicture(message, "private");
-        } else if ("抽奖".equals(msgArray[0])) {
-            drawPrize.DrawPrizeManager(message);
+        switch (msgArray[0]) {
+            case "色图":
+                sexPicture.sendSexPicture(message, "private");
+                break;
+            case "抽奖":
+                drawPrize.DrawPrizeManager(message);
+                break;
+            case "天气":
+                queryWeather.weatherManager(message);
+                break;
         }
     }
 
@@ -71,6 +78,9 @@ public class ReceiveMessageController {
                 break;
             case "抽奖":
                 drawPrize.DrawPrizeManager(message);
+                break;
+            case "天气":
+                queryWeather.weatherManager(message);
                 break;
             default:
         }
