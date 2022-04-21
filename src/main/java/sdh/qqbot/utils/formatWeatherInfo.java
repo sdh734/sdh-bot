@@ -43,9 +43,9 @@ public class formatWeatherInfo {
                 e.printStackTrace();
             }
             builder.append(sdf1.format(date1)).append("天气预报：%0d");
-            builder.append("天气情况：").append(weatherCode.queryByCode(weather.getResult().getDaily().getSkycon().get(1).getValue())).append("%0d");
-            builder.append("最高温度：").append(weather.getResult().getDaily().getTemperature().get(1).getMax()).append("℃；");
-            builder.append("最低温度：").append(weather.getResult().getDaily().getTemperature().get(1).getMin()).append("℃%0d");
+            builder.append("天气情况：").append(weatherCode.queryByCode(weather.getResult().getDaily().getSkycon().get(i).getValue())).append("%0d");
+            builder.append("最高温度：").append(weather.getResult().getDaily().getTemperature().get(i).getMax()).append("℃；");
+            builder.append("最低温度：").append(weather.getResult().getDaily().getTemperature().get(i).getMin()).append("℃%0d");
         }
         return builder.toString();
     }
