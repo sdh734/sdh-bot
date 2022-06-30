@@ -58,7 +58,7 @@ public class sexPicture {
     }
 
     private static StringBuilder setUrlTag(MessageEntity message, String[] msgArray) {
-        StringBuilder baseUrl = new StringBuilder("https://api.lolicon.app/setu/v2?proxy=i.pixiv.re&size=small&num=100");
+        StringBuilder baseUrl = new StringBuilder("https://api.lolicon.app/setu/v2?size=small&num=10");
         //R18 Flag
         boolean r18;
         int userType = UserController.getPermissionByUserId(message.getUserId());
