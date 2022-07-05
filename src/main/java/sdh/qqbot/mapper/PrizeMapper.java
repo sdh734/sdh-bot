@@ -1,8 +1,8 @@
 package sdh.qqbot.mapper;
 
-import sdh.qqbot.dao.Prize;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import sdh.qqbot.dao.Prize;
 
 /**
  * <p>

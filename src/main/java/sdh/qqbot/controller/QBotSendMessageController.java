@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 public class QBotSendMessageController {
-    private static StringBuilder baseUrl = new StringBuilder("http://127.0.0.1:5700/");
+    private static final StringBuilder baseUrl = new StringBuilder("http://127.0.0.1:5700/send_msg");
 
     @GetMapping("/test")
     public void Test() {
@@ -18,17 +18,17 @@ public class QBotSendMessageController {
     }
 
     public static void sendPrivateMsg(String userId, String message) {
-        baseUrl.append("send_msg?");
-        baseUrl.append("user_id=").append(userId);
-        baseUrl.append("&message=").append(message);
-        send(baseUrl.toString());
+        String url = baseUrl.toString();
+        url += "?user_id=" + userId;
+        url += "&message=" + message;
+        send(url);
     }
 
     public static void sendGroupMsg(String groupId, String message) {
-        baseUrl.append("send_msg?");
-        baseUrl.append("group_id=").append(groupId);
-        baseUrl.append("&message=").append(message);
-        send(baseUrl.toString());
+        String url = baseUrl.toString();
+        url += "?group_id=" + groupId;
+        url += "&message=" + message;
+        send(url);
     }
 
     public static void sendMsg(MessageEntity messageEntity, String message) {
@@ -41,7 +41,6 @@ public class QBotSendMessageController {
 
     private static void send(String url) {
         OkHttpUtil.get(url);
-        baseUrl = new StringBuilder("http://127.0.0.1:5700/");
     }
 
     public static <T> StringBuilder generatorMessageByList(List<T> list) {

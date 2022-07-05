@@ -1,6 +1,8 @@
 package sdh.qqbot.controller;
 
 import com.alibaba.fastjson.JSON;
+import sdh.qqbot.config.ApiKeyConfig;
+import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.entity.WeatherCityEntity;
 import sdh.qqbot.entity.WeatherEntity;
 import sdh.qqbot.utils.OkHttpUtil;
@@ -9,11 +11,6 @@ import sdh.qqbot.utils.OkHttpUtil;
  * 查询天气接口
  */
 public class WeatherController {
-    //替换为自己的token
-    //高德开发者token
-    final static String AMAP_TOKEN = "";
-    //彩云天气开发者token
-    final static String CY_TOKEN = "";
 
     /**
      * 通过城市字符串查询所在经纬度
@@ -22,8 +19,8 @@ public class WeatherController {
      * @return 城市实体对象
      */
     public static WeatherCityEntity queryCityByString(String City) {
-        String AMAP_URL = "https://restapi.amap.com/v3/geocode/geo?key=";
-        AMAP_URL += AMAP_TOKEN;
+        String AMAP_URL = ApiUrlConfig.AMAP_URL;
+        AMAP_URL += ApiKeyConfig.AMAP_TOKEN;
         AMAP_URL += "&address=";
         AMAP_URL += City;
         String json = OkHttpUtil.get(AMAP_URL);
@@ -37,7 +34,7 @@ public class WeatherController {
      * @return 天气对象
      */
     public static WeatherEntity queryWeatherByLocation(String location) {
-        String CY_URL = "https://api.caiyunapp.com/v2.5/" + CY_TOKEN + "/";
+        String CY_URL = ApiUrlConfig.CY_URL + ApiKeyConfig.CY_TOKEN + "/";
         CY_URL += location;
         CY_URL += "/weather.json";
         String json = OkHttpUtil.get(CY_URL);

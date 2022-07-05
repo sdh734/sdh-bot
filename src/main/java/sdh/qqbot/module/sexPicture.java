@@ -2,15 +2,16 @@ package sdh.qqbot.module;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.controller.QBotSendMessageController;
 import sdh.qqbot.controller.UserController;
 import sdh.qqbot.dao.Sexpicture;
 import sdh.qqbot.entity.ImgUrlEntity;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.mapper.SexpictureMapper;
-import sdh.qqbot.utils.Log;
 import sdh.qqbot.utils.OkHttpUtil;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +21,7 @@ import javax.annotation.PostConstruct;
  */
 
 @Component
+@Slf4j
 public class sexPicture {
     static SexpictureMapper sexpictureMapper;
     @Autowired
@@ -28,16 +30,16 @@ public class sexPicture {
     public static void sendSexPicture(MessageEntity message, String type) {
         String[] msgArray = message.getMessage().split(" ");
         StringBuilder baseUrl = setUrlTag(message, msgArray);
-        Log.i("请求Api链接：" + baseUrl);
+        log.info("请求Api链接：" + baseUrl);
         if (baseUrl != null) {
             String imgUrl;
             String url = OkHttpUtil.get(baseUrl.toString());
             ImgUrlEntity img = JSON.parseObject(url, ImgUrlEntity.class);
             if (img.getData().size() != 0) {
                 imgUrl = img.getData().get((int) Math.floor(Math.random() * img.getData().size())).getUrls().getSmall();
-                Log.i("色图图片链接：" + imgUrl);
+                log.info("色图图片链接：" + imgUrl);
                 String cqMsg = "[CQ:image,file=picture,c=3,url=" + imgUrl + "]";
-                setTypeAndSend(message, cqMsg, type);
+                QBotSendMessageController.sendMsg(message, cqMsg);
                 for (int i = 0; i < img.getData().size(); i++) {
                     sdh.qqbot.dao.Sexpicture sexpicture = new Sexpicture();
                     sexpicture.setPictureId(img.getData().get(i).getPid().toString());
@@ -48,17 +50,17 @@ public class sexPicture {
                 }
             } else {
                 String errorMessage = "找不到关键词";
-                setTypeAndSend(message, errorMessage, type);
+                QBotSendMessageController.sendMsg(message, errorMessage);
             }
         } else {
             String errorMessage = "无R18权限";
-            setTypeAndSend(message, errorMessage, type);
+            QBotSendMessageController.sendMsg(message, errorMessage);
         }
 
     }
 
     private static StringBuilder setUrlTag(MessageEntity message, String[] msgArray) {
-        StringBuilder baseUrl = new StringBuilder("https://api.lolicon.app/setu/v2?size=small&num=10");
+        StringBuilder baseUrl = new StringBuilder(ApiUrlConfig.ST_URL);
         //R18 Flag
         boolean r18;
         int userType = UserController.getPermissionByUserId(message.getUserId());
@@ -91,17 +93,6 @@ public class sexPicture {
 
         }
         return baseUrl;
-    }
-
-    private static void setTypeAndSend(MessageEntity messageEntity, String message, String type) {
-        switch (type) {
-            case "private":
-                QBotSendMessageController.sendPrivateMsg(messageEntity.getUserId(), message);
-                break;
-            case "group":
-                QBotSendMessageController.sendGroupMsg(messageEntity.getGroupId(), message);
-                break;
-        }
     }
 
     @PostConstruct

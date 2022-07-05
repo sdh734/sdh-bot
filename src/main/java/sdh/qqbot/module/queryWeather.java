@@ -1,16 +1,17 @@
 package sdh.qqbot.module;
 
+import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.QBotSendMessageController;
 import sdh.qqbot.controller.WeatherController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.entity.WeatherCityEntity;
 import sdh.qqbot.entity.WeatherEntity;
-import sdh.qqbot.utils.Log;
 import sdh.qqbot.utils.formatWeatherInfo;
 
 /**
  * 天气查询模块
  */
+@Slf4j
 public class queryWeather {
     public static void weatherManager(MessageEntity message) {
         String[] msgArr = message.getMessage().split(" ");
@@ -34,20 +35,20 @@ public class queryWeather {
     }
 
     private static void queryWeatherByCityString(MessageEntity message, String city) {
-        Log.i("开始查询" + city + "的天气");
+        log.info("开始查询" + city + "的天气");
         //获取经纬度
         WeatherCityEntity weatherCityEntity = WeatherController.queryCityByString(city);
-        Log.i(weatherCityEntity.toString());
+        log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
         WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
         QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, 2));
     }
 
     private static void queryWeatherByCityStringAndDayCount(MessageEntity message, String city, int dayCount) {
-        Log.i("开始查询" + city + "的天气");
+        log.info("开始查询" + city + "的天气");
         //获取经纬度
         WeatherCityEntity weatherCityEntity = WeatherController.queryCityByString(city);
-        Log.i(weatherCityEntity.toString());
+        log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
         WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
         QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, dayCount));
