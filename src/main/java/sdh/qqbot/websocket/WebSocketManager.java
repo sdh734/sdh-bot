@@ -1,5 +1,6 @@
 package sdh.qqbot.websocket;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okio.ByteString;
@@ -8,8 +9,14 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.OkHttpInstance;
+import sdh.qqbot.utils.OkHttpUtil;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * OkHttp WebSocket连接管理类，实现定时发送心跳，定时判断连接状态并重连
@@ -28,6 +35,8 @@ public class WebSocketManager {
 
     private boolean isConnect = false;//连接标志
     private int connectCount = 0;//连接次数
+    private final int maxReConnectNum = 10;//最大重连次数
+    private boolean isNotify = false;//通知标记
 
     private static final String WS_URL = ApiUrlConfig.WS_URL;
 
@@ -114,12 +123,11 @@ public class WebSocketManager {
                 if (response != null) {
                     log.info("WS连接失败，：" + response.message());
                 }
-                log.info("WS连接失败异常原因：" + t.getMessage());
+                log.info("WS连接失败，异常原因：" + t.getMessage());
                 isConnect = false;
                 if (receiveMessage != null) {
                     receiveMessage.onConnectFailed();
                 }
-                reconnect();
             }
 
             @Override
@@ -148,6 +156,8 @@ public class WebSocketManager {
                     reconnect();
                 } else {
                     log.info("WS连接成功。");
+                    isNotify = false;
+                    connectCount = 0;
                     if (receiveMessage != null) {
                         receiveMessage.onConnectSuccess();
                     }
@@ -157,16 +167,44 @@ public class WebSocketManager {
     }
 
     /**
-     * 重新连接WS
+     * 重新连接WS，并根据重连次数判断是否需要发送微信通知。
      */
     public void reconnect() {
-        log.info("开始重新连接WS。。。");
-        if (IWebSocket != null) {
-            close();
-            IWebSocket = null;
+        if (connectCount < maxReConnectNum) {
+            log.info("开始重新连接WS。。。");
+            if (IWebSocket != null) {
+                close();
+                IWebSocket = null;
+            }
+            connect();
+            connectCount++;
+        } else {
+            log.info("WS重连次数已超过最大次数，请检查Go-CQHTTP服务。");
+            if (!isNotify) {
+                //发送微信通知
+                if (!Objects.equals(ApiKeyConfig.SERVERCHAN_TOKEN, "")) {
+                    log.info("开始使用Server酱推送微信消息。");
+                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", StandardCharsets.UTF_8);
+                    OkHttpUtil.get(url);
+                    log.info("微信消息发送成功。");
+                } else if (!Objects.equals(ApiKeyConfig.PUSHPLUS_TOKEN, "")) {
+                    log.info("开始使用PushPlus推送微信消息。");
+                    JSONObject request = new JSONObject();
+                    request.put("token", ApiKeyConfig.PUSHPLUS_TOKEN);
+                    request.put("title", "Notify");
+                    request.put("content", "WS重连失败，请检查GO—CQ服务");
+                    request.put("template", "txt");
+                    OkHttpUtil.post(ApiUrlConfig.PUSHPLUS_URL, request.toString());
+                    log.info("微信消息发送成功。");
+                } else {
+                    log.info("微信消息发送失败，未配置推送平台Token。");
+                }
+                isNotify = true;
+            } else {
+                log.info("微信消息已经发送，或未配置推送平台Token。请检查配置类或微信消息。");
+            }
         }
-        connect();
-        connectCount++;
+
     }
 
     /**
@@ -193,9 +231,11 @@ public class WebSocketManager {
     @Async
     void sendHeartBeat() {
 //        log.info("开始发送心跳包。");
-        boolean isSend = sendMessage("HeartBeat：" + System.currentTimeMillis());
-        if (!isSend) {
-            log.info("心跳包发送失败，请检查WS连接");
+        if (isConnect) {
+            boolean isSend = sendMessage("HeartBeat：" + System.currentTimeMillis());
+            if (!isSend) {
+                log.info("心跳包发送失败，请检查WS连接");
+            }
         }
     }
 

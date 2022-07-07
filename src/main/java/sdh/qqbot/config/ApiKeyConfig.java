@@ -13,4 +13,9 @@ public class ApiKeyConfig {
 
     //彩云天气开发者token
     public final static String CY_TOKEN = "";
+    //Server酱通知key
+    public final static String SERVERCHAN_TOKEN = "";
+    //Pushplus推送服务key。
+    public final static String PUSHPLUS_TOKEN = "";
+
 }
