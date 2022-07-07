@@ -6,8 +6,6 @@ import okhttp3.*;
 import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
@@ -71,11 +69,9 @@ public class WebSocketManager {
 
     /**
      * 初始化字段
-     *
-     * @param message 实现消息处理接口的类对象
      */
-    public void init(IReceiveMessage message) {
-        receiveMessage = message;
+    public void init() {
+        receiveMessage = new WebSocketReceiveMessage();
         connect();
     }
 
@@ -87,7 +83,7 @@ public class WebSocketManager {
             log.info("WebSocket 已经连接！");
             return;
         }
-        okHttpClient.newWebSocket(request, createListener());
+        IWebSocket = okHttpClient.newWebSocket(request, createListener());
     }
 
     /**
@@ -119,15 +115,16 @@ public class WebSocketManager {
 
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
-                super.onFailure(webSocket, t, response);
                 if (response != null) {
                     log.info("WS连接失败，：" + response.message());
                 }
                 log.info("WS连接失败，异常原因：" + t.getMessage());
                 isConnect = false;
+                close();
                 if (receiveMessage != null) {
                     receiveMessage.onConnectFailed();
                 }
+                reconnect();
             }
 
             @Override
@@ -135,6 +132,8 @@ public class WebSocketManager {
                 super.onMessage(webSocket, text);
                 if (receiveMessage != null) {
                     receiveMessage.onMessage(text);
+                } else {
+                    log.info("receiveMessage为空");
                 }
             }
 
@@ -158,6 +157,8 @@ public class WebSocketManager {
                     log.info("WS连接成功。");
                     isNotify = false;
                     connectCount = 0;
+                    isConnect = true;
+                    IWebSocket = webSocket;
                     if (receiveMessage != null) {
                         receiveMessage.onConnectSuccess();
                     }
@@ -171,12 +172,15 @@ public class WebSocketManager {
      */
     public void reconnect() {
         if (connectCount < maxReConnectNum) {
-            log.info("开始重新连接WS。。。");
+            log.info("开始重新连接WS。。。第" + connectCount + 1 + "次重连中。。。");
             if (IWebSocket != null) {
                 close();
                 IWebSocket = null;
             }
             connect();
+            if (receiveMessage == null) {
+                receiveMessage = new WebSocketReceiveMessage();
+            }
             connectCount++;
         } else {
             log.info("WS重连次数已超过最大次数，请检查Go-CQHTTP服务。");
@@ -204,7 +208,11 @@ public class WebSocketManager {
                 log.info("微信消息已经发送，或未配置推送平台Token。请检查配置类或微信消息。");
             }
         }
-
+        try {
+            Thread.sleep(RECONNECT_MILLIS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -227,8 +235,8 @@ public class WebSocketManager {
     /**
      * 定时发送心跳包
      */
-    @Scheduled(fixedDelay = HEART_MILLIS, initialDelay = 10000)
-    @Async
+//    @Scheduled(fixedDelay = HEART_MILLIS, initialDelay = 10000)
+//    @Async
     void sendHeartBeat() {
         log.info("开始发送心跳包。");
         if (isConnect) {
@@ -244,8 +252,8 @@ public class WebSocketManager {
     /**
      * 使用SpringBoot定时任务，定时检查WS连接。
      */
-    @Scheduled(fixedDelay = RECONNECT_MILLIS, initialDelay = 10000)
-    @Async
+//    @Scheduled(fixedDelay = RECONNECT_MILLIS, initialDelay = 10000)
+//    @Async
     void inspectWebSocketConnect() {
         log.info("开始检查WS连接。。。");
         if (!isConnect()) {

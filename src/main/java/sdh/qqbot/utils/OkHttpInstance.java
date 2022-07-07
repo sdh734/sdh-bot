@@ -9,7 +9,7 @@ public class OkHttpInstance {
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
-            .pingInterval(5, TimeUnit.SECONDS)
+            .pingInterval(30, TimeUnit.SECONDS)
             .build();
 
     public static OkHttpClient getInstance() {

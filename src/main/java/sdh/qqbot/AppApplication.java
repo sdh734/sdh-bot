@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import sdh.qqbot.websocket.WebSocketManager;
-import sdh.qqbot.websocket.WebSocketReceiveMessage;
 
 @SpringBootApplication(scanBasePackages = {"sdh.qqbot"})
 @EnableScheduling
@@ -17,7 +16,7 @@ public class AppApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
-        webSocketManager.init(new WebSocketReceiveMessage());
+        webSocketManager.init();
     }
 
 }
