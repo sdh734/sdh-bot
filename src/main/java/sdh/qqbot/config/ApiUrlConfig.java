@@ -15,7 +15,7 @@ public class ApiUrlConfig {
     //彩云天气获取天气Api
     public static final String CY_URL = "https://api.caiyunapp.com/v2.5/";
     //色图Api
-    public static final String ST_URL = "https://api.lolicon.app/setu/v2?size=small&num=10";
+    public static final String ST_URL = "https://api.lolicon.app/setu/v2?size=original&size=small&num=10";
     //Server酱通知Api
     public static final String SERVERCHAN_URL = "https://sctapi.ftqq.com/" + ApiKeyConfig.SERVERCHAN_TOKEN + ".send";
     //PushPlus推送Api

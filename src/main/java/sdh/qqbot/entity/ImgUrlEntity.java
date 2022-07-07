@@ -48,6 +48,8 @@ public class ImgUrlEntity {
         public static class UrlsDTO {
             @JsonProperty("small")
             private String small;
+            @JsonProperty("original")
+            private String original;
         }
 
     }

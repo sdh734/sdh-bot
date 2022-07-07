@@ -25,7 +25,7 @@ import java.util.Objects;
 @Component
 public class WebSocketManager {
     private final static int RECONNECT_MILLIS = 10000;//重连检查时间间隔，毫秒
-    private final static int HEART_MILLIS = 5 * 1000;//心跳发送时间间隔，毫秒
+    private final static int HEART_MILLIS = 10 * 1000;//心跳发送时间间隔，毫秒
     private static WebSocketManager webSocketManager;
 
     private final OkHttpClient okHttpClient = OkHttpInstance.getInstance();//OkHttpClient对象
@@ -230,11 +230,13 @@ public class WebSocketManager {
     @Scheduled(fixedDelay = HEART_MILLIS, initialDelay = 10000)
     @Async
     void sendHeartBeat() {
-//        log.info("开始发送心跳包。");
+        log.info("开始发送心跳包。");
         if (isConnect) {
             boolean isSend = sendMessage("HeartBeat：" + System.currentTimeMillis());
             if (!isSend) {
                 log.info("心跳包发送失败，请检查WS连接");
+            } else {
+                log.info("心跳包发送成功。");
             }
         }
     }
@@ -245,7 +247,7 @@ public class WebSocketManager {
     @Scheduled(fixedDelay = RECONNECT_MILLIS, initialDelay = 10000)
     @Async
     void inspectWebSocketConnect() {
-//        log.info("开始检查WS连接。。。");
+        log.info("开始检查WS连接。。。");
         if (!isConnect()) {
             log.info("WS连接出错，准备重连。");
             reconnect();

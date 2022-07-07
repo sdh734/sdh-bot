@@ -36,14 +36,15 @@ public class sexPicture {
             String url = OkHttpUtil.get(baseUrl.toString());
             ImgUrlEntity img = JSON.parseObject(url, ImgUrlEntity.class);
             if (img.getData().size() != 0) {
-                imgUrl = img.getData().get((int) Math.floor(Math.random() * img.getData().size())).getUrls().getSmall();
+                ImgUrlEntity.DataDTO dataDTO = img.getData().get((int) Math.floor(Math.random() * img.getData().size()));
+                imgUrl = dataDTO.getUrls().getSmall();
                 log.info("色图图片链接：" + imgUrl);
-                String cqMsg = "[CQ:image,file=picture,c=3,url=" + imgUrl + "]";
+                String cqMsg = "[CQ:image,file=picture,c=3,url=" + imgUrl + "]%0d原图链接：" + dataDTO.getUrls().getOriginal();
                 QBotSendMessageController.sendMsg(message, cqMsg);
                 for (int i = 0; i < img.getData().size(); i++) {
                     sdh.qqbot.dao.Sexpicture sexpicture = new Sexpicture();
                     sexpicture.setPictureId(img.getData().get(i).getPid().toString());
-                    sexpicture.setPictureUrl(img.getData().get(i).getUrls().getSmall());
+                    sexpicture.setPictureUrl(img.getData().get(i).getUrls().getOriginal());
                     if (!sexpictureMapper.exists(new QueryWrapper<Sexpicture>().eq("picture_id", sexpicture.getPictureId()))) {
                         sexpictureMapper.insert(sexpicture);
                     }
