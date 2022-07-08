@@ -171,8 +171,13 @@ public class WebSocketManager {
      * 重新连接WS，并根据重连次数判断是否需要发送微信通知。
      */
     public void reconnect() {
+        try {
+            Thread.sleep(RECONNECT_MILLIS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (connectCount < maxReConnectNum) {
-            log.info("开始重新连接WS。。。第" + connectCount + 1 + "次重连中。。。");
+            log.info("开始重新连接WS。。。第" + (connectCount + 1) + "次重连中。。。");
             if (IWebSocket != null) {
                 close();
                 IWebSocket = null;
@@ -208,11 +213,7 @@ public class WebSocketManager {
                 log.info("微信消息已经发送，或未配置推送平台Token。请检查配置类或微信消息。");
             }
         }
-        try {
-            Thread.sleep(RECONNECT_MILLIS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     /**
