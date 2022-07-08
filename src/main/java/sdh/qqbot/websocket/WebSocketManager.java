@@ -1,6 +1,7 @@
 package sdh.qqbot.websocket;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okio.ByteString;
@@ -12,6 +13,7 @@ import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.OkHttpInstance;
 import sdh.qqbot.utils.OkHttpUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -113,6 +115,7 @@ public class WebSocketManager {
                 }
             }
 
+            @SneakyThrows
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
                 if (response != null) {
@@ -145,6 +148,7 @@ public class WebSocketManager {
                 }
             }
 
+            @SneakyThrows
             @Override
             public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
                 super.onOpen(webSocket, response);
@@ -170,7 +174,12 @@ public class WebSocketManager {
     /**
      * 重新连接WS，并根据重连次数判断是否需要发送微信通知。
      */
-    public void reconnect() {
+    public void reconnect() throws UnsupportedEncodingException {
+        try {
+            Thread.sleep(RECONNECT_MILLIS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (connectCount < maxReConnectNum) {
             log.info("开始重新连接WS。。。第" + connectCount + 1 + "次重连中。。。");
             if (IWebSocket != null) {
@@ -188,7 +197,7 @@ public class WebSocketManager {
                 //发送微信通知
                 if (!Objects.equals(ApiKeyConfig.SERVERCHAN_TOKEN, "")) {
                     log.info("开始使用Server酱推送微信消息。");
-                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", StandardCharsets.UTF_8);
+                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", String.valueOf(StandardCharsets.UTF_8));
                     OkHttpUtil.get(url);
                     log.info("微信消息发送成功。");
                 } else if (!Objects.equals(ApiKeyConfig.PUSHPLUS_TOKEN, "")) {
@@ -208,11 +217,7 @@ public class WebSocketManager {
                 log.info("微信消息已经发送，或未配置推送平台Token。请检查配置类或微信消息。");
             }
         }
-        try {
-            Thread.sleep(RECONNECT_MILLIS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     /**
@@ -254,6 +259,7 @@ public class WebSocketManager {
      */
 //    @Scheduled(fixedDelay = RECONNECT_MILLIS, initialDelay = 10000)
 //    @Async
+    @SneakyThrows
     void inspectWebSocketConnect() {
         log.info("开始检查WS连接。。。");
         if (!isConnect()) {
