@@ -22,9 +22,9 @@ public class MessageEntity {
     private String message;
     //消息ID
     @JsonProperty("message_id")
-    private Integer messageId;
+    private String messageId;
     @JsonProperty("message_seq")
-    private Integer messageSeq;
+    private String messageSeq;
     /**
      * 消息类型
      * private 私聊
@@ -45,7 +45,7 @@ public class MessageEntity {
     @JsonProperty("raw_message")
     private String rawMessage;
     @JsonProperty("self_id")
-    private Integer selfId;
+    private String selfId;
     /**
      * 消息发送人信息对象
      */
@@ -54,7 +54,7 @@ public class MessageEntity {
     @JsonProperty("sub_type")
     private String subType;
     @JsonProperty("target_id")
-    private Integer targetId;
+    private String targetId;
     @JsonProperty("time")
     private Integer time;
     /**
