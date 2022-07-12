@@ -31,6 +31,9 @@ public class GUSHICI {
         type.put("食物", "shiwu");
     }
 
+    /*
+      古诗词一言模块主入口
+     */
     public static void gushiManager(MessageEntity message) {
         String[] msgArr = message.getMessage().split(" ");
         if ("帮助".equals(msgArr[1])) {
