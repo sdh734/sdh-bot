@@ -97,6 +97,9 @@ public class ReceiveMessageController {
             case "每日一言":
                 AWordADay.aWordADayManager(message);
                 break;
+            case "古诗词":
+                GUSHICI.gushiManager(message);
+                break;
             case "舔狗日记":
                 QueryLickTheDogDiary.diaryManager(message);
                 break;

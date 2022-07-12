@@ -25,7 +25,7 @@ public class ApiUrlConfig {
     //每日一言Api
     public static final String AWORDADAY_URL = "https://v.api.aa1.cn/api/yiyan/index.php";
     //古诗词一言Api
-    public static final String GUSHI_URL = "https://v1.jinrishici.com/all";
+    public static final String GUSHI_URL = "https://v1.jinrishici.com/";
     //舔狗日记
     public static final String LICKTHEDOGDIARY_URL = "https://v.api.aa1.cn/api/tiangou/index.php";
 }
