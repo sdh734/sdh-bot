@@ -174,14 +174,14 @@ public class WebSocketManager {
     /**
      * 重新连接WS，并根据重连次数判断是否需要发送微信通知。
      */
-    public void reconnect() throws UnsupportedEncodingException {
+    public void reconnect() {
         try {
             Thread.sleep(RECONNECT_MILLIS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         if (connectCount < maxReConnectNum) {
-            log.info("开始重新连接WS。。。第" + connectCount + 1 + "次重连中。。。");
+            log.info("开始重新连接WS。。。第" + (connectCount + 1) + "次重连中。。。");
             if (IWebSocket != null) {
                 close();
                 IWebSocket = null;
@@ -197,7 +197,7 @@ public class WebSocketManager {
                 //发送微信通知
                 if (!Objects.equals(ApiKeyConfig.SERVERCHAN_TOKEN, "")) {
                     log.info("开始使用Server酱推送微信消息。");
-                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", String.valueOf(StandardCharsets.UTF_8));
+                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", StandardCharsets.UTF_8);
                     OkHttpUtil.get(url);
                     log.info("微信消息发送成功。");
                 } else if (!Objects.equals(ApiKeyConfig.PUSHPLUS_TOKEN, "")) {
