@@ -9,6 +9,7 @@ import sdh.qqbot.module.*;
 
 /**
  * 接收消息接口
+ *
  * @author SDH
  */
 @Slf4j
@@ -56,11 +57,7 @@ public class ReceiveMessageController {
                     group 群聊
                 */
                 log.info(message.toString());
-                if ("private".equals(message.getMessageType())) {
-                    PrivateMessageManager(message);
-                } else {
-                    GroupMessageManager(message);
-                }
+                MessageManager(message);
                 break;
             case "event"://事件类型
                 break;
@@ -72,13 +69,18 @@ public class ReceiveMessageController {
      *
      * @param message 私聊消息实体
      */
-    private static void PrivateMessageManager(MessageEntity message) {
+    private static void MessageManager(MessageEntity message) {
         UserController.addUser(message);
         log.info("收到私聊消息，消息内容：" + message.getMessage());
         String[] msgArray = message.getMessage().split(" ");
         switch (msgArray[0]) {
             case "色图":
-                sexPicture.sendSexPicture(message, "private");
+                if ("private".equals(message.getMessageType())) {
+                    //私聊开启色图
+                    sexPicture.sendSexPicture(message);
+                } else {
+                    QBotSendMessageController.sendMsg(message, "群聊未开启此功能。");
+                }
                 break;
             case "抽奖":
                 drawPrize.DrawPrizeManager(message);
@@ -99,45 +101,9 @@ public class ReceiveMessageController {
                 QueryLickTheDogDiary.diaryManager(message);
                 break;
             case "帮助":
-                QueryHelp.helpManager(message,"private");
+                QueryHelp.helpManager(message);
                 break;
         }
     }
 
-    /**
-     * 群聊消息处理
-     *
-     * @param message 群聊消息实体
-     */
-    private static void GroupMessageManager(MessageEntity message) {
-        UserController.addUser(message);
-        log.info("收到群聊消息，消息内容：" + message.getMessage());
-        String[] msgArray = message.getMessage().split(" ");
-        switch (msgArray[0]) {
-            case "色图":
-                //sexPicture.sendSexPicture(message, "group");
-                break;
-            case "抽奖":
-                drawPrize.DrawPrizeManager(message);
-                break;
-            case "天气":
-                queryWeather.weatherManager(message);
-                break;
-            case "壁纸":
-                wallpaperModule.wallpaperManager(message);
-                break;
-            case "语录":
-                QuerySaying.sayingManager(message);
-                break;
-            case "每日一言":
-                AWordADay.aWordADayManager(message);
-                break;
-            case "舔狗日记":
-                QueryLickTheDogDiary.diaryManager(message);
-                break;
-            case "帮助":
-                QueryHelp.helpManager(message,"group");
-                break;
-        }
-    }
 }

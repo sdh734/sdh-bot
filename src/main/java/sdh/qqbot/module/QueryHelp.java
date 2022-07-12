@@ -23,14 +23,14 @@ public class QueryHelp {
         list.add("舔狗日记");
     }
 
-    public static void helpManager(MessageEntity message, String type) {
-        queryHelp(message, type);
+    public static void helpManager(MessageEntity message) {
+        queryHelp(message);
     }
 
-    public static void queryHelp(MessageEntity message,String type){
+    public static void queryHelp(MessageEntity message) {
         StringBuilder builder = new StringBuilder();
         builder.append("机器人功能：").append("%0d");
-        if ("private".equals(type)) {
+        if ("private".equals(message.getMessageType())) {
             builder.append("色图").append("%0d");
         }
         for (String function : list) {

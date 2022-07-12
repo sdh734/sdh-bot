@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * 发送色图模块
+ *
  * @author SDH
  */
 
@@ -28,8 +29,12 @@ public class sexPicture {
     @Autowired
     private SexpictureMapper iSexpictureMapper;
 
-    public static void sendSexPicture(MessageEntity message, String type) {
+    public static void sendSexPicture(MessageEntity message) {
         String[] msgArray = message.getMessage().split(" ");
+        if ("帮助".equals(msgArray[1])) {
+            QBotSendMessageController.sendMsg(message, help());
+            return;
+        }
         StringBuilder baseUrl = setUrlTag(message, msgArray);
         log.info("请求Api链接：" + baseUrl);
         if (baseUrl != null) {
@@ -100,5 +105,12 @@ public class sexPicture {
     @PostConstruct
     public void init() {
         sexpictureMapper = iSexpictureMapper;
+    }
+
+    public static String help() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("色图帮助：").append("%0d");
+        builder.append("色图 [关键词]（数量不限） [r18](可选，权限找机器人管理员开)");
+        return builder.toString();
     }
 }
