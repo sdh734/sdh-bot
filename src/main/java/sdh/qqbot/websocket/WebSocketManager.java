@@ -1,6 +1,7 @@
 package sdh.qqbot.websocket;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okio.ByteString;
@@ -12,6 +13,7 @@ import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.OkHttpInstance;
 import sdh.qqbot.utils.OkHttpUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -113,6 +115,7 @@ public class WebSocketManager {
                 }
             }
 
+            @SneakyThrows
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
                 if (response != null) {
@@ -145,6 +148,7 @@ public class WebSocketManager {
                 }
             }
 
+            @SneakyThrows
             @Override
             public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
                 super.onOpen(webSocket, response);
@@ -255,6 +259,7 @@ public class WebSocketManager {
      */
 //    @Scheduled(fixedDelay = RECONNECT_MILLIS, initialDelay = 10000)
 //    @Async
+    @SneakyThrows
     void inspectWebSocketConnect() {
         log.info("开始检查WS连接。。。");
         if (!isConnect()) {
@@ -270,7 +275,9 @@ public class WebSocketManager {
      * @return 是否发送成功
      */
     public boolean sendMessage(String text) {
-        if (!isConnect()) return false;
+        if (!isConnect()) {
+            return false;
+        }
         return IWebSocket.send(text);
     }
 }

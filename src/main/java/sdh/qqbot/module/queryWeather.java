@@ -41,7 +41,7 @@ public class queryWeather {
         log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
         WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
-        QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, 2));
+        QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, 2,weatherCityEntity.getGeocodes().get(0).getFormattedAddress()));
     }
 
     private static void queryWeatherByCityStringAndDayCount(MessageEntity message, String city, int dayCount) {
@@ -51,6 +51,6 @@ public class queryWeather {
         log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
         WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
-        QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, dayCount));
+        QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, dayCount,weatherCityEntity.getGeocodes().get(0).getFormattedAddress()));
     }
 }

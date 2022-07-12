@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.module.drawPrize;
-import sdh.qqbot.module.queryWeather;
-import sdh.qqbot.module.sexPicture;
-import sdh.qqbot.module.wallpaperModule;
+import sdh.qqbot.module.*;
 
 @Slf4j
 @RestController
@@ -88,6 +85,18 @@ public class ReceiveMessageController {
             case "壁纸":
                 wallpaperModule.wallpaperManager(message);
                 break;
+            case "语录":
+                QuerySaying.sayingManager(message);
+                break;
+            case "每日一言":
+                AWordADay.aWordADayManager(message);
+                break;
+            case "舔狗日记":
+                QueryLickTheDogDiary.diaryManager(message);
+                break;
+            case "帮助":
+                QueryHelp.helpManager(message,"private");
+                break;
         }
     }
 
@@ -112,6 +121,18 @@ public class ReceiveMessageController {
                 break;
             case "壁纸":
                 wallpaperModule.wallpaperManager(message);
+                break;
+            case "语录":
+                QuerySaying.sayingManager(message);
+                break;
+            case "每日一言":
+                AWordADay.aWordADayManager(message);
+                break;
+            case "舔狗日记":
+                QueryLickTheDogDiary.diaryManager(message);
+                break;
+            case "帮助":
+                QueryHelp.helpManager(message,"group");
                 break;
         }
     }

@@ -20,4 +20,10 @@ public class ApiUrlConfig {
     public static final String SERVERCHAN_URL = "https://sctapi.ftqq.com/" + ApiKeyConfig.SERVERCHAN_TOKEN + ".send";
     //PushPlus推送Api
     public static final String PUSHPLUS_URL = "http://www.pushplus.plus/send";
+    //语录Api
+    public static final String SAYING_URL = "https://api.oddfar.com/yl/q.php";
+    //每日一言Api
+    public static final String AWORDADAY_URL = "https://v.api.aa1.cn/api/yiyan/index.php";
+    //舔狗日记
+    public static final String LICKTHEDOGDIARY_URL = "https://v.api.aa1.cn/api/tiangou/index.php";
 }
