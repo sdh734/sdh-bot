@@ -275,7 +275,9 @@ public class WebSocketManager {
      * @return 是否发送成功
      */
     public boolean sendMessage(String text) {
-        if (!isConnect()) return false;
+        if (!isConnect()) {
+            return false;
+        }
         return IWebSocket.send(text);
     }
 }

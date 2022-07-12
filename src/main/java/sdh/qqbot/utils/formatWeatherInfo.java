@@ -23,8 +23,8 @@ public class formatWeatherInfo {
      * @param dayCount 预报天数最大值 5
      * @return 格式化后的字符串
      */
-    public static String format(WeatherEntity weather, int dayCount) {
-        StringBuilder builder = new StringBuilder("当前天气情况：%0d");
+    public static String format(WeatherEntity weather, int dayCount,String city) {
+        StringBuilder builder = new StringBuilder(city + "天气情况：%0d");
         builder.append("当前温度：").append(weather.getResult().getRealtime().getTemperature()).append("℃%0d");
         builder.append("当前天气：").append(weatherCode.queryByCode(weather.getResult().getRealtime().getSkycon())).append("%0d");
         builder.append("温馨提示：").append(weather.getResult().getForecastKeypoint()).append("%0d");

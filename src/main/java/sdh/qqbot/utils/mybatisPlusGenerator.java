@@ -21,7 +21,7 @@ public class mybatisPlusGenerator {
      */
     public static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/qqbot?serverTimezone=GMT%2B8";
     public static final String JDBC_USERNAME = "root";
-    public static final String JDBC_PASSWORD = "123456";
+    public static final String JDBC_PASSWORD = "admin";
 
     /**
      * 包名
