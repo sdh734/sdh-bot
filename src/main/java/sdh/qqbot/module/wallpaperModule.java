@@ -21,6 +21,8 @@ import java.util.List;
  * 包含2个功能：
  * 1. 每日必应壁纸获取
  * 2. WallHaven网站壁纸获取。
+ *
+ * @author SDh
  */
 @Slf4j
 public class wallpaperModule {

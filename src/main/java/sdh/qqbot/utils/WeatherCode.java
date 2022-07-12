@@ -5,6 +5,8 @@ import java.util.Map;
 
 /**
  * 天气代码
+ *
+ * @author SDH
  */
 public class WeatherCode {
     Map<String, String> sky = new HashMap<>();

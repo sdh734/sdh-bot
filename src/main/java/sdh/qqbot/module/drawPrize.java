@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * 抽奖功能模块
+ * @author SDh
  */
 @Component
 public class drawPrize {

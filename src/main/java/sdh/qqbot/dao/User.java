@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
+ * 用户实体类
  * @author SDH
  * @since 2022-02-01
  */

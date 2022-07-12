@@ -5,17 +5,18 @@ import sdh.qqbot.controller.QBotSendMessageController;
 import sdh.qqbot.controller.SayingController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.entity.SayingEntity;
-import sdh.qqbot.utils.formatWeatherInfo;
 
 import java.util.HashMap;
 import java.util.Set;
 
 /**
- * @author 语录查询模块
+ * 语录查询模块
+ *
+ * @author fusheng
  */
 @Slf4j
 public class QuerySaying {
-    private static HashMap<String, String> map = new HashMap<>();
+    private static final HashMap<String, String> map = new HashMap<>();
 
     static {
         map.put("土味情话", "1001");
@@ -80,8 +81,7 @@ public class QuerySaying {
             SayingEntity sayingEntity = SayingController.querySaying(type);
             builder.append(sayingEntity.getText().replaceAll("<br>", "")).append("%0d");
         }
-        SayingEntity sayingEntity = SayingController.querySaying(type);
-        log.info(say + ":" + builder.toString());
+        log.info(say + ":" + builder);
         QBotSendMessageController.sendMsg(message, builder.toString());
 
     }

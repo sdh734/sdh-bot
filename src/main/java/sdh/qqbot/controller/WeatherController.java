@@ -9,6 +9,7 @@ import sdh.qqbot.utils.OkHttpUtil;
 
 /**
  * 查询天气接口
+ * @author SDH
  */
 public class WeatherController {
 

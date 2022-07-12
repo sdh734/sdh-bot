@@ -11,6 +11,11 @@ import sdh.qqbot.controller.ReceiveMessageController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.utils.OkHttpInstance;
 
+/**
+ * OkHttp连接WebSocket（已弃用）
+ *
+ * @author SDH
+ */
 @Slf4j
 @Data
 public class WebSocketClient {

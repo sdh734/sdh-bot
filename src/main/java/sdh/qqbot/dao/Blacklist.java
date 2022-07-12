@@ -10,10 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- * 
- * </p>
- *
+ * 黑名单实体类
  * @author SDH
  * @since 2022-01-08
  */

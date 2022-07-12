@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 抽奖获胜者操作接口
  *
  * @author SDH
  * @since 2022-01-09

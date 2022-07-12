@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 输出格式化后的天气信息
+ * 天气信息格式化工具类
+ *
+ * @author SDH
  */
 public class formatWeatherInfo {
     private static final WeatherCode weatherCode = WeatherCode.getInstance();
@@ -23,7 +25,7 @@ public class formatWeatherInfo {
      * @param dayCount 预报天数最大值 5
      * @return 格式化后的字符串
      */
-    public static String format(WeatherEntity weather, int dayCount,String city) {
+    public static String format(WeatherEntity weather, int dayCount, String city) {
         StringBuilder builder = new StringBuilder(city + "天气情况：%0d");
         builder.append("当前温度：").append(weather.getResult().getRealtime().getTemperature()).append("℃%0d");
         builder.append("当前天气：").append(weatherCode.queryByCode(weather.getResult().getRealtime().getSkycon())).append("%0d");

@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * 发送色图模块
+ * @author SDH
  */
 
 @Component

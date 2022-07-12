@@ -7,7 +7,7 @@ import sdh.qqbot.mapper.BlacklistMapper;
 import sdh.qqbot.service.IBlacklistService;
 
 /**
- *  服务实现类
+ *  黑名单服务实现类
  *
  * @author SDH
  * @since 2022-01-08

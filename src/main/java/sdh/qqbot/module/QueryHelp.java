@@ -12,7 +12,7 @@ import java.util.List;
  * @author fusheng
  */
 public class QueryHelp {
-    private static List<String> list = new ArrayList<>();
+    private static final List<String> list = new ArrayList<>();
 
     static {
         list.add("抽奖");

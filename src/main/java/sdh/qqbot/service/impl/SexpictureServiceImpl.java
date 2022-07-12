@@ -7,9 +7,7 @@ import sdh.qqbot.mapper.SexpictureMapper;
 import sdh.qqbot.service.ISexpictureService;
 
 /**
- * <p>
- * 服务实现类
- * </p>
+ * 色图服务实现类
  *
  * @author SDH
  * @since 2022-01-08

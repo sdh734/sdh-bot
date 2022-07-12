@@ -7,9 +7,7 @@ import sdh.qqbot.mapper.UserMapper;
 import sdh.qqbot.service.IUserService;
 
 /**
- * <p>
- * 服务实现类
- * </p>
+ * 用户服务实现类
  *
  * @author SDH
  * @since 2022-02-01

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 天气查询返回实体对象
+ * @author SDH
  */
 @NoArgsConstructor
 @Data

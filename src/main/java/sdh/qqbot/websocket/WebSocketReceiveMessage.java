@@ -4,6 +4,11 @@ import com.alibaba.fastjson.JSON;
 import sdh.qqbot.controller.ReceiveMessageController;
 import sdh.qqbot.entity.MessageEntity;
 
+/**
+ * WS接收消息处理类
+ *
+ * @author SDH
+ */
 public class WebSocketReceiveMessage implements IReceiveMessage {
     @Override
     public void onConnectSuccess() {

@@ -5,9 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import sdh.qqbot.dao.Winners;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
+ *  抽奖获胜者Mapper 接口
  *
  * @author SDH
  * @since 2022-01-09

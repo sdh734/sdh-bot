@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import sdh.qqbot.dao.Drawprize;
 
 /**
- * <p>
- *  服务类
- * </p>
+ *  抽奖服务类
  *
  * @author SDH
  * @since 2022-01-08

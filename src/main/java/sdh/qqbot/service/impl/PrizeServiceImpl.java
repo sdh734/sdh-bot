@@ -7,9 +7,7 @@ import sdh.qqbot.mapper.PrizeMapper;
 import sdh.qqbot.service.IPrizeService;
 
 /**
- * <p>
- *  服务实现类
- * </p>
+ *  奖品服务实现类
  *
  * @author SDH
  * @since 2022-01-09

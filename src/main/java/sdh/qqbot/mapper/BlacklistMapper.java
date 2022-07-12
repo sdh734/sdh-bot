@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import sdh.qqbot.dao.Blacklist;
 
 /**
- *  Mapper 接口
+ *  黑名单Mapper 接口
  *
  * @author SDH
  * @since 2022-01-08

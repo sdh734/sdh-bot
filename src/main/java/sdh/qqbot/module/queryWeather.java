@@ -10,6 +10,7 @@ import sdh.qqbot.utils.formatWeatherInfo;
 
 /**
  * 天气查询模块
+ * @author SDH
  */
 @Slf4j
 public class queryWeather {

@@ -5,9 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import sdh.qqbot.dao.Sexpicture;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
+ *  色图Mapper 接口
  *
  * @author SDH
  * @since 2022-01-08

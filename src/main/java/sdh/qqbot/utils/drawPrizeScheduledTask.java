@@ -15,6 +15,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
+/**
+ * 定时抽奖定时任务类
+ *
+ * @author SDH
+ */
 @Component
 @Slf4j
 public class drawPrizeScheduledTask {

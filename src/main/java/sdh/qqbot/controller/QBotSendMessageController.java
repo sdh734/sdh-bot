@@ -7,6 +7,11 @@ import sdh.qqbot.utils.OkHttpUtil;
 
 import java.util.List;
 
+/**
+ * 与GO-CQ联动，发送消息接口
+ *
+ * @author SDH
+ */
 @RestController
 public class QBotSendMessageController {
     private static final StringBuilder baseUrl = new StringBuilder("http://127.0.0.1:5700/send_msg");

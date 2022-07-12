@@ -1,5 +1,10 @@
 package sdh.qqbot.websocket;
 
+/**
+ * WebSocket接收消息接口
+ *
+ * @author SDH
+ */
 public interface IReceiveMessage {
     void onConnectSuccess();// 连接成功
 

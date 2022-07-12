@@ -13,13 +13,14 @@ import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.OkHttpInstance;
 import sdh.qqbot.utils.OkHttpUtil;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
  * OkHttp WebSocket连接管理类，实现定时发送心跳，定时判断连接状态并重连
+ *
+ * @author SDh
  */
 @Slf4j
 @Component

@@ -6,7 +6,8 @@ import sdh.qqbot.entity.SayingEntity;
 import sdh.qqbot.utils.OkHttpUtil;
 
 /**
- * @author 语录查询接口
+ * 语录查询接口
+ * @author fusheng
  */
 public class SayingController {
     public static SayingEntity querySaying(String type){

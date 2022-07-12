@@ -5,9 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import sdh.qqbot.dao.User;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
+ * 用户Mapper 接口
  *
  * @author SDH
  * @since 2022-02-01

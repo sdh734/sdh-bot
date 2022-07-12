@@ -16,9 +16,7 @@ import sdh.qqbot.utils.OkHttpUtil;
 import javax.annotation.PostConstruct;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 用户操作接口
  *
  * @author SDH
  * @since 2022-01-08

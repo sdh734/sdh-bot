@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 语录查询实体类
+ * 语录查询实体类
+ * @author fusheng
  */
 @NoArgsConstructor
 @Data

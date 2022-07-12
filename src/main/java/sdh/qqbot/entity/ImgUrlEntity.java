@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 色图JSON数据实体类
+ * @author SDH
+ */
 @NoArgsConstructor
 @Data
 public class ImgUrlEntity {

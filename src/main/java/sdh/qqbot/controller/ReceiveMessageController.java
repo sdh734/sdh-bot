@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.module.*;
 
+/**
+ * 接收消息接口
+ * @author SDH
+ */
 @Slf4j
 @RestController
 public class ReceiveMessageController {

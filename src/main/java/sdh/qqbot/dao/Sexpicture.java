@@ -9,9 +9,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
+ * 色图实体类
  *
  * @author SDH
  * @since 2022-01-08

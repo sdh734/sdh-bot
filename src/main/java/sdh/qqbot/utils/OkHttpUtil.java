@@ -5,6 +5,11 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * OkHttp工具类
+ *
+ * @author SDh
+ */
 public class OkHttpUtil {
     private static final OkHttpClient client = OkHttpInstance.getInstance();
     public static final MediaType JSON

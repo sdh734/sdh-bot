@@ -14,7 +14,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * MybatisPlus自动生成代码工具类
+ *
+ * @author SDH
+ */
 public class mybatisPlusGenerator {
     /**
      * 数据库

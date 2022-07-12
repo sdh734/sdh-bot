@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * WallHaven搜索结果实体类
+ * @author SDH
+ */
 @NoArgsConstructor
 @Data
 public class WallHavenSearchResult {

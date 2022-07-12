@@ -10,9 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- *
- * </p>
+ *奖品实体类
  *
  * @author SDH
  * @since 2022-01-09

@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * WallHaven壁纸数据实体类
+ * @author SDH
+ */
 @NoArgsConstructor
 @Data
 public class WallHavenInfo {

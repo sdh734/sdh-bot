@@ -13,9 +13,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 抽奖黑名单接口
  *
  * @author SDH
  * @since 2022-01-08

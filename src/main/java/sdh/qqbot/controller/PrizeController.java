@@ -11,9 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * 抽奖奖品操作接口
  *
  * @author SDH
  * @since 2022-01-09

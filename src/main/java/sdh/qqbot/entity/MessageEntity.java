@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 消息实体类 包括私聊及群聊消息
+ * @author SDH
  */
 @NoArgsConstructor
 @Data
