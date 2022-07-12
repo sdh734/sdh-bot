@@ -17,7 +17,7 @@ spring:
     #基本属性
     url: jdbc:mysql://127.0.0.1:3306/qqbot?serverTimezone=GMT%2B8
     username: root
-    password: admin
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #druid相关配置
