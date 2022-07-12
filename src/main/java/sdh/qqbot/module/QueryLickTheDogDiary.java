@@ -15,6 +15,7 @@ import java.util.List;
 @Slf4j
 public class QueryLickTheDogDiary {
 
+
     public static void diaryManager(MessageEntity message){
         queryLickTheDogDiary(message);
     }
