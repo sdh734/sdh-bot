@@ -3,7 +3,7 @@
 <mapper namespace="sdh.qqbot.mapper.BlacklistMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="sdh.qqbot.dao.Blacklist">
+    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.database.Blacklist">
         <id column="id" property="id" />
         <result column="blackuser_id" property="blackuserId" />
         <result column="black_time" property="blackTime" />

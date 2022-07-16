@@ -3,7 +3,7 @@
 <mapper namespace="sdh.qqbot.mapper.PrizeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="sdh.qqbot.dao.Prize">
+    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.database.Prize">
         <id column="id" property="id" />
         <result column="prize_name" property="prizeName" />
         <result column="prize_quantity" property="prizeQuantity" />

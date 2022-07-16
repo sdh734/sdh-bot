@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import sdh.qqbot.controller.DrawprizeController;
-import sdh.qqbot.dao.Prize;
+import sdh.qqbot.controller.database.DrawprizeController;
+import sdh.qqbot.entity.database.Prize;
 import sdh.qqbot.mapper.PrizeMapper;
 
 import javax.annotation.PostConstruct;

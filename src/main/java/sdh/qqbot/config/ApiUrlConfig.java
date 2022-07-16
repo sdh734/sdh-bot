@@ -19,7 +19,7 @@ public class ApiUrlConfig {
     //Server酱通知Api
     public static final String SERVERCHAN_URL = "https://sctapi.ftqq.com/" + ApiKeyConfig.SERVERCHAN_TOKEN + ".send";
     //PushPlus推送Api
-    public static final String PUSHPLUS_URL = "http://www.pushplus.plus/send";
+    public static final String PUSHPLUS_URL = "https://www.pushplus.plus/send";
     //语录Api
     public static final String SAYING_URL = "https://api.oddfar.com/yl/q.php";
     //每日一言Api
@@ -31,5 +31,9 @@ public class ApiUrlConfig {
     //历史上的今天Api
     public static final String TODAYONHISTORY_URL = "https://tenapi.cn/lishi/?format=json";
     //伤感语录Api
-    public static final String SADSAYINGS_URL = "http://api.wuxixindong.top/api/sgyl.php";
+    public static final String SADSAYINGS_URL = "https://api.wuxixindong.top/api/sgyl.php";
+    //每日早报api
+    public static final String DAILYNEWS_URL = "https://v2.alapi.cn/api/zaobao";
+    //疫情风险地区api
+    public static final String NCOV_URL = "https://v2.alapi.cn/api/zaobao";
 }

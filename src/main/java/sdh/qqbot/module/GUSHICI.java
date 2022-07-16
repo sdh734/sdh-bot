@@ -1,9 +1,9 @@
 package sdh.qqbot.module;
 
-import sdh.qqbot.controller.AWordGUSHIController;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.entity.GUSHIEntity;
-import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.GUSHIEntity;
+import sdh.qqbot.entity.api.MessageEntity;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -41,10 +41,10 @@ public class GUSHICI {
             return;
         }
         if (msgArr.length > 1 && msgArr[1] != null) {
-            GUSHIEntity gushiEntity = AWordGUSHIController.queryGUSHI(type.get(msgArr[1]));
+            GUSHIEntity gushiEntity = QueryApiManagerController.queryGUSHI(type.get(msgArr[1]));
             QBotSendMessageController.sendMsg(message, gushiEntity.toString());
         } else {
-            GUSHIEntity gushiEntity = AWordGUSHIController.queryGUSHI(type.get("全部"));
+            GUSHIEntity gushiEntity = QueryApiManagerController.queryGUSHI(type.get("全部"));
             QBotSendMessageController.sendMsg(message, gushiEntity.toString());
         }
     }

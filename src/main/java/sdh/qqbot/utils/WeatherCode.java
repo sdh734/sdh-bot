@@ -9,7 +9,7 @@ import java.util.Map;
  * @author SDH
  */
 public class WeatherCode {
-    Map<String, String> sky = new HashMap<>();
+    final Map<String, String> sky = new HashMap<>();
 
     private WeatherCode() {
         sky.put("CLEAR_DAY", "晴");

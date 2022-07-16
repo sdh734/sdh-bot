@@ -2,7 +2,7 @@ package sdh.qqbot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import sdh.qqbot.dao.Sexpicture;
+import sdh.qqbot.entity.database.Sexpicture;
 
 /**
  *  色图Mapper 接口

@@ -3,7 +3,7 @@
 <mapper namespace="sdh.qqbot.mapper.UserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="sdh.qqbot.dao.User">
+    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.database.User">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="nickname" property="nickname"/>

@@ -1,10 +1,10 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.controller.SayingController;
-import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.entity.SayingEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.SayingEntity;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -78,7 +78,7 @@ public class QuerySaying {
         }
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < number; i++) {
-            SayingEntity sayingEntity = SayingController.querySaying(type);
+            SayingEntity sayingEntity = QueryApiManagerController.querySaying(type);
             builder.append(sayingEntity.getText().replaceAll("<br>", "")).append("%0d");
         }
         log.info(say + ":" + builder);

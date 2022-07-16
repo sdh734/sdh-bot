@@ -2,7 +2,7 @@ package sdh.qqbot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import sdh.qqbot.dao.Drawprize;
+import sdh.qqbot.entity.database.Drawprize;
 
 /**
  * 抽奖Mapper 接口
