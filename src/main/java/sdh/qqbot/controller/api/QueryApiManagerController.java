@@ -3,7 +3,7 @@ package sdh.qqbot.controller.api;
 import com.alibaba.fastjson.JSON;
 import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
-import sdh.qqbot.entity.TwoDimensionalSpaceEntity;
+import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.*;
 import sdh.qqbot.utils.OkHttpUtil;
 
@@ -123,10 +123,11 @@ public class QueryApiManagerController {
 
     /**
      * 二次元图片查询接口
+     *
      * @return
      */
-    public static TwoDimensionalSpaceEntity queryTwoDimensionalSpace(){
-        String url = ApiUrlConfig.TWODIMENSIONALSPACE;
+    public static TwoDimensionalSpaceEntity queryTwoDimensionalSpace() {
+        String url = ApiUrlConfig.TODAYONHISTORY_URL;
         String json = OkHttpUtil.get(url);
         return JSON.parseObject(json, TwoDimensionalSpaceEntity.class);
     }

@@ -3,7 +3,7 @@ package sdh.qqbot.module;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.controller.message.QBotSendMessageController;
-import sdh.qqbot.entity.TwoDimensionalSpaceEntity;
+import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.MessageEntity;
 
 /**
