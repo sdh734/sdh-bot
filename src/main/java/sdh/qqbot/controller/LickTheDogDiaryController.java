@@ -17,7 +17,6 @@ public class LickTheDogDiaryController {
     public static LickTheDogDiaryEntity queryLickTheDogDiary() {
         String LICKTHEDOGDIARY_URL = ApiUrlConfig.LICKTHEDOGDIARY_URL;
         String json = OkHttpUtil.get(LICKTHEDOGDIARY_URL);
-        json = json.substring(0, json.lastIndexOf("1"));
         return JSON.parseObject(json, LickTheDogDiaryEntity.class);
     }
 }

@@ -21,8 +21,4 @@ public class LickTheDogDiaryEntity {
     @JsonProperty("msg")
     private String msg;
 
-    @JsonProperty("newslist")
-    private List<HashMap<String,String>> newsList;
-
-
 }

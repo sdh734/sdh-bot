@@ -22,14 +22,7 @@ public class QueryLickTheDogDiary {
 
     private static void queryLickTheDogDiary(MessageEntity message){
         LickTheDogDiaryEntity lickTheDogDiaryEntity = LickTheDogDiaryController.queryLickTheDogDiary();
-        if (lickTheDogDiaryEntity == null ){
-            return;
-        }
-        List<HashMap<String, String>> newsList = lickTheDogDiaryEntity.getNewsList();
-        if (newsList  == null || newsList.size() == 0){
-            return;
-        }
-        log.info("舔狗日记：" + newsList.get(0).get("content"));
-        QBotSendMessageController.sendMsg(message,newsList.get(0).get("content") );
+        log.info("舔狗日记：" + lickTheDogDiaryEntity.getMsg());
+        QBotSendMessageController.sendMsg(message,lickTheDogDiaryEntity.getMsg() );
     }
 }

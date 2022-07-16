@@ -27,5 +27,5 @@ public class ApiUrlConfig {
     //古诗词一言Api
     public static final String GUSHI_URL = "https://v1.jinrishici.com/";
     //舔狗日记
-    public static final String LICKTHEDOGDIARY_URL = "https://v.api.aa1.cn/api/tiangou/index.php";
+    public static final String LICKTHEDOGDIARY_URL = "https://api.ixiaowai.cn/tgrj/index.php/?code=json";
 }
