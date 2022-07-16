@@ -1,0 +1,36 @@
+package sdh.qqbot.module;
+
+import lombok.extern.slf4j.Slf4j;
+import sdh.qqbot.controller.QBotSendMessageController;
+import sdh.qqbot.controller.TwoDimensionalSpaceController;
+import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.entity.TwoDimensionalSpaceEntity;
+
+/**
+ * 二次元图
+ * @author fusheng
+ */
+@Slf4j
+public class TwoDimensionalSpace {
+
+    /**
+     * 二次元图管理器
+     * @param message
+     */
+    public static void twoDimensionalSpaceEntity(MessageEntity message){
+        queryTwoDimensionalSpaceEntity(message);
+    }
+
+    /**
+     * 查询二次元图
+     * @param message
+     */
+    private static void queryTwoDimensionalSpaceEntity(MessageEntity message){
+        TwoDimensionalSpaceEntity twoDimensionalSpaceEntity = TwoDimensionalSpaceController.queryTwoDimensionalSpace();
+        String url = twoDimensionalSpaceEntity.getImgUrl();
+        log.info("二次元链接：" + url);
+        String cqMsg = "[CQ:image,file=picture,c=3,url=" + url + "]%0d原图链接：" + url;
+        QBotSendMessageController.sendMsg(message,cqMsg);
+    }
+
+}

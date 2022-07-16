@@ -109,6 +109,9 @@ public class ReceiveMessageController {
             case "到点了":
                 QuerySadSayings.sadSayingsManager(message);
                 break;
+            case "二次元":
+                TwoDimensionalSpace.twoDimensionalSpaceEntity(message);
+                break;
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;
