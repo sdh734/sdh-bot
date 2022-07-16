@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.MessageEntity;
 import sdh.qqbot.utils.OkHttpUtil;
+import sdh.qqbot.websocket.WebSocketManager;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 public class QBotSendMessageController {
     private static final StringBuilder baseUrl = new StringBuilder("http://127.0.0.1:5700/send_msg");
+    private static final WebSocketManager webSocketManager = WebSocketManager.getInstance();
 
     @GetMapping("/test")
     public void Test() {

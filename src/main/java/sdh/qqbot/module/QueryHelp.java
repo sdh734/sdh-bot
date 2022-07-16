@@ -19,6 +19,7 @@ public class QueryHelp {
         list.add("天气");
         list.add("壁纸");
         list.add("语录");
+        list.add("古诗词");
         list.add("每日一言");
         list.add("舔狗日记");
         list.add("古诗词");

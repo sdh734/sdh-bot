@@ -31,7 +31,7 @@ public class sexPicture {
 
     public static void sendSexPicture(MessageEntity message) {
         String[] msgArray = message.getMessage().split(" ");
-        if ("帮助".equals(msgArray[1])) {
+        if (msgArray.length > 1 && "帮助".equals(msgArray[1])) {
             QBotSendMessageController.sendMsg(message, help());
             return;
         }

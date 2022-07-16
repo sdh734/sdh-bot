@@ -36,11 +36,11 @@ public class GUSHICI {
      */
     public static void gushiManager(MessageEntity message) {
         String[] msgArr = message.getMessage().split(" ");
-        if ("帮助".equals(msgArr[1])) {
+        if (msgArr.length > 1 && "帮助".equals(msgArr[1])) {
             QBotSendMessageController.sendMsg(message, help());
             return;
         }
-        if (msgArr[1] != null) {
+        if (msgArr.length > 1 && msgArr[1] != null) {
             GUSHIEntity gushiEntity = AWordGUSHIController.queryGUSHI(type.get(msgArr[1]));
             QBotSendMessageController.sendMsg(message, gushiEntity.toString());
         } else {
