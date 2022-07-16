@@ -103,6 +103,9 @@ public class ReceiveMessageController {
             case "舔狗日记":
                 QueryLickTheDogDiary.diaryManager(message);
                 break;
+            case "历史上的今天":
+                TodayOnHistory.todayOnHistoryManager(message);
+                break;
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;

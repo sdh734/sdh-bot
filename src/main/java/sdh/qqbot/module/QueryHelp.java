@@ -21,6 +21,8 @@ public class QueryHelp {
         list.add("语录");
         list.add("每日一言");
         list.add("舔狗日记");
+        list.add("古诗词");
+        list.add("历史上的今天");
     }
 
     public static void helpManager(MessageEntity message) {
@@ -33,8 +35,12 @@ public class QueryHelp {
         if ("private".equals(message.getMessageType())) {
             builder.append("色图").append("%0d");
         }
-        for (String function : list) {
-            builder.append(function).append("%0d");
+        for (int i = 0; i < list.size(); i++) {
+            String function = list.get(i);
+            builder.append(function);
+            if (i < list.size() - 1){
+                builder.append("%0d");
+            }
         }
         QBotSendMessageController.sendMsg(message, builder.toString());
     }

@@ -28,4 +28,6 @@ public class ApiUrlConfig {
     public static final String GUSHI_URL = "https://v1.jinrishici.com/";
     //舔狗日记
     public static final String LICKTHEDOGDIARY_URL = "https://api.ixiaowai.cn/tgrj/index.php/?code=json";
+    //历史上的今天
+    public static final String TODAYONHISTORY_URL = "https://tenapi.cn/lishi/?format=json";
 }
