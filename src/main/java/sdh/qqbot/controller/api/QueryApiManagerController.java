@@ -3,6 +3,7 @@ package sdh.qqbot.controller.api;
 import com.alibaba.fastjson.JSON;
 import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
+import sdh.qqbot.entity.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.*;
 import sdh.qqbot.utils.OkHttpUtil;
 
@@ -118,5 +119,15 @@ public class QueryApiManagerController {
         CY_URL += "/weather.json";
         String json = OkHttpUtil.get(CY_URL);
         return JSON.parseObject(json, WeatherEntity.class);
+    }
+
+    /**
+     * 二次元图片查询接口
+     * @return
+     */
+    public static TwoDimensionalSpaceEntity queryTwoDimensionalSpace(){
+        String url = ApiUrlConfig.TWODIMENSIONALSPACE;
+        String json = OkHttpUtil.get(url);
+        return JSON.parseObject(json, TwoDimensionalSpaceEntity.class);
     }
 }

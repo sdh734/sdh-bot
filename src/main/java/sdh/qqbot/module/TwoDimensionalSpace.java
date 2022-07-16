@@ -1,10 +1,10 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.controller.TwoDimensionalSpaceController;
-import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.entity.TwoDimensionalSpaceEntity;
+import sdh.qqbot.entity.api.MessageEntity;
 
 /**
  * 二次元图
@@ -26,7 +26,7 @@ public class TwoDimensionalSpace {
      * @param message
      */
     private static void queryTwoDimensionalSpaceEntity(MessageEntity message){
-        TwoDimensionalSpaceEntity twoDimensionalSpaceEntity = TwoDimensionalSpaceController.queryTwoDimensionalSpace();
+        TwoDimensionalSpaceEntity twoDimensionalSpaceEntity = QueryApiManagerController.queryTwoDimensionalSpace();
         String url = twoDimensionalSpaceEntity.getImgUrl();
         log.info("二次元链接：" + url);
         String cqMsg = "[CQ:image,file=picture,c=3,url=" + url + "]%0d原图链接：" + url;
