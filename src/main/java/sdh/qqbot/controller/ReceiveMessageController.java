@@ -106,6 +106,11 @@ public class ReceiveMessageController {
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;
+            default:
+                //复读机
+                if ("group".equals(message.getMessageType())){
+                    Repeater.repeaterManager(message);
+                }
         }
     }
 
