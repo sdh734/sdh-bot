@@ -1,11 +1,11 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.controller.WeatherController;
-import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.entity.WeatherCityEntity;
-import sdh.qqbot.entity.WeatherEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.WeatherCityEntity;
+import sdh.qqbot.entity.api.WeatherEntity;
 import sdh.qqbot.utils.formatWeatherInfo;
 
 /**
@@ -49,10 +49,10 @@ public class queryWeather {
     private static void queryWeatherByCityString(MessageEntity message, String city) {
         log.info("开始查询" + city + "的天气");
         //获取经纬度
-        WeatherCityEntity weatherCityEntity = WeatherController.queryCityByString(city);
+        WeatherCityEntity weatherCityEntity = QueryApiManagerController.queryCityDesByCityName(city);
         log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
-        WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
+        WeatherEntity weatherEntity = QueryApiManagerController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
         QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, 2, weatherCityEntity.getGeocodes().get(0).getFormattedAddress()));
     }
 
@@ -66,10 +66,10 @@ public class queryWeather {
     private static void queryWeatherByCityStringAndDayCount(MessageEntity message, String city, int dayCount) {
         log.info("开始查询" + city + "的天气");
         //获取经纬度
-        WeatherCityEntity weatherCityEntity = WeatherController.queryCityByString(city);
+        WeatherCityEntity weatherCityEntity = QueryApiManagerController.queryCityDesByCityName(city);
         log.info(weatherCityEntity.toString());
         //根据经纬度查询天气
-        WeatherEntity weatherEntity = WeatherController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
+        WeatherEntity weatherEntity = QueryApiManagerController.queryWeatherByLocation(weatherCityEntity.getGeocodes().get(0).getLocation());
         QBotSendMessageController.sendMsg(message, formatWeatherInfo.format(weatherEntity, dayCount, weatherCityEntity.getGeocodes().get(0).getFormattedAddress()));
     }
 

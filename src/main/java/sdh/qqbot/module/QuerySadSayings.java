@@ -1,9 +1,9 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.controller.SadSayingsController;
-import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.MessageEntity;
 
 /**
  * 伤感语录
@@ -20,7 +20,7 @@ public class QuerySadSayings {
     }
 
     private static void querySadSayings(MessageEntity message){
-        String sayings = SadSayingsController.querySadSayings();
+        String sayings = QueryApiManagerController.querySadSayings();
         String substring = sayings.substring(sayings.indexOf("━━━━━━━━━") + 9, sayings.lastIndexOf("━━━━━━━━━"));
         log.info("伤感语录：" + substring);
         QBotSendMessageController.sendMsg(message,substring );

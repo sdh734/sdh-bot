@@ -2,7 +2,7 @@ package sdh.qqbot.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import sdh.qqbot.dao.Prize;
+import sdh.qqbot.entity.database.Prize;
 import sdh.qqbot.mapper.PrizeMapper;
 import sdh.qqbot.service.IPrizeService;
 

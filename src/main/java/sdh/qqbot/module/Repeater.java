@@ -1,7 +1,7 @@
 package sdh.qqbot.module;
 
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.entity.api.MessageEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Repeater {
 
-    private static Map<Integer, String> repeaterUtterance = new HashMap<>();
+    private static final Map<Integer, String> repeaterUtterance = new HashMap<>();
 
-    private static Map<String, List<String>> talk = new ConcurrentHashMap<>();
+    private static final Map<String, List<String>> talk = new ConcurrentHashMap<>();
 
     static {
         repeaterUtterance.put(7, "打断施法");
@@ -25,7 +25,7 @@ public class Repeater {
 
     /**
      * 复读机管理模块
-     * @param message
+     * @param message 消息实体类
      */
     public static void repeaterManager(MessageEntity message) {
         repeater(message);
@@ -33,7 +33,7 @@ public class Repeater {
 
     /**
      * 复读机复读
-     * @param message
+     * @param message 消息实体类
      */
     public static void repeater(MessageEntity message) {
         String groupId = message.getGroupId();
@@ -55,7 +55,7 @@ public class Repeater {
             list.add(message.getMessage());
         }
         int size = list.size();
-        String speak = null;
+        String speak;
         speak = repeaterUtterance.get(size);
         if (size == 3) {
             speak = message.getMessage();

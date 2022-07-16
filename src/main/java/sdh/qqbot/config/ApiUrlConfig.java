@@ -34,4 +34,9 @@ public class ApiUrlConfig {
     public static final String SADSAYINGS_URL = "http://api.wuxixindong.top/api/sgyl.php";
     //手绘壁纸Api
     public static final String  TWODIMENSIONALSPACE = "https://tenapi.cn/acg?return=json";
+    public static final String SADSAYINGS_URL = "https://api.wuxixindong.top/api/sgyl.php";
+    //每日早报api
+    public static final String DAILYNEWS_URL = "https://v2.alapi.cn/api/zaobao";
+    //疫情风险地区api
+    public static final String NCOV_URL = "https://v2.alapi.cn/api/zaobao";
 }

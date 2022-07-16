@@ -1,10 +1,10 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.controller.TodayOnHistoryController;
-import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.entity.TodayOnHistoryEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.TodayOnHistoryEntity;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class TodayOnHistory {
 
     /**
      * 历史上的今天管理模块
-     * @param message
+     * @param message 消息实体类
      */
     public static void todayOnHistoryManager(MessageEntity message) {
         queryHistory(message);
@@ -26,12 +26,12 @@ public class TodayOnHistory {
 
     /**
      * 历史上的今天查询
-     * @param message
+     * @param message 消息实体类
      */
     private static void queryHistory(MessageEntity message) {
-        TodayOnHistoryEntity todayOnHistoryEntity = TodayOnHistoryController.queryTodayOnHistoryEntity();
+        TodayOnHistoryEntity todayOnHistoryEntity = QueryApiManagerController.queryTodayOnHistoryEntity();
         StringBuilder builder = new StringBuilder();
-        builder.append("日期：" + todayOnHistoryEntity.getDay()).append("%0d");
+        builder.append("日期：").append(todayOnHistoryEntity.getDay()).append("%0d");
         List<String> contents = todayOnHistoryEntity.getContent();
         for (int i = 0; i < contents.size(); i++) {
             String content = contents.get(i);

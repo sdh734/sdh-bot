@@ -13,9 +13,10 @@ public class ApiKeyConfig {
 
     //彩云天气开发者token
     public final static String CY_TOKEN = "";
-    //Server酱通知key
+    //Server酱通知token
     public final static String SERVERCHAN_TOKEN = "";
-    //Pushplus推送服务key。
+    //Pushplus推送服务token。
     public final static String PUSHPLUS_TOKEN = "";
-
+    //每日早报 疫情风险地区token
+    public final static String DAILYNEWS_TOKEN = "";
 }

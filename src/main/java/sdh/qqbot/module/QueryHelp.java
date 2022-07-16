@@ -1,7 +1,7 @@
 package sdh.qqbot.module;
 
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.entity.MessageEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.entity.api.MessageEntity;
 
 import java.util.ArrayList;
 import java.util.List;

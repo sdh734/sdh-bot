@@ -1,6 +1,6 @@
 package sdh.qqbot.utils;
 
-import sdh.qqbot.entity.WeatherEntity;
+import sdh.qqbot.entity.api.WeatherEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

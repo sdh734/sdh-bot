@@ -3,7 +3,7 @@
 <mapper namespace="sdh.qqbot.mapper.SexpictureMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="sdh.qqbot.dao.Sexpicture">
+    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.database.Sexpicture">
         <id column="id" property="id" />
         <id column="picture_id" property="pictureId" />
         <result column="picture_url" property="pictureUrl" />

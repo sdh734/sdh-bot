@@ -1,10 +1,9 @@
 package sdh.qqbot.module;
 
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.controller.AWordADayController;
-import sdh.qqbot.controller.QBotSendMessageController;
-import sdh.qqbot.entity.MessageEntity;
-import sdh.qqbot.utils.formatWeatherInfo;
+import sdh.qqbot.controller.message.QBotSendMessageController;
+import sdh.qqbot.controller.api.QueryApiManagerController;
+import sdh.qqbot.entity.api.MessageEntity;
 
 /**
  * 每日一言
@@ -18,7 +17,7 @@ public class AWordADay {
     }
 
     private static void queryAWordADay(MessageEntity message){
-        String aWordADay = AWordADayController.queryAWordADay();
+        String aWordADay = QueryApiManagerController.queryAWordADay();
         String word = aWordADay.replaceAll("</p>", "").replaceAll("<p>", "");
         log.info("每日一言：" + word);
         QBotSendMessageController.sendMsg(message, word);
