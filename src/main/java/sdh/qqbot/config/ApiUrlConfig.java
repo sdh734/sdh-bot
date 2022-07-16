@@ -26,8 +26,10 @@ public class ApiUrlConfig {
     public static final String AWORDADAY_URL = "https://v.api.aa1.cn/api/yiyan/index.php";
     //古诗词一言Api
     public static final String GUSHI_URL = "https://v1.jinrishici.com/";
-    //舔狗日记
+    //舔狗日记Api
     public static final String LICKTHEDOGDIARY_URL = "https://api.ixiaowai.cn/tgrj/index.php/?code=json";
-    //历史上的今天
+    //历史上的今天Api
     public static final String TODAYONHISTORY_URL = "https://tenapi.cn/lishi/?format=json";
+    //伤感语录Api
+    public static final String SADSAYINGS_URL = "http://api.wuxixindong.top/api/sgyl.php";
 }

@@ -106,6 +106,9 @@ public class ReceiveMessageController {
             case "历史上的今天":
                 TodayOnHistory.todayOnHistoryManager(message);
                 break;
+            case "到点了":
+                QuerySadSayings.sadSayingsManager(message);
+                break;
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;
