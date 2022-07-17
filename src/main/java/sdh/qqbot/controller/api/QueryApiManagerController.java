@@ -127,7 +127,7 @@ public class QueryApiManagerController {
      * @return 图片链接
      */
     public static TwoDimensionalSpaceEntity queryTwoDimensionalSpace() {
-        String url = ApiUrlConfig.TODAYONHISTORY_URL;
+        String url = ApiUrlConfig.TWODIMENSIONALSPACE_URL;
         String json = OkHttpUtil.get(url);
         return JSON.parseObject(json, TwoDimensionalSpaceEntity.class);
     }

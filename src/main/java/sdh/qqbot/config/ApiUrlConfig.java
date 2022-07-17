@@ -32,7 +32,7 @@ public class ApiUrlConfig {
     public static final String TODAYONHISTORY_URL = "https://tenapi.cn/lishi/?format=json";
     //伤感语录Api
     public static final String SADSAYINGS_URL = "https://api.wuxixindong.top/api/sgyl.php";
-    //手绘壁纸Api
+    //二次元壁纸Api
     public static final String TWODIMENSIONALSPACE_URL = "https://tenapi.cn/acg?return=json";
     //每日早报api
     public static final String DAILYNEWS_URL = "https://v2.alapi.cn/api/zaobao";
