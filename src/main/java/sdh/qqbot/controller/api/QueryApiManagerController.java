@@ -124,11 +124,21 @@ public class QueryApiManagerController {
     /**
      * 二次元图片查询接口
      *
-     * @return
+     * @return 图片链接
      */
     public static TwoDimensionalSpaceEntity queryTwoDimensionalSpace() {
         String url = ApiUrlConfig.TODAYONHISTORY_URL;
         String json = OkHttpUtil.get(url);
         return JSON.parseObject(json, TwoDimensionalSpaceEntity.class);
+    }
+
+    /**
+     * 摸鱼人查询接口
+     * @return 摸鱼人链接
+     */
+    public static SlackOffEntity querySlackOff(){
+        String url = ApiUrlConfig.SLACKOFF;
+        String json = OkHttpUtil.get(url);
+        return JSON.parseObject(json,SlackOffEntity.class);
     }
 }

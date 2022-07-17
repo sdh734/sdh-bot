@@ -26,6 +26,7 @@ public class QueryHelp {
         list.add("历史上的今天");
         list.add("到点了");
         list.add("二次元");
+        list.add("摸鱼");
     }
 
     public static void helpManager(MessageEntity message) {

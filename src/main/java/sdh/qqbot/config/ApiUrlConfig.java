@@ -38,4 +38,6 @@ public class ApiUrlConfig {
     public static final String DAILYNEWS_URL = "https://v2.alapi.cn/api/zaobao";
     //疫情风险地区api
     public static final String NCOV_URL = "https://v2.alapi.cn/api/zaobao";
+    //摸鱼人Api
+    public static final String SLACKOFF = "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json";
 }
