@@ -11,7 +11,7 @@
  Target Server Version : 50650
  File Encoding         : 65001
 
- Date: 06/07/2022 01:16:22
+ Date: 20/07/2022 14:28:56
 */
 
 SET NAMES utf8mb4;
@@ -41,6 +41,35 @@ CREATE TABLE `t_drawprize`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Table structure for t_infectcount
+-- ----------------------------
+DROP TABLE IF EXISTS `t_infectcount`;
+CREATE TABLE `t_infectcount`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `country_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '国家名',
+  `province_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '省市名',
+  `city_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '城市名',
+  `today_confirm` int(11) NOT NULL DEFAULT 0 COMMENT '今日确诊',
+  `today_heal` int(11) NOT NULL DEFAULT 0 COMMENT '今日治愈',
+  `today_dead` int(11) NOT NULL DEFAULT 0 COMMENT '今日死亡',
+  `today_storeconfirm` int(11) NOT NULL DEFAULT 0 COMMENT '今日现存确诊',
+  `today_input` int(11) NOT NULL DEFAULT 0 COMMENT '今日境外输入',
+  `today_suspect` int(11) NOT NULL DEFAULT 0 COMMENT '今日本土无症状',
+  `today_severe` int(11) NOT NULL DEFAULT 0 COMMENT '今日危重症患者',
+  `today_location` int(11) NOT NULL DEFAULT 0 COMMENT '今日本土确诊',
+  `total_confirm` int(11) NOT NULL DEFAULT 0 COMMENT '累计确诊总和',
+  `total_heal` int(11) NOT NULL DEFAULT 0 COMMENT '总计治愈',
+  `total_dead` int(11) NOT NULL DEFAULT 0 COMMENT '总计死亡',
+  `total_storeconfirm` int(11) NOT NULL DEFAULT 0 COMMENT '总计现有确诊',
+  `total_input` int(11) NOT NULL DEFAULT 0 COMMENT '总计境外输入',
+  `total_suspect` int(11) NOT NULL DEFAULT 0 COMMENT '现有本土无症状',
+  `total_severe` int(11) NOT NULL DEFAULT 0 COMMENT '总计危重症患者',
+  `total_location` int(11) NOT NULL DEFAULT 0 COMMENT '现有本土确诊',
+  `update_date` datetime NULL DEFAULT NULL COMMENT '数据更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3864 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '中国疫情每日数据总和汇总' ROW_FORMAT = Compact;
+
+-- ----------------------------
 -- Table structure for t_prize
 -- ----------------------------
 DROP TABLE IF EXISTS `t_prize`;
@@ -66,7 +95,7 @@ CREATE TABLE `t_sexpicture`  (
   `picture_size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '色图图像大小（original，regular，small，thumb，mini）',
   `picture_cache` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '色图缓存图像绝对地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4573 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4846 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -92,7 +121,7 @@ CREATE TABLE `t_user`  (
   `title_expire_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '专属头衔过期时间戳',
   `shut_up_timestamp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '禁言到期时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for t_winners
