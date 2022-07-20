@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.freewayso.image.combiner.ImageCombiner;
 import com.freewayso.image.combiner.element.TextElement;
 import com.freewayso.image.combiner.enums.OutputFormat;
+import com.freewayso.image.combiner.enums.ZoomMode;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.controller.api.TencentNcovApiController;
@@ -134,9 +135,14 @@ public class NcovInfo {
     private static String GenerateNcovInfoImg(String title, Infectcount infectcount, List<String> hRiskAreaList, List<String> mRiskAreaList) {
         int offsetY = 240;
         int offsetX;
-        int numberFontSize = 75;
-        int titleFontSize = 120;
-        int wordFontSize = 80;
+        int numberFontSize = 75;//数字大小
+        int titleFontSize = 120;//标题文字大小
+        int wordFontSize = 80;//文字字体大小
+        int canvasWidth = 1800;//画布宽度
+        int canvasHeight = 1640 //基础高度
+                + getHeight(hRiskAreaList, wordFontSize, canvasWidth) //高风险高度
+                + getHeight(mRiskAreaList, wordFontSize, canvasWidth)//中风险高度
+                + 50; //尾部高度
         BufferedImage bg;
         try {
             ClassPathResource resource = new ClassPathResource("assets/bg.jpg");
@@ -144,8 +150,8 @@ public class NcovInfo {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ImageCombiner combiner = new ImageCombiner(bg, OutputFormat.PNG);
-        combiner.setBackgroundBlur(30);
+        ImageCombiner combiner = new ImageCombiner(canvasWidth, canvasHeight, Color.white, OutputFormat.PNG);
+        combiner.addImageElement(bg, 0, 0).setCenter(true).setAlpha(.8f).setHeight(combiner.getCanvasHeight()).setWidth(combiner.getCanvasWidth()).setZoomMode(ZoomMode.WidthHeight).setBlur(30);
         TextElement titleElement = combiner.addTextElement(title + "疫情情况", titleFontSize, 0, 240).setCenter(true).setColor(Color.black);
         offsetY += titleElement.getHeight() + 40;
         //开始绘制感染人数情况
@@ -224,5 +230,13 @@ public class NcovInfo {
     private static int getX(TextElement textElement, int number, int fontSize) {
         int a = textElement.getX() + (textElement.getWidth() / 2);
         return a - (String.valueOf(number).length() * (fontSize / 2) + 6) / 2;
+    }
+
+    private static int getHeight(List<String> list, int fontSize, int width) {
+        int count = 0;
+        for (String s : list) {
+            count += ((s.length() * fontSize) / width + 1) * fontSize;
+        }
+        return count;
     }
 }
