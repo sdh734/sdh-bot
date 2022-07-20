@@ -1,6 +1,5 @@
 package sdh.qqbot.websocket;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -8,14 +7,9 @@ import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
-import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.OkHttpInstance;
-import sdh.qqbot.utils.OkHttpUtil;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
+import sdh.qqbot.utils.PushUtils;
 
 /**
  * OkHttp WebSocket连接管理类，实现定时发送心跳，定时判断连接状态并重连
@@ -196,24 +190,7 @@ public class WebSocketManager {
             log.info("WS重连次数已超过最大次数，请检查Go-CQHTTP服务。");
             if (!isNotify) {
                 //发送微信通知
-                if (!Objects.equals(ApiKeyConfig.SERVERCHAN_TOKEN, "")) {
-                    log.info("开始使用Server酱推送微信消息。");
-                    String url = ApiUrlConfig.SERVERCHAN_URL + "?title=" + URLEncoder.encode("WS重连失败，请检查GO—CQ服务", StandardCharsets.UTF_8);
-                    OkHttpUtil.get(url);
-                    log.info("微信消息发送成功。");
-                } else if (!Objects.equals(ApiKeyConfig.PUSHPLUS_TOKEN, "")) {
-                    log.info("开始使用PushPlus推送微信消息。");
-                    JSONObject request = new JSONObject();
-                    request.put("token", ApiKeyConfig.PUSHPLUS_TOKEN);
-                    request.put("title", "Notify");
-                    request.put("content", "WS重连失败，请检查GO—CQ服务");
-                    request.put("template", "txt");
-                    OkHttpUtil.post(ApiUrlConfig.PUSHPLUS_URL, request.toString(), null);
-                    log.info("微信消息发送成功。");
-                } else {
-                    log.info("微信消息发送失败，未配置推送平台Token。");
-                }
-                isNotify = true;
+                isNotify = PushUtils.push("WS重连失败，请检查GO—CQ服务");
             } else {
                 log.info("微信消息已经发送，或未配置推送平台Token。请检查配置类或微信消息。");
             }

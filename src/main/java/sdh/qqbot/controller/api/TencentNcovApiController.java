@@ -7,13 +7,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.entity.api.tencent.*;
 import sdh.qqbot.entity.api.weather.WeatherCityEntity;
 import sdh.qqbot.entity.database.Infectcount;
 import sdh.qqbot.service.impl.InfectcountServiceImpl;
 import sdh.qqbot.utils.OkHttpUtil;
+import sdh.qqbot.utils.PushUtils;
 
 import javax.annotation.PostConstruct;
 import java.text.ParseException;
@@ -25,7 +27,7 @@ import java.util.List;
  *
  * @author SDH
  */
-@Controller
+@RestController
 @Slf4j
 public class TencentNcovApiController {
     @Autowired
@@ -35,6 +37,12 @@ public class TencentNcovApiController {
     @PostConstruct
     public void init() {
         infectcountService = service;
+    }
+
+    @GetMapping("/api/updateNcov")
+    public void updateNcovData() {
+        insertByTencentNcovEntity(queryAll());
+        PushUtils.push("疫情数据更新成功！");
     }
 
     /**
