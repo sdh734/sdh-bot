@@ -166,7 +166,7 @@ public class NcovInfo {
         offsetX += text4.getWidth();
         TextElement text6 = combiner.addTextElement("累计确诊", wordFontSize, offsetX + 120, offsetY);
         offsetY += 100;
-        combiner.addTextElement(String.valueOf(infectcount.getTodayStoreconfirm()), numberFontSize, getX(text5, infectcount.getTodayStoreconfirm(), numberFontSize), offsetY);
+        combiner.addTextElement(String.valueOf(infectcount.getTotalStoreconfirm()), numberFontSize, getX(text5, infectcount.getTodayStoreconfirm(), numberFontSize), offsetY);
         combiner.addTextElement(String.valueOf(infectcount.getTotalConfirm()), numberFontSize, getX(text6, infectcount.getTotalConfirm(), numberFontSize), offsetY);
         combiner.addTextElement(String.valueOf(infectcount.getTodayLocation()), numberFontSize, getX(infectcount.getTodayLocation(), combiner.getCanvasWidth(), numberFontSize), offsetY);
         //结束绘制感染人数情况
