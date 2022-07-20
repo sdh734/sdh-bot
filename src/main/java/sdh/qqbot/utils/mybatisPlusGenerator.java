@@ -25,7 +25,7 @@ public class mybatisPlusGenerator {
      */
     public static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/qqbot?serverTimezone=GMT%2B8";
     public static final String JDBC_USERNAME = "root";
-    public static final String JDBC_PASSWORD = "admin";
+    public static final String JDBC_PASSWORD = "123456";
 
     /**
      * 包名
@@ -59,7 +59,7 @@ public class mybatisPlusGenerator {
                 // 全局配置
                 .globalConfig(builder -> builder.author("SDH").fileOverride().outputDir(OUTPUT_DIR))
                 // 包配置
-                .packageConfig(builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("dao").controller("controller").pathInfo(Collections.singletonMap(OutputFile.mapperXml, MAPPER_XML_DIR)))
+                .packageConfig(builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("entity.database").controller("controller").pathInfo(Collections.singletonMap(OutputFile.mapperXml, MAPPER_XML_DIR)))
                 // 策略配置
                 .strategyConfig(builder -> builder.addInclude(getTables(tableNames)).addTablePrefix("t_")
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()

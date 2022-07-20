@@ -1,4 +1,4 @@
-package sdh.qqbot.utils;
+package sdh.qqbot.scheduledTasks;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class drawPrizeScheduledTask {
+public class DrawPrizeScheduledTask {
     static PrizeMapper prizeMapper;
     @Autowired
     private PrizeMapper iPrizeMapper;

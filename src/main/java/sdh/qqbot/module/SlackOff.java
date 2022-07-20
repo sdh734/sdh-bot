@@ -3,7 +3,7 @@ package sdh.qqbot.module;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.controller.message.QBotSendMessageController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.entity.api.SlackOffEntity;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class SlackOff {
 
     /**
      * 摸鱼管理模块
-     * @param message
+     * @param message 消息实体
      */
     public static void slackOffManager(MessageEntity message){
         querySlackOff(message);
@@ -25,7 +25,7 @@ public class SlackOff {
 
     /**
      * 查询摸鱼图
-     * @param message
+     * @param message 消息实体
      */
     private static void querySlackOff(MessageEntity message){
         SlackOffEntity slackOffEntity = QueryApiManagerController.querySlackOff();

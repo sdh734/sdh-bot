@@ -7,7 +7,7 @@ import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.controller.database.WinnersController;
 import sdh.qqbot.entity.database.Prize;
 import sdh.qqbot.entity.database.User;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

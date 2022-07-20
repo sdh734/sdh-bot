@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 
 /**
  * 二次元图
@@ -15,7 +15,7 @@ public class TwoDimensionalSpace {
 
     /**
      * 二次元图管理器
-     * @param message
+     * @param message 消息实体
      */
     public static void twoDimensionalSpaceEntity(MessageEntity message){
         queryTwoDimensionalSpaceEntity(message);
@@ -23,7 +23,7 @@ public class TwoDimensionalSpace {
 
     /**
      * 查询二次元图
-     * @param message
+     * @param message 消息实体
      */
     private static void queryTwoDimensionalSpaceEntity(MessageEntity message){
         TwoDimensionalSpaceEntity twoDimensionalSpaceEntity = QueryApiManagerController.queryTwoDimensionalSpace();

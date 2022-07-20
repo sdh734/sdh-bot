@@ -8,9 +8,9 @@ import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.config.ResolutionConfig;
 import sdh.qqbot.controller.message.QBotSendMessageController;
-import sdh.qqbot.entity.api.WallHavenInfo;
-import sdh.qqbot.entity.api.WallHavenSearchResult;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.wallhaven.WallHavenInfo;
+import sdh.qqbot.entity.api.wallhaven.WallHavenSearchResult;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.utils.OkHttpUtil;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package sdh.qqbot.module;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.controller.api.QueryApiManagerController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 
 /**
  * 伤感语录

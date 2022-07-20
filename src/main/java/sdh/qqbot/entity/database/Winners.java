@@ -1,4 +1,4 @@
-package sdh.qqbot.entity.api;
+package sdh.qqbot.entity.database;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

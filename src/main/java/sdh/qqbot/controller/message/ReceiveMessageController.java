@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.controller.database.UserController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.module.*;
 
 /**
@@ -118,6 +118,9 @@ public class ReceiveMessageController {
                 break;
             case "摸鱼":
                 SlackOff.slackOffManager(message);
+                break;
+            case "疫情":
+                NcovInfo.NcovInfoManager(message);
                 break;
             case "帮助":
                 QueryHelp.helpManager(message);

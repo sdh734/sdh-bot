@@ -208,7 +208,7 @@ public class WebSocketManager {
                     request.put("title", "Notify");
                     request.put("content", "WS重连失败，请检查GO—CQ服务");
                     request.put("template", "txt");
-                    OkHttpUtil.post(ApiUrlConfig.PUSHPLUS_URL, request.toString());
+                    OkHttpUtil.post(ApiUrlConfig.PUSHPLUS_URL, request.toString(), null);
                     log.info("微信消息发送成功。");
                 } else {
                     log.info("微信消息发送失败，未配置推送平台Token。");

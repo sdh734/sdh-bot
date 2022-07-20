@@ -40,4 +40,16 @@ public class ApiUrlConfig {
     public static final String NCOV_URL = "https://v2.alapi.cn/api/zaobao";
     //摸鱼人Api
     public static final String SLACKOFF = "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json";
+
+    //网易疫情数据接口
+    public final static String NETEASYNCOV_API = "https://c.m.163.com/ug/api/wuhan/app/data/list-total";
+    //百度疫情数据接口
+    public final static String BAIDUNCOV_API = "https://voice.baidu.com/newpneumonia/getv2?from=mola-virus&stage=publish&target=trend&area=";
+    //腾讯疫情接口
+    public final static String TENCENTNCOVALL_API = "https://api.inews.qq.com/newsqa/v1/query/inner/publish/modules/list?modules=diseaseh5Shelf";
+    //腾讯按城市查询疫情接口
+    public final static String TENCENTNCOVCITY_API = "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?limit=1&adCode=";
+    //腾讯疫情风险地区接口
+    public final static String TENCENTNCOVAREA_API = "https://v.qq.com/cache/wuji/object?appid=disease_map&schemaid=riskArea&schemakey=c037e2cccdb54682ba7d3fa516a5b830&filter=";
+
 }

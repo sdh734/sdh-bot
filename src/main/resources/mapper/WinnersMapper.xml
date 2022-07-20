@@ -3,7 +3,7 @@
 <mapper namespace="sdh.qqbot.mapper.WinnersMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.api.Winners">
+    <resultMap id="BaseResultMap" type="sdh.qqbot.entity.database.Winners">
         <id column="id" property="id" />
         <result column="prize_id" property="prizeId" />
         <result column="user_id" property="userId" />

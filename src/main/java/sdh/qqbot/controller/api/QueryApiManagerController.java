@@ -5,6 +5,8 @@ import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.*;
+import sdh.qqbot.entity.api.weather.WeatherCityEntity;
+import sdh.qqbot.entity.api.weather.WeatherEntity;
 import sdh.qqbot.utils.OkHttpUtil;
 
 /**

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.entity.database.Prize;
 import sdh.qqbot.entity.database.User;
-import sdh.qqbot.entity.api.Winners;
+import sdh.qqbot.entity.database.Winners;
 import sdh.qqbot.mapper.WinnersMapper;
 
 import javax.annotation.PostConstruct;

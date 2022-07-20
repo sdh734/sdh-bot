@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.entity.api.DailyNewsEntity;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.utils.OkHttpUtil;
 
 /**

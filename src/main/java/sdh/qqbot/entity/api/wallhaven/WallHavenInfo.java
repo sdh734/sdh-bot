@@ -1,4 +1,4 @@
-package sdh.qqbot.entity.api;
+package sdh.qqbot.entity.api.wallhaven;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -7,34 +7,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * WallHaven搜索结果实体类
+ * WallHaven壁纸数据实体类
  * @author SDH
  */
 @NoArgsConstructor
 @Data
-public class WallHavenSearchResult {
+public class WallHavenInfo {
 
     @JsonProperty("data")
-    private List<DataDTO> data;
-    @JsonProperty("meta")
-    private MetaDTO meta;
-
-    @NoArgsConstructor
-    @Data
-    public static class MetaDTO {
-        @JsonProperty("current_page")
-        private Integer currentPage;
-        @JsonProperty("last_page")
-        private Integer lastPage;
-        @JsonProperty("per_page")
-        private Integer perPage;
-        @JsonProperty("total")
-        private Integer total;
-        @JsonProperty("query")
-        private String query;
-        @JsonProperty("seed")
-        private Object seed;
-    }
+    private DataDTO data;
 
     @NoArgsConstructor
     @Data
@@ -45,6 +26,8 @@ public class WallHavenSearchResult {
         private String url;
         @JsonProperty("short_url")
         private String shortUrl;
+        @JsonProperty("uploader")
+        private UploaderDTO uploader;
         @JsonProperty("views")
         private Integer views;
         @JsonProperty("favorites")
@@ -75,6 +58,32 @@ public class WallHavenSearchResult {
         private String path;
         @JsonProperty("thumbs")
         private ThumbsDTO thumbs;
+        @JsonProperty("tags")
+        private List<TagsDTO> tags;
+
+        @NoArgsConstructor
+        @Data
+        public static class UploaderDTO {
+            @JsonProperty("username")
+            private String username;
+            @JsonProperty("group")
+            private String group;
+            @JsonProperty("avatar")
+            private AvatarDTO avatar;
+
+            @NoArgsConstructor
+            @Data
+            public static class AvatarDTO {
+                @JsonProperty("200px")
+                private String $200px;
+                @JsonProperty("128px")
+                private String $128px;
+                @JsonProperty("32px")
+                private String $32px;
+                @JsonProperty("20px")
+                private String $20px;
+            }
+        }
 
         @NoArgsConstructor
         @Data
@@ -85,6 +94,25 @@ public class WallHavenSearchResult {
             private String original;
             @JsonProperty("small")
             private String small;
+        }
+
+        @NoArgsConstructor
+        @Data
+        public static class TagsDTO {
+            @JsonProperty("id")
+            private Integer id;
+            @JsonProperty("name")
+            private String name;
+            @JsonProperty("alias")
+            private String alias;
+            @JsonProperty("category_id")
+            private Integer categoryId;
+            @JsonProperty("category")
+            private String category;
+            @JsonProperty("purity")
+            private String purity;
+            @JsonProperty("created_at")
+            private String createdAt;
         }
     }
 }

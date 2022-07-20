@@ -1,7 +1,7 @@
 package sdh.qqbot.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import sdh.qqbot.entity.api.Winners;
+import sdh.qqbot.entity.database.Winners;
 
 /**
  *  抽奖获胜者服务类

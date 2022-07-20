@@ -1,7 +1,7 @@
 package sdh.qqbot.module;
 
 import sdh.qqbot.controller.message.QBotSendMessageController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,8 @@ public class QueryHelp {
         list.add("到点了");
         list.add("二次元");
         list.add("摸鱼");
+        list.add("早报");
+        list.add("疫情");
     }
 
     public static void helpManager(MessageEntity message) {

@@ -2,7 +2,7 @@ package sdh.qqbot.controller.message;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.utils.OkHttpUtil;
 import sdh.qqbot.websocket.WebSocketManager;
 

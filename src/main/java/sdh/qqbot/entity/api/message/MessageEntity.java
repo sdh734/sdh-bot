@@ -1,4 +1,4 @@
-package sdh.qqbot.entity.api;
+package sdh.qqbot.entity.api.message;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

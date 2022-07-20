@@ -10,7 +10,7 @@ import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.controller.database.UserController;
 import sdh.qqbot.entity.database.Sexpicture;
 import sdh.qqbot.entity.api.ImgUrlEntity;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.mapper.SexpictureMapper;
 import sdh.qqbot.utils.OkHttpUtil;
 

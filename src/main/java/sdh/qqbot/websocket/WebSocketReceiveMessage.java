@@ -2,7 +2,7 @@ package sdh.qqbot.websocket;
 
 import com.alibaba.fastjson.JSON;
 import sdh.qqbot.controller.message.ReceiveMessageController;
-import sdh.qqbot.entity.api.MessageEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
 
 /**
  * WS接收消息处理类

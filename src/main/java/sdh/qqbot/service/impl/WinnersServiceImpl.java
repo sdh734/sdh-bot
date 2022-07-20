@@ -2,7 +2,7 @@ package sdh.qqbot.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import sdh.qqbot.entity.api.Winners;
+import sdh.qqbot.entity.database.Winners;
 import sdh.qqbot.mapper.WinnersMapper;
 import sdh.qqbot.service.IWinnersService;
 

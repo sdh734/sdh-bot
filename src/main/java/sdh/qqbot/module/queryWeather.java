@@ -3,9 +3,9 @@ package sdh.qqbot.module;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.controller.api.QueryApiManagerController;
-import sdh.qqbot.entity.api.MessageEntity;
-import sdh.qqbot.entity.api.WeatherCityEntity;
-import sdh.qqbot.entity.api.WeatherEntity;
+import sdh.qqbot.entity.api.message.MessageEntity;
+import sdh.qqbot.entity.api.weather.WeatherCityEntity;
+import sdh.qqbot.entity.api.weather.WeatherEntity;
 import sdh.qqbot.utils.formatWeatherInfo;
 
 /**
