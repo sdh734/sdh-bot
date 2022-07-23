@@ -116,6 +116,9 @@ public class ReceiveMessageController {
             case "二次元":
                 TwoDimensionalSpace.twoDimensionalSpaceEntity(message);
                 break;
+            case "撩人":
+                Prologue.prologueManager(message);
+                break;
             case "摸鱼":
                 SlackOff.slackOffManager(message);
                 break;

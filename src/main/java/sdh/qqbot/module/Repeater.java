@@ -19,8 +19,8 @@ public class Repeater {
     private static final Map<String, List<String>> talk = new ConcurrentHashMap<>();
 
     static {
-        repeaterUtterance.put(7, "打断施法");
-        repeaterUtterance.put(10, "一群人天天只知道复读");
+        repeaterUtterance.put(5, "打断施法");
+        repeaterUtterance.put(7, "一群人天天只知道复读");
     }
 
     /**

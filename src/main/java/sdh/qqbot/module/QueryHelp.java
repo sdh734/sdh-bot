@@ -29,6 +29,7 @@ public class QueryHelp {
         list.add("摸鱼");
         list.add("早报");
         list.add("疫情");
+        list.add("撩人");
     }
 
     public static void helpManager(MessageEntity message) {
