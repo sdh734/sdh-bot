@@ -51,5 +51,7 @@ public class ApiUrlConfig {
     public final static String TENCENTNCOVCITY_API = "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?limit=1&adCode=";
     //腾讯疫情风险地区接口
     public final static String TENCENTNCOVAREA_API = "https://v.qq.com/cache/wuji/object?appid=disease_map&schemaid=riskArea&schemakey=c037e2cccdb54682ba7d3fa516a5b830&filter=";
+    //cos图片api
+    public final static String COSIMG_API = "https://yang520.ltd/api/cos.php";
 
 }

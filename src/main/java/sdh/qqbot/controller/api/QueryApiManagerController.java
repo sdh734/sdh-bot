@@ -143,4 +143,14 @@ public class QueryApiManagerController {
         String json = OkHttpUtil.get(url);
         return JSON.parseObject(json,SlackOffEntity.class);
     }
+
+    /**
+     * cos图片查询接口
+     * @return
+     */
+    public static String queryCosImg(){
+        String url = ApiUrlConfig.COSIMG_API;
+        return OkHttpUtil.get(url);
+    }
+
 }

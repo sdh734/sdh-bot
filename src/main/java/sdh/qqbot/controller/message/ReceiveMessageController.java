@@ -8,6 +8,9 @@ import sdh.qqbot.controller.database.UserController;
 import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.module.*;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+
 /**
  * 接收消息接口
  *
@@ -74,7 +77,7 @@ public class ReceiveMessageController {
         UserController.addUser(message);
         log.info("收到私聊消息，消息内容：" + message.getMessage());
         String[] msgArray = message.getMessage().split(" ");
-        switch (msgArray[0]) {
+        switch (msgArray[0].toLowerCase()) {
             case "色图":
                 if ("private".equals(message.getMessageType())) {
                     //私聊开启色图
@@ -121,6 +124,9 @@ public class ReceiveMessageController {
                 break;
             case "摸鱼":
                 SlackOff.slackOffManager(message);
+                break;
+            case "cos":
+                CosImg.cosImgManager(message);
                 break;
             case "疫情":
                 NcovInfo.NcovInfoManager(message);
