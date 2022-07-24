@@ -57,5 +57,7 @@ public class ApiUrlConfig {
     public final static String SONG_API = "https://yang520.ltd/api/kw.php";
     //点歌api搜索歌曲id（网易云）
     public final static String SONG_163_API = "http://music.163.com/api/search/pc";
+    //早安语录api
+    public final static String GOODMORNING_API = "https://yang520.ltd/api/getNewTheme.php";
 
 }

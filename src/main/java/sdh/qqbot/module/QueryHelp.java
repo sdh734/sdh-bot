@@ -32,6 +32,7 @@ public class QueryHelp {
         list.add("撩人");
         list.add("cos");
         list.add("点歌");
+        list.add("早安语录");
     }
 
     public static void helpManager(MessageEntity message) {

@@ -134,6 +134,9 @@ public class ReceiveMessageController {
             case "疫情":
                 NcovInfo.NcovInfoManager(message);
                 break;
+            case "早安语录":
+                GoodMorning.goodMorningManager(message);
+                break;
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;
