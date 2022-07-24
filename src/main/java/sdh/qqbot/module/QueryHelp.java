@@ -34,6 +34,7 @@ public class QueryHelp {
         list.add("点歌");
         list.add("早安语录");
         list.add("妹纸图");
+        list.add("安慰语录");
     }
 
     public static void helpManager(MessageEntity message) {

@@ -17,7 +17,7 @@ public class GoodMorning {
 
     private static void queryGoodMorning(MessageEntity message) {
         String json = QueryApiManagerController.queryGoodMorning();
-        String goodMorning = json.substring(json.lastIndexOf("±") + 2,json.lastIndexOf("━━━━━━━━━"));
+        String goodMorning = json.substring(json.lastIndexOf("±") + 2, json.lastIndexOf("━━━━━━━━━") - 1);
         log.info("早安语录：" + goodMorning);
         QBotSendMessageController.sendMsg(message, goodMorning);
     }

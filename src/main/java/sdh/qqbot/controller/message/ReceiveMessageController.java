@@ -137,6 +137,9 @@ public class ReceiveMessageController {
             case "早安语录":
                 GoodMorning.goodMorningManager(message);
                 break;
+            case "安慰语录":
+                Comfort.comfortManager(message);
+                break;
             case "妹纸图":;
             case "妹子图":;
             case "妹纸图片":;

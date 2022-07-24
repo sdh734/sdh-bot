@@ -190,14 +190,28 @@ public class QueryApiManagerController {
         return JSON.parseObject(songIdCorEntity.getSongs().get(0), SongIdEntity.class);
     }
 
+    /**
+     * 查询早安语录
+     *
+     * @return
+     */
     public static String queryGoodMorning() {
         String url = ApiUrlConfig.GOODMORNING_API;
         return OkHttpUtil.get(url);
     }
 
+    /**
+     * 查询妹纸图片
+     * @return
+     */
     public static String queryTheGirlImg() {
         String url = ApiUrlConfig.THEGIRLIMG_API;
         return OkHttpUtil.getImgUrl(url);
+    }
+
+    public static String queryComfort(){
+        String url = ApiUrlConfig.COMFORT_API;
+        return OkHttpUtil.get(url);
     }
 
 }
