@@ -33,6 +33,7 @@ public class QueryHelp {
         list.add("cos");
         list.add("点歌");
         list.add("早安语录");
+        list.add("妹纸图");
     }
 
     public static void helpManager(MessageEntity message) {

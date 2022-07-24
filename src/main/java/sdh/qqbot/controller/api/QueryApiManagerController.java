@@ -175,6 +175,7 @@ public class QueryApiManagerController {
 
     /**
      * 查询歌曲id接口
+     *
      * @param songName
      * @return
      */
@@ -182,16 +183,21 @@ public class QueryApiManagerController {
         String url = ApiUrlConfig.SONG_163_API + "?s=" + songName + "&offset=0&limit=1&type=1";
         String json = OkHttpUtil.post163Song(url);
         SongIdModelEntity songIdModelEntity = JSON.parseObject(json, SongIdModelEntity.class);
-        if (!"200".equals(songIdModelEntity.getCode())){
+        if (!"200".equals(songIdModelEntity.getCode())) {
             return null;
         }
         SongIdCorEntity songIdCorEntity = JSON.parseObject(songIdModelEntity.getResult(), SongIdCorEntity.class);
         return JSON.parseObject(songIdCorEntity.getSongs().get(0), SongIdEntity.class);
     }
 
-    public static String queryGoodMorning(){
+    public static String queryGoodMorning() {
         String url = ApiUrlConfig.GOODMORNING_API;
         return OkHttpUtil.get(url);
+    }
+
+    public static String queryTheGirlImg() {
+        String url = ApiUrlConfig.THEGIRLIMG_API;
+        return OkHttpUtil.getImgUrl(url);
     }
 
 }

@@ -137,6 +137,12 @@ public class ReceiveMessageController {
             case "早安语录":
                 GoodMorning.goodMorningManager(message);
                 break;
+            case "妹纸图":;
+            case "妹子图":;
+            case "妹纸图片":;
+            case "妹子图片":
+                TheGirlImg.theGirlImgManager(message);
+                break;
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;

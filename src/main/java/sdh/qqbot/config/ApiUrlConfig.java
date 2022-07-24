@@ -59,5 +59,7 @@ public class ApiUrlConfig {
     public final static String SONG_163_API = "http://music.163.com/api/search/pc";
     //早安语录api
     public final static String GOODMORNING_API = "https://yang520.ltd/api/getNewTheme.php";
+    //妹纸图片Api
+    public final static String THEGIRLIMG_API = "https://yang520.ltd/api/sjmnt.php";
 
 }

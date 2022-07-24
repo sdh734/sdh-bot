@@ -64,4 +64,17 @@ public class OkHttpUtil {
             throw new RuntimeException(e);
         }
     }
+
+    public static String getImgUrl(String url) {
+        final Request request = new Request.Builder()
+                .url(url)
+                .addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36 Edg/103.0.1264.44")
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            return Objects.requireNonNull(response.request().url()).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "NaN";
+    }
 }
