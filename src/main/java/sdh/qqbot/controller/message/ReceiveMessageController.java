@@ -137,6 +137,9 @@ public class ReceiveMessageController {
             case "帮助":
                 QueryHelp.helpManager(message);
                 break;
+            case "关于":
+                AboutMe.aboutMeManager(message);
+                break;
             default:
                 //复读机
                 if ("group".equals(message.getMessageType())) {
