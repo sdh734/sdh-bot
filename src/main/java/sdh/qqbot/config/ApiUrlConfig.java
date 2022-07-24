@@ -53,5 +53,9 @@ public class ApiUrlConfig {
     public final static String TENCENTNCOVAREA_API = "https://v.qq.com/cache/wuji/object?appid=disease_map&schemaid=riskArea&schemakey=c037e2cccdb54682ba7d3fa516a5b830&filter=";
     //cos图片api
     public final static String COSIMG_API = "https://yang520.ltd/api/cos.php";
+    //点歌api，用的酷我音乐接口
+    public final static String SONG_API = "https://yang520.ltd/api/kw.php";
+    //点歌api搜索歌曲id（网易云）
+    public final static String SONG_163_API = "http://music.163.com/api/search/pc";
 
 }

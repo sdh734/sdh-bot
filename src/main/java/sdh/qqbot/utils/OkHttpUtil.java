@@ -1,7 +1,12 @@
 package sdh.qqbot.utils;
 
 import okhttp3.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -36,6 +41,25 @@ public class OkHttpUtil {
         try {
             Response response = client.newCall(request).execute();
             return Objects.requireNonNull(response.body()).string();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String post163Song(String url) {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/35.0.1916.138 Safari/537.36")
+                .addHeader("Cookie", "NMTID=00OP8GEUDjo7mKQLUugrNNvI6t73UMAAAGCK7Sejg")
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.body().string();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -128,6 +128,9 @@ public class ReceiveMessageController {
             case "cos":
                 CosImg.cosImgManager(message);
                 break;
+            case "点歌":
+                Song.songManager(message);
+                break;
             case "疫情":
                 NcovInfo.NcovInfoManager(message);
                 break;

@@ -30,6 +30,8 @@ public class QueryHelp {
         list.add("早报");
         list.add("疫情");
         list.add("撩人");
+        list.add("cos");
+        list.add("点歌");
     }
 
     public static void helpManager(MessageEntity message) {

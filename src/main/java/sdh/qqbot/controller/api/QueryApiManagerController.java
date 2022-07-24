@@ -1,13 +1,19 @@
 package sdh.qqbot.controller.api;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import okhttp3.Headers;
+import okhttp3.internal.http2.Header;
 import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.*;
 import sdh.qqbot.entity.api.weather.WeatherCityEntity;
 import sdh.qqbot.entity.api.weather.WeatherEntity;
+import sdh.qqbot.module.Song;
 import sdh.qqbot.utils.OkHttpUtil;
+
+import java.util.HashMap;
 
 /**
  * 查询Api接口统一管理，不涉及数据库操作。
@@ -136,21 +142,46 @@ public class QueryApiManagerController {
 
     /**
      * 摸鱼人查询接口
+     *
      * @return 摸鱼人链接
      */
-    public static SlackOffEntity querySlackOff(){
+    public static SlackOffEntity querySlackOff() {
         String url = ApiUrlConfig.SLACKOFF;
         String json = OkHttpUtil.get(url);
-        return JSON.parseObject(json,SlackOffEntity.class);
+        return JSON.parseObject(json, SlackOffEntity.class);
     }
 
     /**
      * cos图片查询接口
+     *
      * @return
      */
-    public static String queryCosImg(){
+    public static String queryCosImg() {
         String url = ApiUrlConfig.COSIMG_API;
         return OkHttpUtil.get(url);
+    }
+
+    /**
+     * 查询歌曲接口
+     *
+     * @param songName 歌曲名字
+     * @return 返回json类型数据
+     */
+    public static SongModelEntity querySong(String songName) {
+        String url = ApiUrlConfig.SONG_API + "?msg=" + songName + "&b=1&type=json";
+        String json = OkHttpUtil.get(url);
+        return JSON.parseObject(json.substring(5), SongModelEntity.class);
+    }
+
+    public static SongIdEntity querySongId(String songName) {
+        String url = ApiUrlConfig.SONG_163_API + "?s=" + songName + "&offset=0&limit=1&type=1";
+        String json = OkHttpUtil.post163Song(url);
+        SongIdModelEntity songIdModelEntity = JSON.parseObject(json, SongIdModelEntity.class);
+        if (!"200".equals(songIdModelEntity.getCode())){
+            return null;
+        }
+        SongIdCorEntity songIdCorEntity = JSON.parseObject(songIdModelEntity.getResult(), SongIdCorEntity.class);
+        return JSON.parseObject(songIdCorEntity.getSongs().get(0), SongIdEntity.class);
     }
 
 }
