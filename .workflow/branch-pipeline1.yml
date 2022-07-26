@@ -1,6 +1,6 @@
 version: '1.0'
-name: branch-pipeline
-displayName: BranchPipeline
+name: branch-pipeline1
+displayName: BranchPipeline1
 triggers:
   trigger: auto
   push:
