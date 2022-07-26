@@ -76,7 +76,7 @@ stages:
             artifactName: qqbot
             artifactVersion: latest
         script:
-          - cd ~/bot/
+          - cd ~/qqbot/
           - ls
           - tar -zxf qqbot.tar.gz
           - cd target
