@@ -16,7 +16,7 @@ import sdh.qqbot.websocket.WebSocketManager;
 @EnableAsync
 public class AppApplication {
     private static final WebSocketManager webSocketManager = WebSocketManager.getInstance();
-//Test workflow111
+//Test workflow1
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
         webSocketManager.init();//启动WS连接
