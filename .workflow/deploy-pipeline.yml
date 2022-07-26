@@ -6,10 +6,10 @@ triggers:
   push:
     branches:
       prefix:
-        - ''
+        - dev
     commitMessages:
       include:
-        - \bbuild\b
+        - .*build.*
 stages:
   - name: stage-2fbcd0ba
     displayName: 编译
