@@ -1,7 +1,6 @@
 package sdh.qqbot.module;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import sdh.qqbot.controller.api.QueryApiManagerController;
 import sdh.qqbot.controller.message.QBotSendMessageController;
@@ -9,9 +8,6 @@ import sdh.qqbot.entity.api.SongEntity;
 import sdh.qqbot.entity.api.SongIdEntity;
 import sdh.qqbot.entity.api.SongModelEntity;
 import sdh.qqbot.entity.api.message.MessageEntity;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 点歌

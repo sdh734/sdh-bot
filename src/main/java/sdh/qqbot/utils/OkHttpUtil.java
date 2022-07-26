@@ -1,12 +1,7 @@
 package sdh.qqbot.utils;
 
 import okhttp3.*;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Objects;
 

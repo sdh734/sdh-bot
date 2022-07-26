@@ -1,10 +1,10 @@
 package sdh.qqbot.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 import sdh.qqbot.entity.database.Infectcount;
 import sdh.qqbot.mapper.InfectcountMapper;
 import sdh.qqbot.service.IInfectcountService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

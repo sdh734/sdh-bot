@@ -1,19 +1,12 @@
 package sdh.qqbot.controller.api;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import okhttp3.Headers;
-import okhttp3.internal.http2.Header;
 import sdh.qqbot.config.ApiKeyConfig;
 import sdh.qqbot.config.ApiUrlConfig;
-import sdh.qqbot.entity.api.TwoDimensionalSpaceEntity;
 import sdh.qqbot.entity.api.*;
 import sdh.qqbot.entity.api.weather.WeatherCityEntity;
 import sdh.qqbot.entity.api.weather.WeatherEntity;
-import sdh.qqbot.module.Song;
 import sdh.qqbot.utils.OkHttpUtil;
-
-import java.util.HashMap;
 
 /**
  * 查询Api接口统一管理，不涉及数据库操作。
