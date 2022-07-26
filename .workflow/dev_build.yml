@@ -6,7 +6,11 @@ triggers:
   push:
     branches:
       prefix:
-        - dev
+        - ''
+  pr:
+    branches:
+      prefix:
+        - ''
 stages:
   - name: stage-3e79fde3
     displayName: Maven构建
