@@ -80,7 +80,14 @@ stages:
           - ls
           - tar -zxf output.tar.gz
           - cd target
-          - . /root/test.sh
+          - PID=$(lsof -i:8090 -t)
+          - if [ $? == 0 ]; then
+          - '        echo "process id is:${PID}"'
+          - '        kill -9 ${PID}'
+          - else
+          - '        echo "process 8090 no exit"'
+          - fi
+          - nohup java -jar qqbot-2.0.jar > nohup.out &
         notify: []
         strategy:
           retry: '0'
