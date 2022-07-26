@@ -80,7 +80,7 @@ stages:
           - ls
           - tar -zxf output.tar.gz
           - cd target
-          - ./root/test.sh
+          - . /root/test.sh
           - nohup java -jar qqbot-2.0.jar &
           - echo "Deploy Success"
         notify: []
