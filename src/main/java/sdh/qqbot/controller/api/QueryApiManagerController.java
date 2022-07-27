@@ -6,7 +6,7 @@ import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.entity.api.*;
 import sdh.qqbot.entity.api.weather.WeatherCityEntity;
 import sdh.qqbot.entity.api.weather.WeatherEntity;
-import sdh.qqbot.utils.OkHttpUtil;
+import sdh.qqbot.utils.okhttp.OkHttpUtil;
 
 /**
  * 查询Api接口统一管理，不涉及数据库操作。
@@ -147,7 +147,7 @@ public class QueryApiManagerController {
     /**
      * cos图片查询接口
      *
-     * @return
+     * @return Cos图片链接
      */
     public static String queryCosImg() {
         String url = ApiUrlConfig.COSIMG_API;
@@ -169,8 +169,8 @@ public class QueryApiManagerController {
     /**
      * 查询歌曲id接口
      *
-     * @param songName
-     * @return
+     * @param songName 歌曲名
+     * @return 歌曲实体
      */
     public static SongIdEntity querySongId(String songName) {
         String url = ApiUrlConfig.SONG_163_API + "?s=" + songName + "&offset=0&limit=1&type=1";
@@ -186,7 +186,7 @@ public class QueryApiManagerController {
     /**
      * 查询早安语录
      *
-     * @return
+     * @return 语录内容
      */
     public static String queryGoodMorning() {
         String url = ApiUrlConfig.GOODMORNING_API;
@@ -195,7 +195,7 @@ public class QueryApiManagerController {
 
     /**
      * 查询妹纸图片
-     * @return
+     * @return 图片url
      */
     public static String queryTheGirlImg() {
         String url = ApiUrlConfig.THEGIRLIMG_API;

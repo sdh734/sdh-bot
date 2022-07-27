@@ -10,7 +10,7 @@ import sdh.qqbot.entity.api.neteasy.TodayDTO;
 import sdh.qqbot.entity.api.neteasy.TotalDTO;
 import sdh.qqbot.entity.database.Infectcount;
 import sdh.qqbot.mapper.InfectcountMapper;
-import sdh.qqbot.utils.OkHttpUtil;
+import sdh.qqbot.utils.okhttp.OkHttpUtil;
 
 import javax.annotation.PostConstruct;
 import java.text.ParseException;

@@ -3,6 +3,7 @@ package sdh.qqbot.utils
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import sdh.qqbot.utils.pinyinconvert.PinYinUtils
 
 /**
  * @author jj_wen

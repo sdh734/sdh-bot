@@ -24,7 +24,7 @@ public class GUSHIEntity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(this.content).append("%0d");
+        builder.append(this.content).append("\n");
         builder.append("——");
         builder.append(this.author).append("·").append("《").append(this.origin).append("》");
         return builder.toString();

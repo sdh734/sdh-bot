@@ -3,7 +3,7 @@ package sdh.qqbot.controller.message
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import sdh.qqbot.entity.api.message.MessageEntity
+import sdh.qqbot.entity.message.MessageEntity
 
 /**
  * @author jj_wen

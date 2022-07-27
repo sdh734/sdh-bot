@@ -8,8 +8,8 @@ import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.controller.message.ReceiveMessageController;
-import sdh.qqbot.entity.api.message.MessageEntity;
-import sdh.qqbot.utils.OkHttpInstance;
+import sdh.qqbot.entity.message.MessageEntity;
+import sdh.qqbot.utils.okhttp.OkHttpInstance;
 
 /**
  * OkHttp连接WebSocket（已弃用）

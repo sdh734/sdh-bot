@@ -1,8 +1,21 @@
 package sdh.qqbot.controller.message
 
-import sdh.qqbot.entity.api.message.MessageEntity
+import sdh.qqbot.entity.message.MessageEntity
 import sdh.qqbot.module.*
-import sdh.qqbot.utils.PinYinUtils
+import sdh.qqbot.module.about.AboutMe
+import sdh.qqbot.module.about.QueryHelp
+import sdh.qqbot.module.drawprize.DrawPrize
+import sdh.qqbot.module.music.Song
+import sdh.qqbot.module.ncov.NcovInfo
+import sdh.qqbot.module.news.DailyNews
+import sdh.qqbot.module.picture.*
+import sdh.qqbot.module.word.*
+import sdh.qqbot.module.word.history.TodayOnHistory
+import sdh.qqbot.module.word.poetry.GUSHICI
+import sdh.qqbot.module.word.quotation.*
+import sdh.qqbot.module.word.repeater.Repeater
+import sdh.qqbot.module.word.weather.queryWeather
+import sdh.qqbot.utils.pinyinconvert.PinYinUtils
 
 /**
  * @author jj_wen
@@ -22,7 +35,7 @@ object MessageDict {
                 //私聊开启色图
                 SexPicture.sendSexPicture(message)
             } else {
-                QBotSendMessageController.sendMsg(message, "群聊未开启此功能。")
+                QBotSendMessageController.sendMsg(message, "群聊未开启此功能。",null)
             }
         }
 

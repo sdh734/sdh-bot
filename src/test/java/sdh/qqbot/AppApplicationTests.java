@@ -7,18 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.Headers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import sdh.qqbot.entity.api.message.MessageEntity;
-import sdh.qqbot.module.NcovInfo;
-import sdh.qqbot.utils.OkHttpUtil;
+import sdh.qqbot.utils.okhttp.OkHttpUtil;
 
 @SpringBootTest
 @Slf4j
 class AppApplicationTests {
     @Test
-    public void test11() {
-        MessageEntity message =new MessageEntity();
-        message.setMessage("疫情 成都");
-        NcovInfo.NcovInfoManager(message);
+    public void test() {
     }
 
 

@@ -14,8 +14,8 @@ import sdh.qqbot.entity.api.tencent.*;
 import sdh.qqbot.entity.api.weather.WeatherCityEntity;
 import sdh.qqbot.entity.database.Infectcount;
 import sdh.qqbot.service.impl.InfectcountServiceImpl;
-import sdh.qqbot.utils.OkHttpUtil;
-import sdh.qqbot.utils.PushUtils;
+import sdh.qqbot.utils.okhttp.OkHttpUtil;
+import sdh.qqbot.utils.push.PushUtils;
 
 import javax.annotation.PostConstruct;
 import java.text.ParseException;

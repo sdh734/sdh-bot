@@ -5,11 +5,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import sdh.qqbot.controller.database.UserController;
-import sdh.qqbot.entity.api.message.MessageEntity;
-import sdh.qqbot.module.*;
+import sdh.qqbot.entity.message.MessageEntity;
+import sdh.qqbot.module.about.AboutMe;
+import sdh.qqbot.module.about.QueryHelp;
+import sdh.qqbot.module.drawprize.DrawPrize;
+import sdh.qqbot.module.music.Song;
+import sdh.qqbot.module.ncov.NcovInfo;
+import sdh.qqbot.module.news.DailyNews;
+import sdh.qqbot.module.picture.*;
+import sdh.qqbot.module.word.history.TodayOnHistory;
+import sdh.qqbot.module.word.poetry.GUSHICI;
+import sdh.qqbot.module.word.quotation.*;
+import sdh.qqbot.module.word.repeater.Repeater;
+import sdh.qqbot.module.word.weather.queryWeather;
 
 /**
- * 接收消息接口
+ * 接收私聊、群聊消息接口
  *
  * @author SDH
  */
@@ -83,7 +94,7 @@ public class ReceiveMessageController {
                     //私聊开启色图
                     SexPicture.sendSexPicture(message);
                 } else {
-                    QBotSendMessageController.sendMsg(message, "群聊未开启此功能。");
+                    QBotSendMessageController.sendMsg(message, "群聊未开启此功能。",null);
                 }
                 break;
             case "抽奖":
