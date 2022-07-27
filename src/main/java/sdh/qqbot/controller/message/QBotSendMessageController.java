@@ -32,7 +32,9 @@ public class QBotSendMessageController {
     public static void sendPrivateMsg(String userId, String message, String echo) {
         SendMessageEntity msg = new SendMessageEntity();
         msg.setAction("send_msg");
-        msg.setEcho(echo);
+        if (echo != null) {
+            msg.setEcho(echo);
+        }
         Map<String, String> params = new HashMap<>();
         params.put("user_id", userId);
         params.put("message", message);
@@ -43,7 +45,9 @@ public class QBotSendMessageController {
     public static void sendGroupMsg(String groupId, String message, String echo) {
         SendMessageEntity msg = new SendMessageEntity();
         msg.setAction("send_msg");
-        msg.setEcho(echo);
+        if (echo != null) {
+            msg.setEcho(echo);
+        }
         Map<String, String> params = new HashMap<>();
         params.put("group_id", groupId);
         params.put("message", message);

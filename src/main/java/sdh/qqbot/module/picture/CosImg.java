@@ -32,8 +32,9 @@ public class CosImg {
         String url = QueryApiManagerController.queryCosImg();
         if (StringUtils.hasText(url)) {
             log.info("cos链接：" + url);
+            url = url.substring(0, url.length() - 1);
             String cqMsg = "[CQ:image,file=picture,c=3,url=" + url + "]";
-            QBotSendMessageController.sendMsg(message, cqMsg,null);
+            QBotSendMessageController.sendMsg(message, cqMsg, null);
         }
     }
 }

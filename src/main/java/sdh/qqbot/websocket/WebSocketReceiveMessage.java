@@ -33,7 +33,6 @@ public class WebSocketReceiveMessage implements IReceiveMessage {
         try {
             ReceiveMessageController.WSPostMessageManager(JSON.parseObject(text, MessageEntity.class));
         } catch (Exception e) {
-            log.info(text);
             ReturnMessageController.MessageManager(text);
         }
 

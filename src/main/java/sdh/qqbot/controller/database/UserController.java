@@ -3,17 +3,18 @@
 package sdh.qqbot.controller.database;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import sdh.qqbot.entity.message.MessageEntity;
+import sdh.qqbot.controller.message.QBotSendMessageController;
 import sdh.qqbot.entity.database.User;
+import sdh.qqbot.entity.message.MessageEntity;
+import sdh.qqbot.entity.message.SendMessageEntity;
 import sdh.qqbot.mapper.UserMapper;
-import sdh.qqbot.utils.okhttp.OkHttpUtil;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户操作接口
@@ -66,10 +67,10 @@ public class UserController {
         if ("private".equals(message.getMessageType())) {
             user.setUserId(message.getUserId());
             user.setNickname(message.getSender().getNickname());
+            addUser(user);
         } else {
-            user = getUserInfo(message.getGroupId(), message.getUserId());
+            getUserInfo(message.getGroupId(), message.getUserId());
         }
-        addUser(user);
     }
 
     /**
@@ -77,12 +78,16 @@ public class UserController {
      *
      * @param groupId 群号
      * @param userId  qq号
-     * @return 群成员信息
      */
-    private static User getUserInfo(String groupId, String userId) {
-        String s = OkHttpUtil.get("http://127.0.0.1:5700/get_group_member_info?no_cache=true&group_id=" + groupId + "&user_id=" + userId);
-        JSONObject parse = (JSONObject) JSONObject.parse(s);
-        return JSON.parseObject(parse.getJSONObject("data").toString(), User.class);
+    private static void getUserInfo(String groupId, String userId) {
+        SendMessageEntity msg = new SendMessageEntity();
+        msg.setAction("get_group_member_info");
+        msg.setEcho("getGroupMemberInfo");
+        Map<String, String> params = new HashMap<>();
+        params.put("group_id", groupId);
+        params.put("user_id", userId);
+        msg.setParams(params);
+        QBotSendMessageController.sendMsgBySendMessageEntity(msg);
     }
 
     /**
@@ -92,7 +97,6 @@ public class UserController {
      * @return 用户权限等级
      */
     public static int getPermissionByUserId(String userId) {
-
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userId));
         return user != null ? user.getUserLevel() : 0;
     }

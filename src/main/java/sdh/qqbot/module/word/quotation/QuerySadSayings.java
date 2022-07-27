@@ -22,7 +22,8 @@ public class QuerySadSayings {
 
     private static void querySadSayings(MessageEntity message) {
         String sayings = QueryApiManagerController.querySadSayings();
-        String substring = sayings.substring(sayings.indexOf("━━━━━━━━━") + 10, sayings.lastIndexOf("━━━━━━━━━"));
+        String[] split = sayings.split("\n");
+        String substring = split[2].substring(0, split[2].length() - 1);
         log.info("伤感语录：" + substring);
         QBotSendMessageController.sendMsg(message, substring, null);
     }

@@ -6,8 +6,6 @@ import okhttp3.*;
 import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import sdh.qqbot.config.ApiUrlConfig;
 import sdh.qqbot.utils.okhttp.OkHttpInstance;
@@ -220,8 +218,8 @@ public class WebSocketManager {
     /**
      * 定时发送心跳包
      */
-    @Scheduled(fixedDelay = HEART_MILLIS, initialDelay = 10000)
-    @Async
+//    @Scheduled(fixedDelay = HEART_MILLIS, initialDelay = 10000)
+//    @Async
     void sendHeartBeat() {
         log.info("开始发送心跳包。");
         if (isConnect) {
