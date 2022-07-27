@@ -1,7 +1,7 @@
 package sdh.qqbot.service;
 
-import sdh.qqbot.entity.database.Infectcount;
 import com.baomidou.mybatisplus.extension.service.IService;
+import sdh.qqbot.entity.database.Infectcount;
 
 /**
  * <p>

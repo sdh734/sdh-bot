@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 public class Prologue {
 
-    private static List<String> prologue = new ArrayList<>();
+    private static final List<String> prologue = new ArrayList<>();
 
     static {
         prologue.add("终于轮到我了，这段时间我可是一直都在构思与你见面的开场白呢。");

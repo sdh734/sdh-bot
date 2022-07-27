@@ -8,9 +8,6 @@ import sdh.qqbot.controller.database.UserController;
 import sdh.qqbot.entity.api.message.MessageEntity;
 import sdh.qqbot.module.*;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
-
 /**
  * 接收消息接口
  *
@@ -143,9 +140,9 @@ public class ReceiveMessageController {
             case "安慰语录":
                 Comfort.comfortManager(message);
                 break;
-            case "妹纸图":;
-            case "妹子图":;
-            case "妹纸图片":;
+            case "妹纸图":
+            case "妹子图":
+            case "妹纸图片":
             case "妹子图片":
                 TheGirlImg.theGirlImgManager(message);
                 break;

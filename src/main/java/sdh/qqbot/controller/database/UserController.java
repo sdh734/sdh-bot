@@ -8,8 +8,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import sdh.qqbot.entity.database.User;
 import sdh.qqbot.entity.api.message.MessageEntity;
+import sdh.qqbot.entity.database.User;
 import sdh.qqbot.mapper.UserMapper;
 import sdh.qqbot.utils.OkHttpUtil;
 

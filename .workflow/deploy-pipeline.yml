@@ -1,0 +1,96 @@
+version: '1.0'
+name: deploy-pipeline
+displayName: DeployPipeline
+triggers:
+  trigger: auto
+  push:
+    branches:
+      prefix:
+        - dev
+    commitMessages:
+      include:
+        - .*build.*
+stages:
+  - name: stage-2fbcd0ba
+    displayName: 编译
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: build@maven
+        name: build_maven
+        displayName: Maven 构建
+        jdkVersion: '11'
+        mavenVersion: 3.6.3
+        commands:
+          - mvn -B clean package -Dmaven.test.skip=true
+        artifacts:
+          - name: BUILD_QQBOT
+            path:
+              - ./target
+        settings: []
+        caches:
+          - ~/.m2
+        notify: []
+        strategy:
+          retry: '0'
+      - step: publish@general_artifacts
+        name: publish_general_artifacts
+        displayName: 上传制品
+        dependArtifact: BUILD_QQBOT
+        artifactName: qqbot
+        notify: []
+        strategy:
+          retry: '0'
+        dependsOn: build_maven
+  - name: stage-34402424
+    displayName: 发布
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: publish@release_artifacts
+        name: publish_release_artifacts
+        displayName: 发布
+        dependArtifact: qqbot
+        version: 1.0.0.0
+        autoIncrement: true
+        notify: []
+        strategy:
+          retry: '0'
+  - name: stage-538356f5
+    displayName: 部署
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: deploy@agent
+        name: deploy_agent
+        displayName: 主机部署
+        hostGroupID: gz
+        deployArtifact:
+          - source: artifact
+            name: output
+            target: ~/qqbot
+            artifactRepository: default
+            artifactName: qqbot
+            artifactVersion: latest
+        script:
+          - cd ~/qqbot/
+          - ls
+          - tar -zxf output.tar.gz
+          - cd target
+          - PID=$(lsof -i:8090 -t)
+          - if [ $? == 0 ]; then
+          - '        echo "process id is:${PID}"'
+          - '        kill -9 ${PID}'
+          - else
+          - '        echo "process 8090 no exit"'
+          - fi
+          - nohup java -jar qqbot-2.0.jar > nohup.out &
+        notify: []
+        strategy:
+          retry: '0'
+permissions:
+  - role: admin
+    members: []
