@@ -76,6 +76,9 @@ public class ReceiveMessageController {
     private static void MessageManager(MessageEntity message) {
         UserController.addUser(message);
         log.info("收到私聊消息，消息内容：" + message.getMessage());
+        // 新方法，下面都可以不要
+        // MessageDict.matchAndRun(message);
+
         String[] msgArray = message.getMessage().split(" ");
         switch (msgArray[0].toLowerCase()) {
             case "色图":
