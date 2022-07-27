@@ -18,8 +18,8 @@ internal class PinYinUtilsTest {
     fun getPinYin() {
         println(PinYinUtils.getPinYin("妹子图"))
         println(PinYinUtils.getPinYin("妹纸图"))
-        assertTrue(PinYinUtils.getPinYin("妹子图") == "MEIZITU")
-        assertTrue(PinYinUtils.getPinYin("妹纸图") == "MEIZITU")
+        assertTrue(PinYinUtils.getPinYin("妹子图") == "meizitu")
+        assertTrue(PinYinUtils.getPinYin("妹纸图") == "meizitu")
     }
 
     @Test
