@@ -35,13 +35,15 @@ object PinYinUtils {
     /**
      * 获取拼音，拼音之间没有分隔符
      */
+    @JvmStatic
     fun getPinYin(text: String): String {
-        return Pinyin.toPinyin(text, "")
+        return Pinyin.toPinyin(text, "").lowercase()
     }
 
     /**
      * 判断两个文字的拼音是否相等
      */
+    @JvmStatic
     fun isEquals(source: String, input: String): Boolean =
         getPinYin(source) == getPinYin(input)
 
